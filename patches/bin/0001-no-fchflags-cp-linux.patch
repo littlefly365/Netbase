@@ -1,7 +1,6 @@
-Sólo en mv-patched/: mv.bak
-diff -u mv/mv.c mv-patched/mv.c
---- mv/mv.c	2026-02-16 10:32:03.709741356 -0500
-+++ mv-patched/mv.c	2026-02-16 10:39:22.267183699 -0500
+diff -u mv.c mv.c
+--- mv.c	2026-02-16 10:32:03.709741356 -0500
++++ mv.c	2026-02-16 10:39:22.267183699 -0500
 @@ -355,9 +355,11 @@
  	}
  	if (fchmod(to_fd, sbp->st_mode))

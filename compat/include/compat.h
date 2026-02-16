@@ -84,4 +84,5 @@ static inline int undelete(const char *path) { return 0; }
 
 #define SIGINFO SIGUSR1
 #define __UNCONST(a)   ((void *)(unsigned long)(const void *)(a))
+#define fcpxattr
 #endif

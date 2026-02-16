@@ -1,5 +1,4 @@
-SUBDIRS = cat chmod date domainname echo hostname ln pwd rm rmdir sleep sync date
-#mv
+SUBDIRS = cat chmod date domainname echo hostname ln pwd rm rmdir sleep sync date mv
 
 all: $(SUBDIRS)
 
