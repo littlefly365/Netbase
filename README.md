@@ -31,7 +31,7 @@ they add some macros like __COPYRIGHT and __RCSID, besides in compat/libcompat a
 
 # Questions
 - Why i need to patch rm?
-A: because the patch is required only for linux. why? A: linux doesnt have st_flags and it is so hard make a wrapper without modify the libc.
+A: because the patch is only required for linux. why? A: linux doesnt have st_flags and it is so hard make a wrapper without modify the libc.
 
 # important
 if you see build or runtime errors tell me.(Note: The utils are tested on Arch and only with a basic use of them).
