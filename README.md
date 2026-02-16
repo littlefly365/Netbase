@@ -2,9 +2,9 @@
 Nbase is a port of the NetBSD's utilities to another unix like operating systems(only tested on Linux with glibc). The number 10 in the name refers to the netbsd version, these  utilities come from the netbsd-10 source.
 
 # Needed
-- gmake
+- gnu make (make on linux, gmake on *BSD and macOS)
 - clang and llvm
-- byacc
+- byacc (berkeley yacc, bison won't work)
 
 # Avaible commands
 - cat
