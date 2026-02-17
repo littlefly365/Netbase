@@ -14,7 +14,7 @@ Nbase is a port of the NetBSD's utilities to another unix like operating systems
 - echo
 - hostname
 - ln
-- mv ( you need to apply the patch found in patches/bin and add it to the bin makefile )
+- mv ( you need to apply the patch found in patches/bin 8if you are on linux) and add it to the bin makefile )
 - pwd
 - rm
 - rmdir
