@@ -1,4 +1,4 @@
-SUBDIRS = env dirname basename id tee yes head printf wc false true whoami
+SUBDIRS = env dirname basename id tee yes head printf wc false true whoami tty
 
 all: $(SUBDIRS)
 
