@@ -1,5 +1,5 @@
-SUBDIRS = lib/libnetbsd lib/libutil bin 
-
+LIBS=lib/libnetbsd lib/libutil 
+SRC=bin/
 CC=clang
 AR=llvm-ar
 CFLAGS=-O2
@@ -9,12 +9,17 @@ LIBUTIL=$(CURDIR)/lib/libutil/libutil.a
 
 export CC AR CFLAGS CPPFLAGS LDFLAGS LIBUTIL
 
-all: $(SUBDIRS)
+all: $(SRC)
 
-$(SUBDIRS): 
+$(LIBS):
+	$(MAKE) -C $@ build
+$(SRC): $(LIBS)
 	$(MAKE) -C $@ build
 clean:
-	for dir in $(SUBDIRS); do \
+	for dir in $(LIBS); do \
 		$(MAKE) -C $$dir clean; \
 	done
-.PHONY: all $(SUBDIRS) clean
+	for dir in $(SRC); do \
+		$(MAKE) -C $$dir clean; \
+	done
+.PHONY: all $(LIBS) $(SRC) clean
