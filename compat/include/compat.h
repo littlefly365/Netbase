@@ -80,6 +80,10 @@ static struct __locale_struct _lc_C_locale;
                 }                                                       \
         } while (/* CONSTCOND */ 0)
 
+// sys/param.h
+#define     MAXPHYS         (64 * 1024)
+#define     MAXBSIZE        MAXPHYS
+
 // custom
 static inline char *group_from_gid(unsigned long group, int gid) { return NULL; }
 static inline char *user_from_uid(unsigned long user, int uid) { return NULL; }

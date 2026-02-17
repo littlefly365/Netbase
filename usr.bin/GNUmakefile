@@ -1,4 +1,4 @@
-SUBDIRS = env dirname basename id tee yes head printf
+SUBDIRS = env dirname basename id tee yes head printf wc
 
 all: $(SUBDIRS)
 

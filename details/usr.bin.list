@@ -6,3 +6,4 @@ tee
 yes
 head
 printf
+wc
