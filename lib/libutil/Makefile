@@ -13,5 +13,5 @@ obj: pre
 build: obj
 	$(AR) rcs lib$(LIB).a $(OBJ)
 clean:
-	rm -rf lib$(LIB).a obj/
+	rm -rf lib$(LIB).a obj/ y.tab.*
 .PHONY: all pre obj build clean
