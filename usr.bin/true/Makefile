@@ -1,7 +1,13 @@
-#	$NetBSD: Makefile,v 1.9 1997/03/24 21:59:56 christos Exp $
-#	from: @(#)Makefile	5.3 (Berkeley) 5/11/90
+PROG = true
 
-MAN=	true.1
-SCRIPTS=true.sh
+all: copy chmod 
 
-.include <bsd.prog.mk>
+chmod: copy
+	chmod +x $(PROG)
+copy:
+	cp $(PROG).sh $(PROG)
+clean:
+
+build: all
+	mv $(PROG) ../../build/usr.bin
+.PHONY: all chmod copy clean build

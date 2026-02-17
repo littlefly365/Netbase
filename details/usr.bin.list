@@ -7,3 +7,6 @@ yes
 head
 printf
 wc
+false
+true
+whoami

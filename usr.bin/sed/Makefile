@@ -1,10 +1,13 @@
-#	$NetBSD: Makefile,v 1.17 2014/06/07 16:37:32 christos Exp $
-#	from: @(#)Makefile	8.1 (Berkeley) 6/6/93
+PROG= dirname
 
-.include <bsd.own.mk>
-WARNS=6
+all: obj $(PROG)
 
-PROG=	sed
-SRCS=	compile.c main.c misc.c process.c
-
-.include <bsd.prog.mk>
+obj:
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $(PROG).c 
+$(PROG): obj
+	$(CC) $(PROG).o $(LDFLAGS) -o $(PROG)
+clean:
+	rm -rf $(PROG).o 
+build: all
+	mv $(PROG) ../../build/usr.bin
+.PHONY: all obj $(PROG) clean build

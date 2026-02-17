@@ -1,6 +1,13 @@
-#	$NetBSD: Makefile,v 1.3 1997/01/09 20:23:11 tls Exp $
-#	from: @(#)Makefile	5.3 (Berkeley) 5/11/90
+PROG= dirname
 
-PROG=	uname
+all: obj $(PROG)
 
-.include <bsd.prog.mk>
+obj:
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $(PROG).c 
+$(PROG): obj
+	$(CC) $(PROG).o $(LDFLAGS) -o $(PROG)
+clean:
+	rm -rf $(PROG).o 
+build: all
+	mv $(PROG) ../../build/usr.bin
+.PHONY: all obj $(PROG) clean build

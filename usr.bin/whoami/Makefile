@@ -1,4 +1,4 @@
-PROG = false
+PROG = whoami
 
 all: copy chmod 
 
