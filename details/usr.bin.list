@@ -10,3 +10,5 @@ wc
 false
 true
 whoami
+uniq
+nice
