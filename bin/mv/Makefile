@@ -1,12 +1,17 @@
 PROG= mv
+
 all: obj $(PROG)
 
-obj:
+obj: check
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $(PROG).c 
 $(PROG): obj
 	$(CC) $(PROG).o $(LDFLAGS) -o $(PROG)
-clean:
+clean: restore
 	rm -rf $(PROG).o 
 build: all
 	mv $(PROG) ../bin-build	
-.PHONY: all obj $(PROG) clean build
+check: check.sh
+	./check.sh
+restore:
+	mv mv.c.bak mv.c
+.PHONY: all obj $(PROG) clean build check restore
