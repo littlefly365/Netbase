@@ -1,5 +1,5 @@
 LIBS=lib/libnetbsd lib/libutil 
-SRC=bin/
+SRC= bin/ usr.bin/
 CC=clang
 AR=llvm-ar
 CFLAGS=-O2
@@ -14,6 +14,7 @@ all: $(SRC)
 $(LIBS):
 	$(MAKE) -C $@ build
 $(SRC): $(LIBS)
+	mkdir -p build
 	$(MAKE) -C $@ build
 clean:
 	for dir in $(LIBS); do \
@@ -22,4 +23,5 @@ clean:
 	for dir in $(SRC); do \
 		$(MAKE) -C $$dir clean; \
 	done
+	rm -rf build
 .PHONY: all $(LIBS) $(SRC) clean

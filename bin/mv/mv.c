@@ -355,9 +355,11 @@ err:		if (unlink(to))
 	}
 	if (fchmod(to_fd, sbp->st_mode))
 		warn("%s: set mode", to);
+	#ifdef __linux__
+	#else
 	if (fchflags(to_fd, sbp->st_flags) && (errno != EOPNOTSUPP))
 		warn("%s: set flags (was: 0%07o)", to, sbp->st_flags);
-
+	#endif
 	if (close(to_fd)) {
 		warn("%s", to);
 		return (1);

@@ -12,6 +12,6 @@ $(PROG): obj
 clean:
 	rm -rf $(PROG).o 
 build: all
-	mv $(PROG) ../bin-build	
+	mv $(PROG) ../../build/bin
 .PHONY: all obj $(PROG) clean build
 

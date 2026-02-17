@@ -1,9 +1,9 @@
-SUBDIRS = cat chmod date domainname echo hostname ln pwd rm rmdir sleep sync date mkdir mv 
+SUBDIRS = env dirname basename id tee yes
 
 all: $(SUBDIRS)
 
 $(SUBDIRS): 
-	mkdir -p ../build/bin
+	mkdir -p ../build/usr.bin
 	$(MAKE)	-C $@ build
 build: $(SUBDIRS)
 
@@ -11,6 +11,6 @@ clean:
 	for dir in $(SUBDIRS); do \
 		$(MAKE) -C $$dir clean; \
 	done
-	rm -rf ../build/bin
+	rm -rf ../build/usr.bin
 .PHONY: all $(SUBDIRS) build
 	

@@ -9,7 +9,7 @@ $(PROG): obj
 clean: restore
 	rm -rf $(PROG).o 
 build: all
-	mv $(PROG) ../bin-build	
+	mv $(PROG) ../../build/bin
 check: check.sh
 	./check.sh
 restore:

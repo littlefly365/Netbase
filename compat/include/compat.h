@@ -49,6 +49,9 @@ static struct __locale_struct _lc_C_locale;
 #define __used __unused
 #define __dead __attribute__((__noreturn__))
 
+// sys/cdefs_aout.h
+#define      ___RENAME(x)    __asm(___STRING(_C_LABEL(x)))
+
 // sys/stat.h
 #define	S_ISTXT	0001000
 #define	_S_IFWHT  0160000
@@ -85,4 +88,7 @@ static inline int undelete(const char *path) { return 0; }
 #define SIGINFO SIGUSR1
 #define __UNCONST(a)   ((void *)(unsigned long)(const void *)(a))
 #define fcpxattr
+#define      LONG_MAX        __LONG_MAX__
+#define      ULONG_MAX       (2UL*LONG_MAX+1UL)
+#define      SIZE_T_MAX      ULONG_MAX
 #endif

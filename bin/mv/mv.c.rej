@@ -1,0 +1,15 @@
+--- mv.c	2026-02-17 09:22:26.422749797 -0500
++++ mv.c	2026-02-17 09:23:03.691881277 -0500
+@@ -355,9 +355,11 @@
+ 	}
+ 	if (fchmod(to_fd, sbp->st_mode))
+ 		warn("%s: set mode", to);
++	#ifdef __linux__
++	#else
+ 	if (fchflags(to_fd, sbp->st_flags) && (errno != EOPNOTSUPP))
+ 		warn("%s: set flags (was: 0%07o)", to, sbp->st_flags);
+-
++	#endif
+ 	if (close(to_fd)) {
+ 		warn("%s", to);
+ 		return (1);
