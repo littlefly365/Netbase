@@ -1,9 +1,13 @@
-#	$NetBSD: Makefile,v 1.11 2007/06/22 03:24:16 simonb Exp $
-#	@(#)Makefile	8.1 (Berkeley) 5/31/93
+PROG= test
 
-PROG=	test
-SRCS=   test.c
-LINKS=	${BINDIR}/test ${BINDIR}/[
-MLINKS=	test.1 [.1
+all: obj $(PROG)
 
-.include <bsd.prog.mk>
+obj:
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $(PROG).c 
+$(PROG): obj
+	$(CC) $(PROG).o $(LDFLAGS) -o $(PROG)
+clean:
+	rm -rf $(PROG).o 
+build: all
+	mv $(PROG) ../../build/bin
+.PHONY: all obj $(PROG) clean build

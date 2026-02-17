@@ -41,6 +41,9 @@ static inline time_t mktime_z(void *tz, struct tm *tm) {
 static struct __locale_struct _lc_C_locale;
 #define LC_C_LOCALE		((locale_t)__UNCONST(&_lc_C_locale))
 
+// regex.h
+#define      REG_BASIC       0000
+
 // sys/cdefs.h
 #define __COPYRIGHT(_s)
 #define __RCSID(_s)
@@ -48,6 +51,9 @@ static struct __locale_struct _lc_C_locale;
 #define __unused 
 #define __used __unused
 #define __dead __attribute__((__noreturn__))
+#define __arraycount(__x)       (sizeof(__x) / sizeof(__x[0]))
+#define __printflike(fmtarg, firstvararg)       \
+            __attribute__((__format__ (__printf__, fmtarg, firstvararg)))
 
 // sys/cdefs_aout.h
 #define      ___RENAME(x)    __asm(___STRING(_C_LABEL(x)))
@@ -70,6 +76,7 @@ static struct __locale_struct _lc_C_locale;
                         (vsp)->tv_nsec -= 1000000000L;                  \
                 }                                                       \
         } while (/* CONSTCOND */ 0)
+
 #define timespecsub(tsp, usp, vsp)                                      \
         do {                                                            \
                 (vsp)->tv_sec = (tsp)->tv_sec - (usp)->tv_sec;          \
@@ -80,6 +87,10 @@ static struct __locale_struct _lc_C_locale;
                 }                                                       \
         } while (/* CONSTCOND */ 0)
 
+#define timespeccmp(tsp, usp, cmp)                                      \
+        (((tsp)->tv_sec == (usp)->tv_sec) ?                             \
+            ((tsp)->tv_nsec cmp (usp)->tv_nsec) :                       \
+            ((tsp)->tv_sec cmp (usp)->tv_sec))
 // sys/param.h
 #define     MAXPHYS         (64 * 1024)
 #define     MAXBSIZE        MAXPHYS

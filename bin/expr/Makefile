@@ -1,11 +1,15 @@
-#	$NetBSD: Makefile,v 1.16 2018/02/02 01:02:39 mrg Exp $
+PROG= expr
+CFLAGS += -fwrapv
+all: obj $(PROG)
 
-PROG=		expr
-SRCS=		expr.y
-
-.include <bsd.prog.mk>
-
-# XXXGCC5
-.if defined(HAVE_GCC) && ${HAVE_GCC} >= 5 && ${ACTIVE_CC} == "gcc"
-CFLAGS+= -fwrapv
-.endif
+yacc:
+	byacc -d $(PROG).y
+obj:
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c y.tab.c 
+$(PROG): obj
+	$(CC) y.tab.o $(LDFLAGS) -o $(PROG)
+clean:
+	rm -rf y.tab.* 
+build: all
+	mv $(PROG) ../../build/bin
+.PHONY: all obj $(PROG) clean build
