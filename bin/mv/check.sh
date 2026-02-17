@@ -6,8 +6,9 @@
 		SHAOR=$(sha256sum mv.c)
 		SHABAK=$(sha256sum mv.c.bak)
 		fi
-		if [ ! "$SHAOR" = "$SHABAK"]; then
+		if [ ! "$SHAOR" = "$SHABAK" ]; then
 		patch -Np0 < ../../patches/bin/0001-no-fchflags-mv-linux.patch 
+		rm mv.c.rej
 		fi
 		;;
 		esac

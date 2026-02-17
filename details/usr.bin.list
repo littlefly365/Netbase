@@ -1,5 +1,8 @@
+basename
 env
 dirname
 id
 tee
 yes
+head
+printf
