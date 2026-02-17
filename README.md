@@ -20,6 +20,7 @@ Nbase is a port of the NetBSD's utilities to another unix like operating systems
 - rmdir
 - sleep
 - sync
+- mkdir 
 
 # How works?
 in the compat/include folder there are some headers for compatibility.
