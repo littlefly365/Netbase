@@ -5,6 +5,7 @@
 #include <stdint.h>  
 #include <inttypes.h> 
 #include <time.h> 
+#include <stdio.h> 
 #include <locale.h> 
 
 #include <sys/types.h> 
@@ -107,4 +108,7 @@ static inline int undelete(const char *path) { return 0; }
 #define      LONG_MAX        __LONG_MAX__
 #define      ULONG_MAX       (2UL*LONG_MAX+1UL)
 #define      SIZE_T_MAX      ULONG_MAX
+char *fgetln(FILE *stream, size_t *len);
+//#define fgetln 		__fgetln
+//#define __fgetln(f, l) __fgetstr(f, l, '\n')
 #endif
