@@ -7,7 +7,8 @@ Nbase is a port of the NetBSD's utilities to another unix like operating systems
 - byacc (berkeley yacc, bison won't work)
 
 # Avaible commands
---/bin
+- /bin
+
 - cat
 - chmod
 - date
@@ -23,7 +24,8 @@ Nbase is a port of the NetBSD's utilities to another unix like operating systems
 - sleep
 - sync 
 
---usr/bin
+- usr/bin
+
 - basename
 - dirname  
 - env
