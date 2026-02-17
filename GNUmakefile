@@ -1,5 +1,5 @@
 LIBS=lib/libnetbsd lib/libutil 
-SRC= bin/ usr.bin/
+SRC= bin/ sbin/ usr.bin/
 CC=clang
 AR=llvm-ar
 CFLAGS=-O2

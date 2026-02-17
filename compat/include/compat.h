@@ -87,6 +87,7 @@ static struct __locale_struct _lc_C_locale;
 // custom
 static inline char *group_from_gid(unsigned long group, int gid) { return NULL; }
 static inline char *user_from_uid(unsigned long user, int uid) { return NULL; }
+static inline char *uid_from_user(const char *user, unsigned int *uid) { return NULL; }
 static inline int undelete(const char *path) { return 0; }
 
 #define SIGINFO SIGUSR1
