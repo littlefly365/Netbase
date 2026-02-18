@@ -4,7 +4,7 @@ Nbase is a port of the NetBSD's utilities to another unix like operating systems
 # Needed
 - gnu make (make on linux, gmake on *BSD and macOS)
 - clang and llvm
-- byacc (berkeley yacc, bison won't work)
+- byacc (you must install berkeley yacc, bison will NOT work)
 
 # How does it work?
 in the compat/include folder there are some headers for compatibility.
