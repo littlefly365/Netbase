@@ -6,9 +6,9 @@ Nbase is a port of the NetBSD's utilities to another unix like operating systems
 - clang and llvm
 - byacc (berkeley yacc, bison won't work)
 
-# How works?
+# How does it work?
 in the compat/include folder there are some headers for compatibility.
-they add some macros like __COPYRIGHT and __RCSID, besides in compat/libcompat are to libraries, libnetbsd(libcompat) and libutil, with these the programs link statically against these librarues but dynamically with the rest of the system ,so no additional runtime dependencies are need(Note: This may change in the future).
+they add some macros like __COPYRIGHT and __RCSID, besides in compat/libcompat are two libraries, libnetbsd(libcompat) and libutil, with these the programs link statically against these librarues but dynamically with the rest of the system ,so no additional runtime dependencies are need(Note: This may change in the future).
 
 # Info
 - The compat libraries use only code from the netbsd source tree.
@@ -17,7 +17,7 @@ they add some macros like __COPYRIGHT and __RCSID, besides in compat/libcompat a
 # important
 if you see build or runtime errors tell me.(Note: The utils are tested on Arch and only with a basic use of them).
 
-# What's commands are available?
+# What commands are available?
 the commands available are listed on details/
 
 # Compatibility Matrix
