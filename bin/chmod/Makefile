@@ -3,7 +3,7 @@ PROG= chmod
 all: obj $(PROG)
 
 obj:
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $(PROG).c 
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LIBUTIL) -c $(PROG).c 
 $(PROG): obj
 	$(CC) $(PROG).o $(LDFLAGS) -o $(PROG)
 clean:

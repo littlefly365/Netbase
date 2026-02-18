@@ -38,7 +38,7 @@
 
 #include "compat.h"
 
-const char *__progname;
+char *__progname;
 
 const char *
 getprogname(void)

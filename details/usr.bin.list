@@ -12,3 +12,5 @@ true
 whoami
 uniq
 nice
+tty
+grep

@@ -11,7 +11,7 @@
 #include <sys/types.h> 
 
 //stdlib.h
-extern const char *__progname;
+extern char *__progname;
 const char *getprogname(void);
 void setprogname(const char *name);
 int reallocarr(void *ptrp, size_t number, size_t size);
