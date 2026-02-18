@@ -1,5 +1,5 @@
-# Nbase-10
-Nbase is a port of the NetBSD's utilities to another unix like operating systems(only tested on Linux with glibc). The number 10 in the name refers to the netbsd version, these  utilities come from the netbsd-10 source.
+# NetBaaw
+Nbase is a port of the NetBSD's utilities to another unix like operating systems(only tested on Linux with glibc).
 
 # Needed
 - gnu make (make on linux, gmake on *BSD and macOS)
@@ -23,3 +23,13 @@ if you see build or runtime errors tell me.(Note: The utils are tested on Arch a
 
 # What's commands are available?
 the commands available are listed on details/
+
+# Plataforms supported (❌ not supported, ☑️  works, ⚠️ should work, 🧪 testing)
+
+- GNU/Linux [☑️]
+- *Linux [⚠️]
+- FreeBSD [⚠️]
+- OpenBSD [⚠️]
+- NetBSD [☑️]
+- MacOS [⚠️]
+- Hurd [❌]
