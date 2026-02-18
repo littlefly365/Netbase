@@ -1,5 +1,5 @@
 SUBDIRS = cat chmod date domainname echo hostname ln pwd rm rmdir sleep \
-	sync date mkdir mv test
+	sync date mkdir mv test ksh
 
 all: $(SUBDIRS)
 

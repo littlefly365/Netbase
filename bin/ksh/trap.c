@@ -32,11 +32,11 @@ inittraps()
 	extern char	*sys_siglist[];
 # endif
 	int	i;
-
+	const char *s = strsignal(i);
 	/* Use system description, if available, for unknown signals... */
 	for (i = 0; i < NSIG; i++)
-		if (!sigtraps[i].name && sys_siglist[i] && sys_siglist[i][0])
-			sigtraps[i].mess = sys_siglist[i];
+		if (!sigtraps[i].name && s && s[0])
+			sigtraps[i].mess = s;
 #endif	/* HAVE_SYS_SIGLIST */
 
 	sigemptyset(&Sigact_ign.sa_mask);

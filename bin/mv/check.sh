@@ -8,7 +8,9 @@
 		fi
 		if [ ! "$SHAOR" = "$SHABAK" ]; then
 		patch -Np0 < ../../patches/bin/0001-no-fchflags-mv-linux.patch 
+		if [ -f mv.c.rej ]; then
 		rm mv.c.rej
+			fi
 		fi
 		;;
 		esac

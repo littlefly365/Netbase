@@ -55,6 +55,7 @@ static struct __locale_struct _lc_C_locale;
 #define __arraycount(__x)       (sizeof(__x) / sizeof(__x[0]))
 #define __printflike(fmtarg, firstvararg)       \
             __attribute__((__format__ (__printf__, fmtarg, firstvararg)))
+#define __USE(a) (/*LINTED*/(void)(a))
 
 // sys/cdefs_aout.h
 #define      ___RENAME(x)    __asm(___STRING(_C_LABEL(x)))
@@ -109,6 +110,7 @@ static inline int undelete(const char *path) { return 0; }
 #define      ULONG_MAX       (2UL*LONG_MAX+1UL)
 #define      SIZE_T_MAX      ULONG_MAX
 char *fgetln(FILE *stream, size_t *len);
-//#define fgetln 		__fgetln
-//#define __fgetln(f, l) __fgetstr(f, l, '\n')
+#define CLK_TCK             0
+#define setproctitle             
+#define  O_EXLOCK  	0
 #endif

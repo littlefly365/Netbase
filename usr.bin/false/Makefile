@@ -7,7 +7,7 @@ chmod: copy
 copy:
 	cp $(PROG).sh $(PROG)
 clean:
-
+	@echo "rm -rf false.o"
 build: all
 	mv $(PROG) ../../build/usr.bin
 .PHONY: all chmod copy clean build

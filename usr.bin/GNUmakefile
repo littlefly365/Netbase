@@ -1,4 +1,5 @@
-SUBDIRS = env dirname basename id tee yes head printf wc false true whoami tty uniq nice grep
+SUBDIRS = env dirname basename id tee yes head printf wc false true whoami tty uniq \
+	nice grep 
 
 all: $(SUBDIRS)
 

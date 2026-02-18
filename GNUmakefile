@@ -2,10 +2,10 @@ LIBS=lib/libnetbsd lib/libutil
 SRC= bin/ sbin/ usr.bin/
 CC=clang
 AR=llvm-ar
-CFLAGS=-O2
-CPPFLAGS=-I$(CURDIR)/include -include compat.h
+CFLAGS=-O2 -ferror-limit=5 
+CPPFLAGS=-I$(CURDIR)/include -include compat.h -static
 LDFLAGS=$(CURDIR)/lib/libnetbsd/libnetbsd.a
-LIBUTIL=$(CURDIR)/lib/libutil/libutil.a
+LIBUTIL=$(CURDIR)/lib/libutil/libutil.a 
 
 export CC AR CFLAGS CPPFLAGS LDFLAGS LIBUTIL
 

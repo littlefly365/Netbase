@@ -2,6 +2,7 @@ SRC_STDLIB=stdlib/*.c
 SRC_STRING=string/*.c
 SRC_UNISTD=unistd/*.c
 SRC_STDIO=stdio/*.c
+SRC_LOCALE=locale/*.c
 SRC_SYS_STAT=sys/stat/*.c
 
 OBJ=obj/*.o

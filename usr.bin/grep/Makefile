@@ -7,7 +7,7 @@ obj:
 $(PROG): obj
 	$(CC) *.o $(LDFLAGS) -o $(PROG) -lbz2 -lz
 clean:
-	rm -rf $(PROG).o 
+	rm -rf *.o 
 build: all
 	mv $(PROG) ../../build/usr.bin
 .PHONY: all obj $(PROG) clean build

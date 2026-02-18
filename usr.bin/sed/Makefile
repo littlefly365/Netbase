@@ -1,13 +1,13 @@
-PROG= dirname
+PROG= sed
 
 all: obj $(PROG)
 
 obj:
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $(PROG).c 
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c *.c 
 $(PROG): obj
-	$(CC) $(PROG).o $(LDFLAGS) -o $(PROG)
+	$(CC) *.o $(LDFLAGS) -o $(PROG)
 clean:
-	rm -rf $(PROG).o 
+	rm -rf *.o 
 build: all
 	mv $(PROG) ../../build/usr.bin
 .PHONY: all obj $(PROG) clean build
