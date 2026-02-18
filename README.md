@@ -24,12 +24,14 @@ if you see build or runtime errors tell me.(Note: The utils are tested on Arch a
 # What's commands are available?
 the commands available are listed on details/
 
-# Plataforms supported (❌ not supported, ☑️  works, ⚠️ should work, 🧪 testing)
+# Compatibility Matrix
 
-- GNU/Linux [☑️]
-- *Linux [⚠️]
-- FreeBSD [⚠️]
-- OpenBSD [⚠️]
-- NetBSD [☑️]
-- MacOS [⚠️]
-- Hurd [❌]
+| Platform        | Status           |
+|-----------------|------------------|
+| GNU/Linux glibc | ☑️ Works         |
+| Linux musl      | ⚠️ Should work   |
+| NetBSD          | ☑️ Works         |
+| FreeBSD         | ⚠️ Should work   |
+| OpenBSD         | ⚠️ Should work   |
+| macOS           | ⚠️ Should work   |
+| GNU/Hurd        | ❌ Not supported |
