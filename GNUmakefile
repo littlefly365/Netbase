@@ -3,7 +3,7 @@ SRC= bin/ sbin/ usr.bin/
 CC=clang
 AR=llvm-ar
 CFLAGS=-O2 -ferror-limit=5 
-CPPFLAGS=-I$(CURDIR)/include -include compat.h -static
+CPPFLAGS=-I$(CURDIR)/include -include compat.h 
 LDFLAGS=$(CURDIR)/lib/libnetbsd/libnetbsd.a
 LIBUTIL=$(CURDIR)/lib/libutil/libutil.a 
 

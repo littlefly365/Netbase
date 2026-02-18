@@ -1,4 +1,4 @@
-PROG= cat
+PROG= stty
 
 all: obj $(PROG)
 
