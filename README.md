@@ -28,7 +28,7 @@ the commands available are listed on details/
 
 | Platform        | Status           |
 |-----------------|------------------|
-| GNU/Linux glibc | ☑️ Works         |
+| Linux glibc     | ☑️ Works         |
 | Linux musl      | ⚠️ Should work   |
 | NetBSD          | ☑️ Works         |
 | FreeBSD         | ⚠️ Should work   |
