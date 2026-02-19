@@ -1,5 +1,5 @@
 # NetBase
-Nbase is a port of the NetBSD's utilities to another unix like operating systems(only tested on Linux with glibc).
+Netbase is a port of the NetBSD's utilities to another unix like operating systems(only tested on Linux with glibc).
 
 # Needed
 - gnu make (make on linux, gmake on *BSD and macOS)
