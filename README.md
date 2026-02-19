@@ -1,13 +1,13 @@
 # NetBase
-Netbase is a port of the NetBSD's utilities to another unix like operating systems(only tested on Linux with glibc).
+Netbase is a port of the NetBSD's utilities to another unix like operating systems.
 
-# Needed
-- gnu make (make on linux, gmake on *BSD and macOS)
+# Deps
+- gnu make
 - clang and llvm
-- byacc (you must install berkeley yacc, bison will NOT work)
+- byacc (bison will NOT work)
 - zlib
 - libbz2
-- libfts ( musl )
+- libfts ( for musl )
 
 # How does it work?
 in the compat/include folder there are some headers for compatibility.
@@ -34,3 +34,8 @@ the commands available are listed on details/
 | OpenBSD         | 🧪 Should work   |
 | macOS           | 🧪 Should work   |
 | GNU/Hurd        | ⚠️ May work      |
+
+# Building
+if you run only g/make may fail so i recommed execute the build script instead:
+`./build.sh`
+
