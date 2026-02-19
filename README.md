@@ -25,7 +25,7 @@ the commands available are listed on details/
 | Platform        | Status           |
 |-----------------|------------------|
 | Linux glibc     | ☑️ Works         |
-| Linux musl      | ❌ Not supported |
+| Linux musl      | ☑️ Works         |
 | NetBSD          | ☑️ Works         |
 | FreeBSD         | 🧪 Should work   |
 | OpenBSD         | 🧪 Should work   |
