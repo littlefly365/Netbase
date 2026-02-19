@@ -1,8 +1,13 @@
-/*      $NetBSD: util.h,v 1.69 2016/04/10 19:05:50 roy Exp $    */
+/*      $NetBSD: assert.h,v 1.25 2020/04/17 15:22:34 kamil Exp $        */
 
 /*-
- * Copyright (c) 1995
+ * Copyright (c) 1992, 1993
  *      The Regents of the University of California.  All rights reserved.
+ * (c) UNIX System Laboratories, Inc.
+ * All or some portions of this file are derived from material licensed
+ * to the University of California by American Telephone and Telegraph
+ * Co. or Unix System Laboratories, Inc. and are reproduced herein with
+ * the permission of UNIX System Laboratories, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -27,13 +32,20 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
+ *
+ *      @(#)assert.h    8.2 (Berkeley) 1/21/94
  */
 
-#ifndef _UTIL_H
-#define _UTIL_H
+/*
+ * Unlike other ANSI header files, <assert.h> may usefully be included
+ * multiple times, with and without NDEBUG defined.
+ */
 
-char *strptime(const char *buf, const char *fmt, struct tm *tm);
-void		logwtmp(const char *, const char *, const char *);
-time_t parsedate(const char *datestr, const time_t *time, const int *tzoff);
+#ifndef _NB_ASSERT_H
+#define _NB_ASSERT_H
+
+#ifndef _DIAGASSERT
+#define _DIAGASSERT(e) 
+#endif
 
 #endif

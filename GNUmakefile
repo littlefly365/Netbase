@@ -2,8 +2,8 @@ LIBS=lib/libnetbsd lib/libutil
 SRC= bin/ sbin/ usr.bin/
 CC=clang
 AR=llvm-ar
-CFLAGS=-O2 -ferror-limit=5 
-CPPFLAGS=-I$(CURDIR)/include -include compat.h 
+CFLAGS=-O2 -ferror-limit=1
+CPPFLAGS=-I$(CURDIR)/include -include compat.h
 LDFLAGS=$(CURDIR)/lib/libnetbsd/libnetbsd.a
 LIBUTIL=$(CURDIR)/lib/libutil/libutil.a 
 
@@ -24,4 +24,5 @@ clean:
 		$(MAKE) -C $$dir clean; \
 	done
 	rm -rf build
+	rm -f include/sys/extattr.h
 .PHONY: all $(LIBS) $(SRC) clean

@@ -48,7 +48,7 @@ getprogname(void)
 }
 
 void
-setprogname(const char *progname)
+setprogname(char *progname)
 {
 	__progname = strrchr(progname, '/');
 	if (__progname == NULL)

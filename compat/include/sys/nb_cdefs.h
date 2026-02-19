@@ -1,8 +1,10 @@
-/*      $NetBSD: util.h,v 1.69 2016/04/10 19:05:50 roy Exp $    */
+/*      $NetBSD: cdefs.h,v 1.159.4.1 2024/10/13 16:15:07 martin Exp $   */
 
-/*-
- * Copyright (c) 1995
+/* * Copyright (c) 1991, 1993
  *      The Regents of the University of California.  All rights reserved.
+ *
+ * This code is derived from software contributed to Berkeley by
+ * Berkeley Software Design, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -27,13 +29,48 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
+ *
+ *      @(#)cdefs.h     8.8 (Berkeley) 1/9/95
  */
 
-#ifndef _UTIL_H
-#define _UTIL_H
+#ifndef _SYS_NB_CDEFS_H
+#define _SYS_NB_CDEFS_H
 
-char *strptime(const char *buf, const char *fmt, struct tm *tm);
-void		logwtmp(const char *, const char *, const char *);
-time_t parsedate(const char *datestr, const time_t *time, const int *tzoff);
+#ifndef __COPYRIGHT
+#define __COPYRIGHT(_s)
+#endif
+
+#ifndef __RCSID
+#define __RCSID(_s)
+#endif
+
+#ifndef __predict_false
+#define	__predict_false(exp)	__builtin_expect((exp) != 0, 0)
+#endif
+
+#ifndef __unused
+#define __unused 
+#endif
+
+#ifndef __used
+#define __used __unused
+#endif
+
+#ifndef __dead
+#define __dead __attribute__((__noreturn__))
+#endif
+
+#ifndef __arraycount
+#define __arraycount(__x)       (sizeof(__x) / sizeof(__x[0]))
+#endif
+
+#ifndef __printflike
+#define __printflike(fmtarg, firstvararg)       \
+            __attribute__((__format__ (__printf__, fmtarg, firstvararg)))
+#endif
+
+#ifndef __USE
+#define __USE(a) (/*LINTED*/(void)(a))
+#endif
 
 #endif

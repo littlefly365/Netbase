@@ -1,7 +1,7 @@
-/*      $NetBSD: util.h,v 1.69 2016/04/10 19:05:50 roy Exp $    */
+/*      $NetBSD: locale.h,v 1.28 2016/04/29 16:26:48 joerg Exp $        */
 
-/*-
- * Copyright (c) 1995
+/*
+ * Copyright (c) 1991, 1993
  *      The Regents of the University of California.  All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,13 +27,16 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
+ *
+ *      @(#)locale.h    8.1 (Berkeley) 6/2/93
  */
 
-#ifndef _UTIL_H
-#define _UTIL_H
+#ifndef _NB_LOCALE_H
+#define _NB_LOCALE_H
 
-char *strptime(const char *buf, const char *fmt, struct tm *tm);
-void		logwtmp(const char *, const char *, const char *);
-time_t parsedate(const char *datestr, const time_t *time, const int *tzoff);
+#include <locale.h>
+
+static locale_t _lc_C_locale;
+#define LC_C_LOCALE		((locale_t)__UNCONST(&_lc_C_locale))
 
 #endif

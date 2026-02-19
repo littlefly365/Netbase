@@ -1,5 +1,5 @@
 PROG= id
-
+CPPFLAGS += -include private.h
 all: obj $(PROG)
 
 obj:

@@ -1,7 +1,7 @@
-/*      $NetBSD: util.h,v 1.69 2016/04/10 19:05:50 roy Exp $    */
+/*      $NetBSD: stdlib.h,v 1.125.2.2 2024/10/13 10:39:53 martin Exp $  */
 
 /*-
- * Copyright (c) 1995
+ * Copyright (c) 1990, 1993
  *      The Regents of the University of California.  All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,13 +27,44 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
+ *
+ *      @(#)stdlib.h    8.5 (Berkeley) 5/19/95
  */
 
-#ifndef _UTIL_H
-#define _UTIL_H
+#ifndef _NB_STDLIB_H
+#define _NB_STDLIB_H
 
-char *strptime(const char *buf, const char *fmt, struct tm *tm);
-void		logwtmp(const char *, const char *, const char *);
-time_t parsedate(const char *datestr, const time_t *time, const int *tzoff);
+#include <stddef.h>
+#include <locale.h>
+
+extern char *__progname;
+const char *getprogname(void);
+void setprogname(char *name);
+int reallocarr(void *ptrp, size_t number, size_t size);
+double		strtod_l(const char * __restrict, char ** __restrict, locale_t);
+
+#ifndef HN_AUTOSCALE
+#define HN_AUTOSCALE            0x20
+#endif
+
+#ifndef HW_GETSCALE
+#define HN_GETSCALE             0x10
+#endif
+
+#ifndef HN_DIVISOR_1000
+#define HN_DIVISOR_1000         0x08
+#endif
+
+#ifndef HN_B
+#define HN_B                    0x04
+#endif
+
+#ifndef HN_NOSPACE
+#define HN_NOSPACE              0x02
+#endif
+
+#ifndef HN_DECIMAL
+#define HN_DECIMAL              0x01
+#endif
 
 #endif

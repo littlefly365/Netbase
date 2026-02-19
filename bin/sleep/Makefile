@@ -1,7 +1,6 @@
 PROG= sleep
 
-CPPFLAGS += -include stdint.h 
-#CFLAGS=-D_POSIX_C_SOURCE=200809L
+CPPFLAGS += -include stdint.h -include nb_locale.h
 LDFLAGS += -lm
 all: obj $(PROG)
 

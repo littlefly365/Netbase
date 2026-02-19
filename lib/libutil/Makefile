@@ -3,7 +3,7 @@ SRC= ../logwtmp.c ../y.tab.c #../strptime.c
 OBJ=obj/*.o
 LIB=util
 all: pre obj lib
-
+CPPFLAGS += -include private.h
 pre:
 	byacc -d parsedate.y
 obj: pre

@@ -1,8 +1,13 @@
-/*      $NetBSD: util.h,v 1.69 2016/04/10 19:05:50 roy Exp $    */
+/*      $NetBSD: param.h,v 1.722.2.11 2024/12/20 18:31:34 martin Exp $  */
 
 /*-
- * Copyright (c) 1995
+ * Copyright (c) 1982, 1986, 1989, 1993
  *      The Regents of the University of California.  All rights reserved.
+ * (c) UNIX System Laboratories, Inc.
+ * All or some portions of this file are derived from material licensed
+ * to the University of California by American Telephone and Telegraph
+ * Co. or Unix System Laboratories, Inc. and are reproduced herein with
+ * the permission of UNIX System Laboratories, Inc.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -27,13 +32,16 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
+ *
+ *      @(#)param.h     8.3 (Berkeley) 4/4/95
  */
 
-#ifndef _UTIL_H
-#define _UTIL_H
+#ifndef _SYS_NB_CDEFS_AOUT_H
+#define _SYS_NB_CDEFS_AOUT_H
 
-char *strptime(const char *buf, const char *fmt, struct tm *tm);
-void		logwtmp(const char *, const char *, const char *);
-time_t parsedate(const char *datestr, const time_t *time, const int *tzoff);
+#if defined(__linux__) || defined(__GNU__)
+#undef __RENAME
+#define      __RENAME(x)  
+#endif
 
 #endif
