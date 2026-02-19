@@ -27,7 +27,7 @@ the commands available are listed on details/
 | Linux glibc     | ☑️ Works         |
 | Linux musl      | ❌ Not supported |
 | NetBSD          | ☑️ Works         |
-| FreeBSD         | ⚠️ Should work   |
-| OpenBSD         | ⚠️ Should work   |
-| macOS           | ⚠️ Should work   |
-| GNU/Hurd        | ❌ Not supported |
+| FreeBSD         | 🧪 Should work   |
+| OpenBSD         | 🧪 Should work   |
+| macOS           | 🧪 Should work   |
+| GNU/Hurd        | ⚠️ May work      |
