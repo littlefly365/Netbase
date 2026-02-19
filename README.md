@@ -8,6 +8,7 @@ Netbase is a port of the NetBSD's utilities to another unix like operating syste
 - zlib
 - libbz2
 - libfts ( for musl )
+- posix shell (link to /bin/sh )
 
 # How does it work?
 in the compat/include folder there are some headers for compatibility.
@@ -37,5 +38,12 @@ the commands available are listed on details/
 
 # Building
 if you run only g/make may fail so i recommed execute the build script instead:
-`./build.sh`
+`
+./build.sh        
+          
+use:
+-b, --build   build the project(default)
+-c, --clean   clean the source tree
+
+ `
 
