@@ -38,11 +38,8 @@ the commands available are listed on details/
 
 # Building
 if you run only g/make may fail so i recommend execute the build script instead:
-`                                          `
 `./build.sh                                `         
-use:
--b, --build   build the project(default)
--c, --clean   clean the source tree
-
- `
+`use:`
+`-b, --build   build the project(default)`
+-c, --clean   clean the source tree`
 
