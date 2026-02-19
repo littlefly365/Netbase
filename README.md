@@ -42,5 +42,6 @@ if you run only g/make may fail so i recommend execute the build script instead:
 `use:`
 
 `-b, --build   build the project(default)`
+
 `-c, --clean   clean the source tree`
 
