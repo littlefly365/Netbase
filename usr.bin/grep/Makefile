@@ -1,11 +1,11 @@
 PROG= grep
-LDFLAGS += -lfts
+LDFLAGS += -lbz2 -lz
 all: obj $(PROG)
 
 obj:
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c *.c 
 $(PROG): obj
-	$(CC) *.o $(LDFLAGS) -o $(PROG) -lbz2 -lz
+	$(CC) *.o $(LDFLAGS) $(LDFTS) -o $(PROG)
 clean:
 	rm -rf *.o 
 build: all

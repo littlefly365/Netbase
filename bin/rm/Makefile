@@ -1,12 +1,11 @@
 PROG= rm
 CFLAGS += -D_EXT_SOURCE 
-LDFLAGS += -lfts
 all: check obj $(PROG)
 
 obj: check
 	$(CC) -I../../include -include sys/nb_cdefs.h $(CFLAGS) -c $(PROG).c 
 $(PROG): obj
-	$(CC) $(PROG).o $(LDFLAGS) -o $(PROG)
+	$(CC) $(PROG).o $(LDFLAGS)  $(LDFTS) -o $(PROG)
 clean:
 	mv rm.c.bak rm.c
 	rm -rf $(PROG).o 

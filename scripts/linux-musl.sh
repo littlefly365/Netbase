@@ -7,6 +7,7 @@
 
 	if [ -f $(pwd)/include/sys/extattr.h ]; then
 		if [ -f $(pwd)/include/sys/cdefs.h ]; then		
+			export LDFTS="-lfts"
 			make -j"$(nproc)"
 		else
 			echo "error"

@@ -1,11 +1,10 @@
 PROG= chmod
-LDFLAGS += -lfts
 all: obj $(PROG)
 
 obj:
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(LIBUTIL) -c $(PROG).c 
 $(PROG): obj
-	$(CC) $(PROG).o $(LDFLAGS) -o $(PROG)
+	$(CC) $(PROG).o $(LDFLAGS) $(LDFTS) -o $(PROG)
 clean:
 	rm -rf $(PROG).o 
 build: all
