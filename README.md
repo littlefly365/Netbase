@@ -38,10 +38,13 @@ the commands available are listed on details/
 
 # Building
 if you run only g/make may fail so i recommend execute the build script instead:
-`./build.sh                                `         
-`use:`
+`./build.sh`       
+use:
 
-`-b, --build  run make with adjustments and variables depending on the platform (default).`
+`-b, --build` 
 
-`-c, --clean   remove object files and clean the source tree`
+run make with configs and variables depending on the platform (default).
+
+`-c, --clean`
+remove object files and clean the source tree.
 
