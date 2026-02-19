@@ -1,5 +1,5 @@
 PROG= chown
-
+LDFLAGS += -lfts
 all: obj $(PROG)
 
 obj:

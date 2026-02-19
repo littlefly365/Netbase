@@ -74,6 +74,7 @@ static int	do_move(char *, char *);
 static int	fastcopy(char *, char *, struct stat *);
 __dead static void	usage(void);
 
+#include "sys/nb_cdefs_aout.h"
 static void
 progress(int sig __unused)
 {
@@ -355,7 +356,7 @@ err:		if (unlink(to))
 	}
 	if (fchmod(to_fd, sbp->st_mode))
 		warn("%s: set mode", to);
-	#ifdef __linux__
+	#if defined(__linux__) || defined(__GNU__)
 	#else
 	if (fchflags(to_fd, sbp->st_flags) && (errno != EOPNOTSUPP))
 		warn("%s: set flags (was: 0%07o)", to, sbp->st_flags);

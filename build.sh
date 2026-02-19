@@ -3,10 +3,12 @@
 		''| -b | --build)
 			case "$(uname -s)" in
 					Linux)
-						if ( ldd --version | grep GNU >/dev/null ); then
-						scripts/linux-glibc.sh
+						if  ldd --version 2>&1 | grep -q musl; then
+							scripts/linux-musl.sh
+						elif  ldd --version 2>&1 | grep -q GNU; then
+							scripts/linux-glibc.sh
 						else
-						scripts/linux-musl.sh
+							echo "error"
 						fi
 					;;
 					*)

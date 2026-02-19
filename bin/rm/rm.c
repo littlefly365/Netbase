@@ -60,6 +60,9 @@ __RCSID("$NetBSD: rm.c,v 1.54 2021/09/10 22:11:03 rillig Exp $");
 #include <string.h>
 #include <unistd.h>
 
+#include "sys/nb_cdefs_aout.h"
+#include "compat.h"
+
 static int dflag, eval, fflag, iflag, Pflag, stdin_ok, vflag, Wflag;
 static int xflag;
 static sig_atomic_t pinfo;

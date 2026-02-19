@@ -25,4 +25,7 @@ clean:
 	done
 	rm -rf build
 	rm -f include/sys/extattr.h
+	rm -f include/sys/cdefs.h
+	rm -f include/sys/queue.h
+	rm -rf include/protocols
 .PHONY: all $(LIBS) $(SRC) clean

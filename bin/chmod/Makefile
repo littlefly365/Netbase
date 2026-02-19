@@ -1,5 +1,5 @@
 PROG= chmod
-
+LDFLAGS += -lfts
 all: obj $(PROG)
 
 obj:

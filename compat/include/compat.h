@@ -12,12 +12,24 @@
 #include "nb_unistd.h"
 #include "tzfile.h"
 #include "util.h"
-#include "vis.h"
-#include  "sys/nb_cdefs_aout.h"
 #include  "sys/nb_cdefs.h"
 #include  "sys/nb_param.h"
 #include  "sys/nb_stat.h"
 #include  "sys/nb_time.h"
+
+#ifndef __BEGIN_DECLS
+
+#ifdef __cplusplus
+#define __BEGIN_DECLS extern "C" {
+#define __END_DECLS   }
+#else
+#define __BEGIN_DECLS
+#define __END_DECLS
+#endif
+
+#endif
+
+#include "vis.h"
 
 #ifdef SIGINFO
 #else
@@ -54,6 +66,10 @@ char *fgetln(FILE *stream, size_t *len);
 #define setproctitle             
 #define  O_EXLOCK  	0
 
+#endif
+
+#ifndef REG_STARTEND
+#define REG_STARTEND  0x0080
 #endif
 
 #endif

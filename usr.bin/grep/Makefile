@@ -1,5 +1,5 @@
 PROG= grep
-
+LDFLAGS += -lfts
 all: obj $(PROG)
 
 obj:

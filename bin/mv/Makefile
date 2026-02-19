@@ -1,17 +1,18 @@
 PROG= mv
-
+CFLAGS += -D_EXT_SOURCE
 all: obj $(PROG)
 
 obj: check
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $(PROG).c 
+	$(CC) -I../../include  -include sys/nb_cdefs.h -include compat.h $(CFLAGS) -c $(PROG).c 
 $(PROG): obj
 	$(CC) $(PROG).o $(LDFLAGS) -o $(PROG)
-clean: restore
+clean: 
+	mv mv.c.bak mv.c
 	rm -rf $(PROG).o 
 build: all
 	mv $(PROG) ../../build/bin
-check: check.sh
+check: check.sh copy
 	./check.sh
-restore:
-	mv mv.c.bak mv.c
-.PHONY: all obj $(PROG) clean build check restore
+copy:
+	cp mv.c mv.c.bak
+.PHONY: all obj $(PROG) clean build check restore copy

@@ -36,12 +36,17 @@
 
 #include <stddef.h>
 #include <locale.h>
+#include <stdint.h>
 
 extern char *__progname;
 const char *getprogname(void);
 void setprogname(char *name);
 int reallocarr(void *ptrp, size_t number, size_t size);
 double		strtod_l(const char * __restrict, char ** __restrict, locale_t);
+#ifdef __GLIBC__
+#else
+uint32_t arc4random(void);
+#endif
 
 #ifndef HN_AUTOSCALE
 #define HN_AUTOSCALE            0x20

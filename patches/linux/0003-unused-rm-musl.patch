@@ -1,0 +1,12 @@
+--- rm.c
++++ rm.c
+@@ -60,6 +60,9 @@
+ #include <string.h>
+ #include <unistd.h>
+ 
++#include "sys/nb_cdefs_aout.h"
++#include "compat.h"
++
+ static int dflag, eval, fflag, iflag, Pflag, stdin_ok, vflag, Wflag;
+ static int xflag;
+ static sig_atomic_t pinfo;

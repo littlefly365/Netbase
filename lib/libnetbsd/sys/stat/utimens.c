@@ -34,6 +34,10 @@
 __RCSID("$NetBSD: utimens.c,v 1.2 2019/09/16 01:25:16 kamil Exp $");
 #endif /* LIBC_SCCS and not lint */
 
+#ifdef __unused
+#undef __unused
+#endif
+
 #include <fcntl.h>
 #include <sys/stat.h>
 

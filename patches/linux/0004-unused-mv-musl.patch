@@ -1,0 +1,10 @@
+--- mv.c.bak
++++ mv.c
+@@ -74,6 +74,7 @@
+ static int	fastcopy(char *, char *, struct stat *);
+ __dead static void	usage(void);
+ 
++#include "sys/nb_cdefs_aout.h"
+ static void
+ progress(int sig __unused)
+ {

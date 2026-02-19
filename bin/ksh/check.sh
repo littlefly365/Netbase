@@ -7,7 +7,7 @@
 		SHABAK=$(sha256sum trap.c.bak)
 		fi
 		if [ ! "$SHAOR" = "$SHABAK" ]; then
-		patch -Np0 < ../../patches/bin/0002-strsignal-ksh-linux.patch 
+		patch -Np0 < ../../patches/linux/0002-strsignal-ksh-linux.patch 
 		if [ -f trap.c.rej ]; then
 		rm trap.c.rej
 			fi

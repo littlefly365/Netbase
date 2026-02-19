@@ -41,6 +41,9 @@ __RCSID("$NetBSD: setmode.c,v 1.38 2022/04/19 20:32:15 rillig Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
+#ifdef __unused
+#undef __unused
+#endif
 #include <sys/types.h>
 #include <sys/stat.h>
 

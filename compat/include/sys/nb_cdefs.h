@@ -48,14 +48,6 @@
 #define	__predict_false(exp)	__builtin_expect((exp) != 0, 0)
 #endif
 
-#ifndef __unused
-#define __unused 
-#endif
-
-#ifndef __used
-#define __used __unused
-#endif
-
 #ifndef __dead
 #define __dead __attribute__((__noreturn__))
 #endif

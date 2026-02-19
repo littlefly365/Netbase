@@ -38,6 +38,10 @@ __RCSID("$NetBSD: logwtmp.c,v 1.14 2003/08/07 16:44:59 agc Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
+#ifdef __unused
+#undef __unused
+#endif
+
 #include <sys/types.h>
 #include <sys/file.h>
 #include <sys/time.h>
@@ -49,6 +53,8 @@ __RCSID("$NetBSD: logwtmp.c,v 1.14 2003/08/07 16:44:59 agc Exp $");
 #include <unistd.h>
 #include <utmp.h>
 #include <util.h>
+#include <fcntl.h>
+
 
 void
 logwtmp(const char *line, const char *name, const char *host)

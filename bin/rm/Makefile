@@ -1,13 +1,17 @@
 PROG= rm
+CFLAGS += -D_EXT_SOURCE 
+LDFLAGS += -lfts
+all: check obj $(PROG)
 
-all: obj $(PROG)
-
-obj:
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $(PROG).c 
+obj: check
+	$(CC) -I../../include -include sys/nb_cdefs.h $(CFLAGS) -c $(PROG).c 
 $(PROG): obj
 	$(CC) $(PROG).o $(LDFLAGS) -o $(PROG)
 clean:
+	mv rm.c.bak rm.c
 	rm -rf $(PROG).o 
 build: all
 	mv $(PROG) ../../build/bin
-.PHONY: all obj $(PROG) clean build
+check:
+	./check.sh
+.PHONY: all obj $(PROG) clean build check

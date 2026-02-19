@@ -3,7 +3,7 @@ PROG= pwd
 all: obj $(PROG)
 
 obj:
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $(PROG).c 
+	$(CC) -I../../include -include compat.h $(CFLAGS) -c $(PROG).c 
 $(PROG): obj
 	$(CC) $(PROG).o $(LDFLAGS) -o $(PROG)
 clean:

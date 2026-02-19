@@ -1,6 +1,6 @@
 PROG= sleep
-
-CPPFLAGS += -include stdint.h -include nb_locale.h
+CFLAGS += -D_EXT_SOURCE
+CPPFLAGS += -include stdint.h -include nb_locale.h -include sys/nb_cdefs_aout.h
 LDFLAGS += -lm
 all: obj $(PROG)
 

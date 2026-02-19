@@ -38,6 +38,10 @@ __RCSID("$NetBSD: strmode.c,v 1.19 2012/06/25 22:32:46 abs Exp $");
 #endif
 #endif /* LIBC_SCCS and not lint */
 
+#ifdef __unused
+#undef __unused
+#endif
+
 #include <sys/types.h>
 #include <sys/stat.h>
 

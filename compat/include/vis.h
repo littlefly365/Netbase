@@ -35,6 +35,7 @@
 #define	_VIS_H_
 
 #include <sys/types.h>
+#include <compat.h>
 
 /*
  * to select alternate encoding format

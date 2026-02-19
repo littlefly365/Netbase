@@ -1,9 +1,9 @@
-SRC= ../logwtmp.c ../y.tab.c #../strptime.c
+SRC= ../logwtmp.c ../y.tab.c
 
 OBJ=obj/*.o
 LIB=util
 all: pre obj lib
-CPPFLAGS += -include private.h
+CPPFLAGS += -include private.h -include sys/nb_cdefs_aout.h -D_EXT_SOURCE
 pre:
 	byacc -d parsedate.y
 obj: pre

@@ -1,16 +1,14 @@
 #!/bin/sh
-	cp mv.c mv.c.bak
 	case $(uname -s) in
 		'Linux')
-		if [ -f mv.c.bak ]; then
-		SHAOR=$(sha256sum mv.c)
-		SHABAK=$(sha256sum mv.c.bak)
+		patch -Np0 < ../../patches/linux/0001-no-fchflags-mv-linux.patch 
+
+		if [ -f /lib/ld-musl-$(uname -m).so.1 ]; then
+		patch -Np0 < ../../patches/linux/0004-unused-mv-musl.patch 	
 		fi
-		if [ ! "$SHAOR" = "$SHABAK" ]; then
-		patch -Np0 < ../../patches/bin/0001-no-fchflags-mv-linux.patch 
+		
 		if [ -f mv.c.rej ]; then
 		rm mv.c.rej
-			fi
 		fi
 		;;
 		esac

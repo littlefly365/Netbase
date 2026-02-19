@@ -44,4 +44,13 @@
 #define      __RENAME(x)  
 #endif
 
+#ifdef _EXT_SOURCE
+#ifndef __unused
+#define __unused
+#endif
+#ifndef __used
+#define __used __unused
+#endif
+
+#endif
 #endif
