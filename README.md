@@ -37,10 +37,9 @@ the commands available are listed on details/
 | GNU/Hurd        | ⚠️ May work      |
 
 # Building
-if you run only g/make may fail so i recommed execute the build script instead:
-`
-./build.sh        
-          
+if you run only g/make may fail so i recommend execute the build script instead:
+`                                          `
+`./build.sh                                `         
 use:
 -b, --build   build the project(default)
 -c, --clean   clean the source tree
