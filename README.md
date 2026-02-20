@@ -28,13 +28,13 @@ the commands available are listed on details/
 
 | Platform        | Status           |
 |-----------------|------------------|
-| Linux glibc     | ☑️ Works         |
-| Linux musl      | ☑️ Works         |
-| NetBSD          | ☑️ Works         |
+| Linux glibc     | ☑️ Works          |
+| Linux musl      | ☑️ Works          |
+| NetBSD          | ☑️ Works          |
 | FreeBSD         | 🧪 Should work   |
 | OpenBSD         | 🧪 Should work   |
 | macOS           | 🧪 Should work   |
-| GNU/Hurd        | ⚠️ May work      |
+| GNU/Hurd        | ⚠️ May work       |
 
 # Building
 if you run only g/make may fail so i recommend execute the build script instead:
@@ -47,4 +47,13 @@ run make with configs and variables depending on the platform (default).
 
 `-c, --clean`
 remove object files and clean the source tree.
+
+# TODO
+
+|    Plataform/Goal	|    Status	|
+|-----------------------|---------------|
+| linux (glibc/musl)  	| ☑️  yes	|
+| Free/Open/NetBSD 	| 🧪should work |
+| MacOS/Minix/Hurd	| ⚠️  untested	|
+| Full Userland (! GNU) | 		|
 
