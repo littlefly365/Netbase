@@ -27,18 +27,21 @@ static struct sigaction Sigact_ign, Sigact_trap;
 void
 inittraps()
 {
-#ifdef HAVE_SYS_SIGLIST
-# ifndef SYS_SIGLIST_DECLARED
-	extern char	*sys_siglist[];
-# endif
-	int	i;
+	#if defined(__linux__) || defined(__GNU__)
 	const char *s = strsignal(i);
+	#else	
+	extern char	*sys_siglist[];
+	#endif
+	int	i;
 	/* Use system description, if available, for unknown signals... */
 	for (i = 0; i < NSIG; i++)
+	#if defined(__linux__) || defined(__GNU__)
 		if (!sigtraps[i].name && s && s[0])
 			sigtraps[i].mess = s;
-#endif	/* HAVE_SYS_SIGLIST */
-
+	#else
+                if (!sigtraps[i].name && sys_siglist[i] && sys_siglist[i][0])
+                        sigtraps[i].mess = sys_siglist[i];
+	#endif
 	sigemptyset(&Sigact_ign.sa_mask);
 	Sigact_ign.sa_flags = KSH_SA_FLAGS;
 	Sigact_ign.sa_handler = SIG_IGN;

@@ -8,7 +8,6 @@ obj: emacs siglist check
 $(PROG): obj
 	$(CC) *.o $(LDFLAGS) -o $(PROG)
 clean:
-	mv trap.c.bak trap.c
 	rm -rf *.o *.out
 build: all
 	mv $(PROG) ../../build/bin
@@ -17,6 +16,4 @@ emacs:
             && mv emacs.out.tmp emacs.out
 siglist:
 	./siglist.sh "clang -E -I. -I$(pwd) -I/usr/include" < siglist.in > siglist.out
-check:
-	./check.sh
 .PHONY: all obj $(PROG) clean build emacs siglist
