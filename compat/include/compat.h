@@ -75,4 +75,6 @@ char *fgetln(FILE *stream, size_t *len);
 #define NL_TEXTMAX          2048
 #endif
 
+#define chflags 
+
 #endif

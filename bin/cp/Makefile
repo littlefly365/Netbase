@@ -1,9 +1,9 @@
 PROG= cp
-CFLAGS += 
+CFLAGS += -D_EXT_SOURCE
 all: obj $(PROG)
 
 obj:
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c *.c
+	$(CC) $(CPPFLAGS) -include sys/nb_cdefs_aout.h $(CFLAGS) -c *.c
 $(PROG): obj
 	$(CC) *.o $(LDFLAGS) -o $(PROG)
 clean:
