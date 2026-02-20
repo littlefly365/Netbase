@@ -7,10 +7,7 @@ obj: check
 $(PROG): obj
 	$(CC) $(PROG).o $(LDFLAGS)  $(LDFTS) -o $(PROG)
 clean:
-	mv rm.c.bak rm.c
 	rm -rf $(PROG).o 
 build: all
 	mv $(PROG) ../../build/bin
-check:
-	./check.sh
 .PHONY: all obj $(PROG) clean build check

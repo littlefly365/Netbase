@@ -1,9 +1,13 @@
-#       $NetBSD: Makefile,v 1.4 2011/08/17 13:19:09 christos Exp $
+PROG= seq
+LDFLAGS += -lm
+all: obj $(PROG)
 
-PROG=	seq
-DPADD=	${LIBMATH}
-LDADD=	-lm
-
-COPTS.seq.c += -Wno-format-nonliteral
-
-.include <bsd.prog.mk>
+obj:
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $(PROG).c 
+$(PROG): obj
+	$(CC) $(PROG).o $(LDFLAGS) -o $(PROG)
+clean:
+	rm -rf $(PROG).o 
+build: all
+	mv $(PROG) ../../build/usr.bin
+.PHONY: all obj $(PROG) clean build

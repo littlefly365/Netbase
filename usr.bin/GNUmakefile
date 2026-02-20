@@ -1,5 +1,5 @@
 SUBDIRS = env dirname basename id tee yes head printf wc false true whoami tty uniq \
-	nice grep sed
+	nice grep sed nl seq
 
 all: $(SUBDIRS)
 

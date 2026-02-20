@@ -1,7 +1,13 @@
-#	$NetBSD: Makefile,v 1.4 2011/08/16 12:00:46 christos Exp $
+PROG= nl
 
-PROG=	nl
+all: obj $(PROG)
 
-COPTS.nl.c += -Wno-format-nonliteral
-
-.include <bsd.prog.mk>
+obj:
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $(PROG).c 
+$(PROG): obj
+	$(CC) $(PROG).o $(LDFLAGS) -o $(PROG)
+clean:
+	rm -rf $(PROG).o 
+build: all
+	mv $(PROG) ../../build/usr.bin
+.PHONY: all obj $(PROG) clean build

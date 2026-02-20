@@ -71,5 +71,8 @@ char *fgetln(FILE *stream, size_t *len);
 #ifndef REG_STARTEND
 #define REG_STARTEND  0x0080
 #endif
+#ifndef NL_TEXTMAX
+#define NL_TEXTMAX          2048
+#endif
 
 #endif

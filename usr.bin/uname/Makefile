@@ -1,4 +1,4 @@
-PROG= dirname
+PROG= uname
 
 all: obj $(PROG)
 
