@@ -78,4 +78,8 @@
 #define      REG_BASIC       0000
 #endif
 
+#ifndef REG_GNU
+#define      REG_GNU          0400
+#endif
+
 #endif

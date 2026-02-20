@@ -48,6 +48,14 @@
 #define	__predict_false(exp)	__builtin_expect((exp) != 0, 0)
 #endif
 
+#ifndef __packed
+#define     __packed        __attribute__((__packed__))
+#endif
+
+#ifndef __dso_hidden
+#define __dso_hidden      __attribute__((__visibility__("hidden")))
+#endif
+
 #ifndef __dead
 #define __dead __attribute__((__noreturn__))
 #endif
@@ -63,6 +71,23 @@
 
 #ifndef __USE
 #define __USE(a) (/*LINTED*/(void)(a))
+#endif
+
+#ifdef __COUNTER__
+#define __CTASSERT(x)           __CTASSERT0(x, __ctassert, __COUNTER__)
+#else
+#define __CTASSERT(x)           __CTASSERT99(x, __INCLUDE_LEVEL__, __LINE__)
+#define __CTASSERT99(x, a, b)   __CTASSERT0(x, __CONCAT(__ctassert,a), \
+                                               __CONCAT(_,b))
+#endif
+#define __CTASSERT0(x, y, z)    __CTASSERT1(x, y, z)
+#define __CTASSERT1(x, y, z)    \
+        struct y ## z ## _struct { \
+                unsigned int y ## z : /*CONSTCOND*/(x) ? 1 : -1; \
+        }
+
+#ifndef __inline
+#define     __inline        inline
 #endif
 
 #endif

@@ -1,7 +1,7 @@
-/*	$NetBSD: logwtmp.c,v 1.14 2003/08/07 16:44:59 agc Exp $	*/
+/*	$NetBSD: errc.c,v 1.3 2014/06/06 11:38:41 joerg Exp $	*/
 
-/*
- * Copyright (c) 1988, 1993
+/*-
+ * Copyright (c) 1993
  *	The Regents of the University of California.  All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,55 +29,30 @@
  * SUCH DAMAGE.
  */
 
+#if HAVE_NBTOOL_CONFIG_H
+#include "nbtool_config.h"
+#endif
+
 #include <sys/cdefs.h>
 #if defined(LIBC_SCCS) && !defined(lint)
-#if 0
-static char sccsid[] = "@(#)logwtmp.c	8.1 (Berkeley) 6/4/93";
-#else
-__RCSID("$NetBSD: logwtmp.c,v 1.14 2003/08/07 16:44:59 agc Exp $");
-#endif
+__RCSID("$NetBSD: errc.c,v 1.3 2014/06/06 11:38:41 joerg Exp $");
 #endif /* LIBC_SCCS and not lint */
 
-#ifdef __unused
-#undef __unused
+#include <err.h>
+#include <stdarg.h>
+
+#ifdef __weak_alias
+__weak_alias(errc, _errc)
 #endif
 
-#include <sys/types.h>
-#include <sys/file.h>
-#include <sys/time.h>
-#include <sys/stat.h>
-
-#include <assert.h>
-#include <string.h>
-#include <time.h>
-#include <unistd.h>
-#include <utmp.h>
-#include <util.h>
-#include <fcntl.h>
-
-
-void
-logwtmp(const char *line, const char *name, const char *host)
+#if !HAVE_ERR_H || !HAVE_DECL_ERRC
+__dead void
+errc(int eval, int code, const char *fmt, ...)
 {
-	struct utmp ut;
-	struct stat buf;
-	int fd;
+	va_list ap;
 
-	_DIAGASSERT(line != NULL);
-	_DIAGASSERT(name != NULL);
-	_DIAGASSERT(host != NULL);
-
-	if ((fd = open(_PATH_WTMP, O_WRONLY|O_APPEND, 0)) < 0)
-		return;
-	if (fstat(fd, &buf) == 0) {
-		(void) strncpy(ut.ut_line, line, sizeof(ut.ut_line));
-		(void) strncpy(ut.ut_name, name, sizeof(ut.ut_name));
-		(void) strncpy(ut.ut_host, host, sizeof(ut.ut_host));
-		time_t t;
-		time(&t);
-		ut.ut_time = (uint32_t)t;
-		if (write(fd, &ut, sizeof(struct utmp)) != sizeof(struct utmp))
-			(void) ftruncate(fd, buf.st_size);
-	}
-	(void) close(fd);
+	va_start(ap, fmt);
+	verrc(eval, code, fmt, ap);
+	va_end(ap);
 }
+#endif

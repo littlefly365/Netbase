@@ -16,7 +16,7 @@ obj:
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c ../$(SRC_STRING) && \
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c ../$(SRC_UNISTD) && \
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c ../$(SRC_STDIO) && \
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c ../$(SRC_GEN) && \
+	$(CC) $(CFLAGS) $(CPPFLAGS) -include nb_errc.h -c -I../gen ../$(SRC_GEN) && \
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c ../$(SRC_SYS_STAT)
 build: obj
 	$(AR) rcs lib$(LIB).a $(OBJ)

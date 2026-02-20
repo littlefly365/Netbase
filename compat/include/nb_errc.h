@@ -1,7 +1,7 @@
-/*	$NetBSD: logwtmp.c,v 1.14 2003/08/07 16:44:59 agc Exp $	*/
+/*	$NetBSD: err.h,v 1.18 2022/01/06 00:16:47 uwe Exp $	*/
 
-/*
- * Copyright (c) 1988, 1993
+/*-
+ * Copyright (c) 1993
  *	The Regents of the University of California.  All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,57 +27,41 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
+ *
+ *	@(#)err.h	8.1 (Berkeley) 6/2/93
  */
 
+#ifndef _ERR_H_
+#define	_ERR_H_
+
 #include <sys/cdefs.h>
-#if defined(LIBC_SCCS) && !defined(lint)
-#if 0
-static char sccsid[] = "@(#)logwtmp.c	8.1 (Berkeley) 6/4/93";
-#else
-__RCSID("$NetBSD: logwtmp.c,v 1.14 2003/08/07 16:44:59 agc Exp $");
-#endif
-#endif /* LIBC_SCCS and not lint */
+#include <stdarg.h>
 
-#ifdef __unused
-#undef __unused
-#endif
+__BEGIN_DECLS
+__dead void	err(int, const char *, ...)
+		     __printflike(2, 3);
+__dead void	verr(int, const char *, va_list)
+		    __printflike(2, 0);
+__dead void	errx(int, const char *, ...)
+		     __printflike(2, 3);
+__dead void	verrx(int, const char *, va_list)
+		    __printflike(2, 0);
+__dead void	errc(int, int, const char *, ...)
+		     __printflike(3, 4);
+__dead void	verrc(int, int, const char *, va_list)
+		    __printflike(3, 0);
+void		warn(const char *, ...)
+		    __printflike(1, 2);
+void		vwarn(const char *, va_list)
+		    __printflike(1, 0);
+void		warnx(const char *, ...)
+		    __printflike(1, 2);
+void		vwarnx(const char *, va_list)
+		    __printflike(1, 0);
+void		warnc(int, const char *, ...)
+		    __printflike(2, 3);
+void		vwarnc(int, const char *, va_list)
+		    __printflike(2, 0);
+__END_DECLS
 
-#include <sys/types.h>
-#include <sys/file.h>
-#include <sys/time.h>
-#include <sys/stat.h>
-
-#include <assert.h>
-#include <string.h>
-#include <time.h>
-#include <unistd.h>
-#include <utmp.h>
-#include <util.h>
-#include <fcntl.h>
-
-
-void
-logwtmp(const char *line, const char *name, const char *host)
-{
-	struct utmp ut;
-	struct stat buf;
-	int fd;
-
-	_DIAGASSERT(line != NULL);
-	_DIAGASSERT(name != NULL);
-	_DIAGASSERT(host != NULL);
-
-	if ((fd = open(_PATH_WTMP, O_WRONLY|O_APPEND, 0)) < 0)
-		return;
-	if (fstat(fd, &buf) == 0) {
-		(void) strncpy(ut.ut_line, line, sizeof(ut.ut_line));
-		(void) strncpy(ut.ut_name, name, sizeof(ut.ut_name));
-		(void) strncpy(ut.ut_host, host, sizeof(ut.ut_host));
-		time_t t;
-		time(&t);
-		ut.ut_time = (uint32_t)t;
-		if (write(fd, &ut, sizeof(struct utmp)) != sizeof(struct utmp))
-			(void) ftruncate(fd, buf.st_size);
-	}
-	(void) close(fd);
-}
+#endif /* !_ERR_H_ */
