@@ -1,9 +1,9 @@
 PROG= ksh
 CFLAGS += -I. -Wno-deprecated-non-prototype
 
-all: emacs siglist check obj $(PROG)
+all: emacs siglist obj $(PROG)
 
-obj: emacs siglist check
+obj: emacs siglist 
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c *.c 
 $(PROG): obj
 	$(CC) *.o $(LDFLAGS) -o $(PROG)

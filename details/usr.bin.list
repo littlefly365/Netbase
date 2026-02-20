@@ -14,3 +14,6 @@ uniq
 nice
 tty
 grep
+sed
+nl
+seq

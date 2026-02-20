@@ -27,12 +27,12 @@ static struct sigaction Sigact_ign, Sigact_trap;
 void
 inittraps()
 {
+	int	i;
 	#if defined(__linux__) || defined(__GNU__)
 	const char *s = strsignal(i);
 	#else	
 	extern char	*sys_siglist[];
 	#endif
-	int	i;
 	/* Use system description, if available, for unknown signals... */
 	for (i = 0; i < NSIG; i++)
 	#if defined(__linux__) || defined(__GNU__)
