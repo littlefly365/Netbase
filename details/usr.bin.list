@@ -17,3 +17,4 @@ grep
 sed
 nl
 seq
+base64

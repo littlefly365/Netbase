@@ -1,9 +1,13 @@
-#	$NetBSD: Makefile,v 1.1 2018/07/24 15:26:16 christos Exp $
+PROG= base64
 
-WARNS?= 6	
+all: obj $(PROG)
 
-.include <bsd.own.mk>
-
-PROG=		base64
-
-.include <bsd.prog.mk>
+obj:
+	$(CC) $(CPPFLAGS) $(CFLAGS) -include nb_errc.h -c $(PROG).c 
+$(PROG): obj
+	$(CC) $(PROG).o $(LDFLAGS) -o $(PROG)
+clean:
+	rm -rf $(PROG).o 
+build: all
+	mv $(PROG) ../../build/usr.bin
+.PHONY: all obj $(PROG) clean build

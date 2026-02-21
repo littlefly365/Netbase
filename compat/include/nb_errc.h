@@ -64,4 +64,6 @@ void		vwarnc(int, const char *, va_list)
 		    __printflike(2, 0);
 __END_DECLS
 
+#define     EFTYPE          79
+
 #endif /* !_ERR_H_ */

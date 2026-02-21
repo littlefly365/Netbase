@@ -8,9 +8,9 @@ else
 endif
 
 ifeq ($(shell command -v llvm-ar 2>/dev/null),)
-    CC := ar
+    AR := ar
 else
-    CC := llvm-ar
+    AR := llvm-ar
 endif
 
 CFLAGS=-O2 -Wno-old-style-definition
@@ -39,4 +39,11 @@ clean:
 	rm -f include/sys/cdefs.h
 	rm -f include/sys/queue.h
 	rm -rf include/protocols
+
+install:
+	cp build/bin/* $(DESTDIR)/$(BINDIR)
+	ln -sv test $(DESTDIR)/$(BINDIR)/[
+	cp build/sbin/* $(DESTDIR)/$(SBINDIR)
+	cp build/usr.bin/* $(DESTDIR)/$(USRBINDIR)
+
 .PHONY: all $(LIBS) $(SRC) clean
