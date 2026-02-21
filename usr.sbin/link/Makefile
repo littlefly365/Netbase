@@ -1,6 +1,13 @@
-#	$NetBSD: Makefile,v 1.1 1999/07/19 09:11:26 kleink Exp $
+PROG= link
 
-PROG=	link
-MAN=	link.8
+all: obj $(PROG)
 
-.include <bsd.prog.mk>
+obj:
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $(PROG).c 
+$(PROG): obj
+	$(CC) $(PROG).o $(LDFLAGS) -o $(PROG)
+clean:
+	rm -rf $(PROG).o 
+build: all
+	mv $(PROG) ../../build/usr.sbin
+.PHONY: all obj $(PROG) clean build

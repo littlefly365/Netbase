@@ -1,9 +1,9 @@
-SUBDIRS = chroot
+SUBDIRS = chroot link
 
 all: $(SUBDIRS)
 
 $(SUBDIRS): 
-	mkdir -p ../build/sbin
+	mkdir -p ../build/usr.sbin
 	$(MAKE)	-C $@ build
 build: $(SUBDIRS)
 

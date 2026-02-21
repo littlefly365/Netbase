@@ -1,6 +1,13 @@
-#	$NetBSD: Makefile,v 1.3 1994/12/22 06:33:38 jtc Exp $
-#	@(#)Makefile	8.1 (Berkeley) 6/9/93
+PROG= logname
 
-PROG=	logname
+all: obj $(PROG)
 
-.include <bsd.prog.mk>
+obj:
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $(PROG).c 
+$(PROG): obj
+	$(CC) $(PROG).o $(LDFLAGS) -o $(PROG)
+clean:
+	rm -rf $(PROG).o 
+build: all
+	mv $(PROG) ../../build/usr.bin
+.PHONY: all obj $(PROG) clean build
