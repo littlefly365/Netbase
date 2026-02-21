@@ -21,3 +21,4 @@ base64
 comm
 expand
 logname
+printenv
