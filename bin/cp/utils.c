@@ -519,6 +519,11 @@ preserve_dir_acls(struct stat *fs, char *source_dir, char *dest_dir)
 			    source_dir);
 			return (1);
 		}
+		#ifdef __linux__
+		(void)dest_dir;
+			if (acl)
+			    acl_free(acl);
+		#else
 		aclp = &acl->ats_acl;
 		if (aclp->acl_cnt != 0 && aclsetf(dest_dir,
 		    ACL_TYPE_DEFAULT, acl) < 0) {
@@ -528,6 +533,7 @@ preserve_dir_acls(struct stat *fs, char *source_dir, char *dest_dir)
 			return (1);
 		}
 		acl_free(acl);
+	#endif
 	}
 	acl = aclgetf(source_dir, acl_type);
 	if (acl == NULL) {

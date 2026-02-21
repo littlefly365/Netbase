@@ -72,4 +72,6 @@ int fchflags(int fd, unsigned long flags);
 #define     ALLPERMS        (S_ISUID|S_ISGID|S_ISTXT|S_IRWXU|S_IRWXG|S_IRWXO)
 #endif
 
+int lutimens(const char *path, const struct timespec *times);
+
 #endif

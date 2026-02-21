@@ -7,6 +7,7 @@ Netbase is a port of the NetBSD's utilities to another unix like operating syste
 - byacc (bison will NOT work)
 - zlib
 - libbz2
+- libacl
 - libfts ( for musl )
 - posix shell (link to /bin/sh )
 

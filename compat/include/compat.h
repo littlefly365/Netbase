@@ -2,6 +2,13 @@
 #define _COMPAT_H
 
 #include <stdio.h>
+#include <stddef.h>
+#include <unistd.h>
+#include <errno.h>
+
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/acl.h>
 
 // compat includes
 #include "nb_assert.h"
@@ -76,5 +83,100 @@ char *fgetln(FILE *stream, size_t *len);
 #endif
 
 #define chflags 
+typedef unsigned long u_long;
+typedef unsigned int u_int;
+#ifndef S_BLKSIZE
+#define S_BLKSIZE 512
+#endif
+
+static inline const char *
+getbsize(int *h, long *b)
+{
+    if (b) *b = 512;
+    return "512";
+}
+
+static inline char *
+flags_to_string(u_long f, char *d)
+{
+    (void)f;
+    return d;
+}
+
+typedef int32_t __devmajor_t, __devminor_t;
+#define devmajor_t __devmajor_t
+#define devminor_t __devminor_t
+#define NODEVMAJOR (-1)
+#define major(x)        ((devmajor_t)(((uint32_t)(x) & 0x000fff00) >>  8))
+#define minor(x)        ((devminor_t)((((uint32_t)(x) & 0xfff00000) >> 12) | \
+                                   (((uint32_t)(x) & 0x000000ff) >>  0)))
+
+static inline long
+lpathconf(const char *path, int name)
+{
+    (void)path;
+    (void)name;
+    return -1;
+}
+
+#define _PC_ACL_EXTENDED	0
+#define ACL_TYPE_NFS4		0
+#define _PC_ACL_NFS4		0
+
+typedef struct __acl_ext *acl_t;
+
+static inline acl_t
+acl_get_link_np(const char *path, acl_type_t type)
+{
+    (void)path;
+    (void)type;
+    return NULL;
+}
+
+static inline int
+acl_set_link_np(const char *path, acl_type_t type, acl_t name)
+{
+    (void)path;
+    (void)type;
+    (void)name;
+    return 0;
+}
+
+static inline acl_t
+acl_get_fd_np(int type, int name)
+{
+    (void)type;
+    (void)name;
+    return 0;
+}
+
+static inline acl_t
+acl_set_fd_np(int path, acl_t acl, int name)
+{
+    (void)path;
+    (void)acl;
+    (void)name;
+    return NULL;
+}
+
+static inline int
+acl_is_trivial_np(acl_t acl, int *trivial)
+{
+    (void)acl;
+    if (trivial)
+        *trivial = 1;
+    return 0;
+}
+#define st_atimespec st_atim
+#define st_mtimespec st_mtim
+#define st_flags st_mode
+
+#ifndef AT_FDCWD
+#define     AT_FDCWD                -100
+#endif
+
+#ifndef NODEV
+#define NODEV ((dev_t)-1)
+#endif
 
 #endif

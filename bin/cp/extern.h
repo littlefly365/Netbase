@@ -34,6 +34,8 @@
 #ifndef _EXTERN_H_
 #define _EXTERN_H_
 
+#include <signal.h>
+
 typedef struct {
 	char *p_end;			/* pointer to NULL at end of path */
 	char *target_end;		/* pointer to end of target base */

@@ -43,6 +43,8 @@ const char *getprogname(void);
 void setprogname(char *name);
 int reallocarr(void *ptrp, size_t number, size_t size);
 double		strtod_l(const char * __restrict, char ** __restrict, locale_t);
+int humanize_number(char *buf, size_t len, int64_t bytes, const char *suffix, int scale, int flags);
+
 #ifdef __GLIBC__
 #else
 uint32_t arc4random(void);

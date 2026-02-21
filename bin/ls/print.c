@@ -45,6 +45,7 @@ __RCSID("$NetBSD: print.c,v 1.57 2020/05/17 23:34:11 christos Exp $");
 #include <sys/stat.h>
 #ifndef SMALL
 #include <sys/acl.h>
+#include <acl/libacl.h>
 #endif
 
 #include <err.h>
@@ -546,7 +547,6 @@ aclmode(char *buf, const FTSENT *p)
 			type = ACL_TYPE_NFS4;
 			supports_acls = 1;
 		} else if (ret < 0 && errno != EINVAL) {
-			warn("%s", name);
 			return;
 		}
 		if (supports_acls == 0) {

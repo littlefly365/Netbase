@@ -14,3 +14,5 @@ date
 mkdir
 test
 ksh
+cp
+ls

@@ -595,7 +595,7 @@ display(FTSENT *p, FTSENT *list)
 					maxgroup = glen;
 				if (f_flags) {
 					flags =
-					    flags_to_string((u_long)sp->st_flags, "-");
+					    flags_to_string((u_long)0, "-");
 					if ((flen = strlen(flags)) > maxflags)
 						maxflags = flen;
 				} else
