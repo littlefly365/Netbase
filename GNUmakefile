@@ -1,8 +1,19 @@
 LIBS=lib/libnetbsd lib/libutil 
 SRC= bin/ sbin/ usr.bin/
-CC=clang
-AR=llvm-ar
-CFLAGS=-O2 -ferror-limit=5
+
+ifeq ($(shell command -v clang 2>/dev/null),)
+    CC := gcc
+else
+    CC := clang
+endif
+
+ifeq ($(shell command -v llvm-ar 2>/dev/null),)
+    CC := ar
+else
+    CC := llvm-ar
+endif
+
+CFLAGS=-O2 -Wno-old-style-definition
 CPPFLAGS=-I$(CURDIR)/include -include compat.h 
 LDFLAGS=$(CURDIR)/lib/libnetbsd/libnetbsd.a
 LIBUTIL=$(CURDIR)/lib/libutil/libutil.a 

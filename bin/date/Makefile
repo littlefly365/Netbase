@@ -1,5 +1,5 @@
 PROG= date
-
+CFLAGS +=  -Wno-incompatible-pointer-types
 all: obj $(PROG)
 
 obj:
