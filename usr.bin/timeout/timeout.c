@@ -117,8 +117,8 @@ parse_signal(const char *str)
 	if (strncasecmp(str, "SIG", 3) == 0) {
 		str += 3;
 
-		for (i = 1; i < sys_nsig; i++) {
-			if (strcasecmp(str, sys_signame[i]) == 0)
+		for (i = 1; i < NSIG; i++) {
+			if (strcasecmp(str, strsignal(i)) == 0)
 				return (i);
 		}
 
@@ -132,7 +132,7 @@ parse_signal(const char *str)
 		goto err;
 	if (errno == ERANGE && (sig == LONG_MAX || sig == LONG_MIN))
 		goto err;
-	if (sig >= sys_nsig || sig < 0)
+	if (sig >= NSIG || sig < 0)
 		goto err;
 
 	return (int)sig;
