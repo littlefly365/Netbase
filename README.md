@@ -31,10 +31,6 @@ the commands available are listed on details/
 |-----------------|------------------|
 | Linux glibc     | ☑️ Works         |
 | Linux musl      | ☑️ Works         |
-| NetBSD          | ☑️ Works         |
-| FreeBSD         | 🧪 Should work   |
-| OpenBSD         | 🧪 Should work   |
-| macOS           | 🧪 Should work   |
 | GNU/Hurd        | ⚠️ May work      |
 
 # Building
