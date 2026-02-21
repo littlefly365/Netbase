@@ -95,6 +95,14 @@ __RCSID("$NetBSD: ftree.c,v 1.42.42.1 2024/08/07 10:52:49 martin Exp $");
 #endif	/* SMALL */
 
 /*
+ * musl doesn't have ALLPERMS
+ */
+
+#ifndef ALLPERMS
+# define ALLPERMS (S_ISUID|S_ISGID|S_ISVTX|S_IRWXU|S_IRWXG|S_IRWXO)/* 07777 */
+#endif
+
+/*
  * routines to interface with the fts library function.
  *
  * file args supplied to pax are stored on a single linked list (of type FTREE)

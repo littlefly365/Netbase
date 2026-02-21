@@ -60,6 +60,14 @@ __RCSID("$NetBSD: walk.c,v 1.32 2022/04/09 10:05:35 riastradh Exp $");
 #include "makefs.h"
 #include "mtree.h"
 
+/*
+ * musl doesn't have ALLPERMS
+ */
+
+#ifndef ALLPERMS
+# define ALLPERMS (S_ISUID|S_ISGID|S_ISVTX|S_IRWXU|S_IRWXG|S_IRWXO)/* 07777 */
+#endif
+
 static	void	 apply_specdir(const char *, NODE *, fsnode *, int);
 static	void	 apply_specentry(const char *, NODE *, fsnode *);
 static	fsnode	*create_fsnode(const char *, const char *, const char *,
