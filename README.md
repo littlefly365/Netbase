@@ -4,7 +4,6 @@ Netbase is a port of the NetBSD's utilities to another unix like operating syste
 # Deps
 - gnu make
 - clang and llvm
-- byacc (bison will NOT work)
 - zlib
 - libbz2
 - libacl
