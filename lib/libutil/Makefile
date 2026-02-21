@@ -1,8 +1,9 @@
-SRC= ../logwtmp.c ../y.tab.c
+SRC= ../logwtmp.c ../y.tab.c ../efun.c
 
 OBJ=obj/*.o
 LIB=util
 all: pre obj lib
+CFLAGS += -Wno-macro-redefined
 CPPFLAGS += -include private.h -include sys/nb_cdefs_aout.h -D_EXT_SOURCE
 
 obj: 

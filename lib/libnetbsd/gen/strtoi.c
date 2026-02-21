@@ -1,8 +1,8 @@
-/*      $NetBSD: util.h,v 1.69 2016/04/10 19:05:50 roy Exp $    */
+/*	$NetBSD: _strtoi.h,v 1.3 2024/01/20 16:13:39 christos Exp $	*/
 
 /*-
- * Copyright (c) 1995
- *      The Regents of the University of California.  All rights reserved.
+ * Copyright (c) 1990, 1993
+ *	The Regents of the University of California.  All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -27,26 +27,71 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
+ *
+ * Original version ID:
+ * NetBSD: src/lib/libc/locale/_wcstoul.h,v 1.2 2003/08/07 16:43:03 agc Exp
+ *
+ * Created by Kamil Rytarowski, based on ID:
+ * NetBSD: src/common/lib/libc/stdlib/_strtoul.h,v 1.7 2013/05/17 12:55:56 joerg Exp
  */
 
-#ifndef _UTIL_H
-#define _UTIL_H
+#include <sys/cdefs.h>
 
-char *strptime(const char *buf, const char *fmt, struct tm *tm);
-void		logwtmp(const char *, const char *, const char *);
-time_t parsedate(const char *datestr, const time_t *time, const int *tzoff);
-size_t estrlcpy(char *dst, const char *src, size_t len);
-size_t estrlcat(char *dst, const char *src, size_t len);
-char *estrdup(const char *s);
-char *estrndup(const char *s, size_t len);
-void *emalloc(size_t n);
-void *calloc(size_t n, size_t s);
-void *erealloc(void *p, size_t n);
-void ereallocarr(void *p, size_t n, size_t s);
-FILE *efopen(const char *p, const char *m);
-int easprintf(char ** __restrict ret, const char * __restrict format, ...);
-int evasprintf(char ** __restrict ret, const char * __restrict format, va_list ap);
-intmax_t estrtoi(const char * nptr, int base, intmax_t lo, intmax_t hi);
-uintmax_t estrtou(const char * nptr, int base, uintmax_t lo, uintmax_t hi);
+#include <stddef.h>
+#include <assert.h>
+#include <errno.h>
+#include <inttypes.h>
 
-#endif
+#define _DIAGASSERT(t)
+
+intmax_t
+strtoi(const char *__restrict nptr,
+       char **__restrict endptr, int base,
+       intmax_t lo, intmax_t hi, int *rstatus)
+{
+	int serrno;
+	intmax_t im;
+	char *ep;
+	int rep;
+
+	_DIAGASSERT(hi >= lo);
+
+	_DIAGASSERT(nptr != NULL);
+	/* endptr may be NULL */
+
+	if (endptr == NULL)
+		endptr = &ep;
+
+	if (rstatus == NULL)
+		rstatus = &rep;
+
+	serrno = errno;
+	errno = 0;
+
+	im = strtoimax(nptr, endptr, base);
+
+	*rstatus = errno;
+	errno = serrno;
+
+	/* No digits were found */
+	if (*rstatus == 0 && nptr == *endptr)
+		*rstatus = ECANCELED;
+
+	if (im < lo) {
+		if (*rstatus == 0)
+			*rstatus = ERANGE;
+		return lo;
+	}
+
+	if (im > hi) {
+		if (*rstatus == 0)
+			*rstatus = ERANGE;
+		return hi;
+	}
+
+	/* There are further characters after number */
+	if (*rstatus == 0 && **endptr != '\0')
+		*rstatus = ENOTSUP;
+
+	return im;
+}

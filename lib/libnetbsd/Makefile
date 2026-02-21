@@ -5,6 +5,8 @@ SRC_STDIO=stdio/*.c
 SRC_GEN=gen/*.c
 SRC_SYS_STAT=sys/stat/*.c
 
+CFLAGS += -Wno-macro-redefined
+
 OBJ=obj/*.o
 LIB=netbsd
 all: obj lib

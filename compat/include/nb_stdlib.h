@@ -44,6 +44,8 @@ void setprogname(char *name);
 int reallocarr(void *ptrp, size_t number, size_t size);
 double		strtod_l(const char * __restrict, char ** __restrict, locale_t);
 int humanize_number(char *buf, size_t len, int64_t bytes, const char *suffix, int scale, int flags);
+intmax_t strtoi(const char *__restrict nptr, char **__restrict endptr, int base, intmax_t lo, intmax_t hi, int *rstatus);
+uintmax_t strtou(const char *__restrict nptr, char **__restrict endptr, int base, uintmax_t lo, uintmax_t hi, int *rstatus);
 
 #ifdef __GLIBC__
 #else
