@@ -1,7 +1,13 @@
-#	@(#)Makefile	8.1 (Berkeley) 6/9/93
-#	$NetBSD: Makefile,v 1.5 2009/04/14 22:15:19 lukem Exp $
+PROG= expand
 
-PROG=	expand
-MLINKS=	expand.1 unexpand.1
+all: obj $(PROG)
 
-.include <bsd.prog.mk>
+obj:
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $(PROG).c 
+$(PROG): obj
+	$(CC) $(PROG).o $(LDFLAGS) -o $(PROG)
+clean:
+	rm -rf $(PROG).o 
+build: all
+	mv $(PROG) ../../build/usr.bin
+.PHONY: all obj $(PROG) clean build

@@ -18,3 +18,5 @@ sed
 nl
 seq
 base64
+comm
+expand
