@@ -50,7 +50,5 @@ remove object files and clean the source tree.
 |    Plataform/Goal	    |     Status	  |
 |-----------------------|---------------|
 | linux (glibc/musl)  	| ☑️ yes	      |
-| Free/Open/NetBSD 	    | 🧪should work |
-| MacOS/Minix/Hurd    	| ⚠️ untested	  |
 | Full Userland (! GNU) | ❌ Incomplete	|
 
