@@ -2,7 +2,7 @@
 Netbase is a port of the NetBSD's utilities to another unix like operating systems.
 
 # Important Note
-- im working to add new utilities and add some functions to libutil so if you see eny arrot remove efun.c on lib/libutil/Makefile and sort from usr.bin/GNUmakefile
+- im working to add new utilities and add some functions to libutil so if you see eny error on build time remove efun.c on lib/libutil/Makefile and sort from usr.bin/GNUmakefile
 
 - now are avaible ~50 commands ported from netbsd
 
