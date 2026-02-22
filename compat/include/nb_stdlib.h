@@ -46,6 +46,8 @@ double		strtod_l(const char * __restrict, char ** __restrict, locale_t);
 int humanize_number(char *buf, size_t len, int64_t bytes, const char *suffix, int scale, int flags);
 intmax_t strtoi(const char *__restrict nptr, char **__restrict endptr, int base, intmax_t lo, intmax_t hi, int *rstatus);
 uintmax_t strtou(const char *__restrict nptr, char **__restrict endptr, int base, uintmax_t lo, uintmax_t hi, int *rstatus);
+long long strsuftoll(const char *desc, const char *val, long long min, long long max);
+long long strsuftollx(const char *desc, const char *val, long long min, long long max, char *ebuf, size_t ebuflen);
 
 #ifdef __GLIBC__
 #else

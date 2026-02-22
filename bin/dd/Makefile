@@ -1,22 +1,13 @@
-#	$NetBSD: Makefile,v 1.20 2019/10/04 08:57:37 mrg Exp $
-#	@(#)Makefile	8.1 (Berkeley) 5/31/93
+PROG= dd
+CFLAGS += -DNO_CONV -DNO_MSGFMT -DNO_IOFLAG -DSMALL -fcommon
+all: obj $(PROG)
 
-.include <bsd.own.mk>
-
-RUMPPRG=dd
-SRCS=	args.c conv.c dd.c dd_swab.c misc.c position.c
-
-DPADD+=	${LIBUTIL}
-LDADD+=	-lutil
-
-.ifdef SMALLPROG
-CPPFLAGS+=	-DNO_CONV -DNO_MSGFMT -DNO_IOFLAG -DSMALL
-.else
-CPPFLAGS+=	-D_NETBSD_SOURCE
-SRCS+=		conv_tab.c
-.ifdef CRUNCHEDPROG
-CPPFLAGS+=	-DSMALL
-.endif
-.endif
-
-.include <bsd.prog.mk>
+obj:
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c *.c 
+$(PROG): obj
+	$(CC) *.o $(LDFLAGS) $(LIBUTIL) -o $(PROG)
+clean:
+	rm -rf *.o 
+build: all
+	mv $(PROG) ../../build/bin
+.PHONY: all obj $(PROG) clean build

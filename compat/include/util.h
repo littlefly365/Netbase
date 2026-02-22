@@ -48,5 +48,6 @@ int easprintf(char ** __restrict ret, const char * __restrict format, ...);
 int evasprintf(char ** __restrict ret, const char * __restrict format, va_list ap);
 intmax_t estrtoi(const char * nptr, int base, intmax_t lo, intmax_t hi);
 uintmax_t estrtou(const char * nptr, int base, uintmax_t lo, uintmax_t hi);
+int raise_default_signal(int rump);
 
 #endif

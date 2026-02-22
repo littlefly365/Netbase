@@ -1,4 +1,4 @@
-SRC= ../logwtmp.c ../y.tab.c ../efun.c
+SRC= ../logwtmp.c ../y.tab.c ../efun.c ../rump.c
 
 OBJ=obj/*.o
 DOBJ=../libnetbsd/obj
