@@ -77,4 +77,6 @@ int lutimens(const char *path, const struct timespec *times);
 #ifndef UF_NODUMP
 #define     UF_NODUMP       0x00000001
 #endif
+const char *devname(dev_t dev, mode_t type);
+
 #endif

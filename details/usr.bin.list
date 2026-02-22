@@ -39,3 +39,4 @@ fold
 du
 mkfifo
 csplit
+stat

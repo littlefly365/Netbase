@@ -49,6 +49,10 @@ __RCSID("$NetBSD: stat.c,v 1.48 2022/06/22 18:20:30 kre Exp $");
 #define HAVE_DEVNAME 1
 #endif /* HAVE_NBTOOL_CONFIG_H */
 
+#define st_atimensec st_atim.tv_nsec
+#define st_mtimensec st_mtim.tv_nsec
+#define st_ctimensec st_ctim.tv_nsec
+
 #include <sys/types.h>
 #include <sys/stat.h>
 
@@ -810,9 +814,9 @@ format1(const struct stat *st,
 	case SHOW_st_btime:
 		if (!gottime) {
 			gottime = 1;
-			secs = st->st_birthtime;
+			secs = 0;
 #if HAVE_STRUCT_STAT_ST_BIRTHTIMENSEC
-			nsecs = st->st_birthtimensec;
+			nsecs = 0;
 #endif /* HAVE_STRUCT_STAT_ST_BIRTHTIMENSEC */
 		}
 #endif /* HAVE_STRUCT_STAT_ST_BIRTHTIME */
@@ -875,8 +879,8 @@ format1(const struct stat *st,
 #endif /* HAVE_STRUCT_STAT_ST_FLAGS */
 #if HAVE_STRUCT_STAT_ST_GEN
 	case SHOW_st_gen:
-		small = (sizeof(st->st_gen) == 4);
-		data = st->st_gen;
+		small = 1;
+		data = 0;
 		sdata = NULL;
 		formats = FMTF_DECIMAL | FMTF_OCTAL | FMTF_UNSIGNED | FMTF_HEX;
 		if (ofmt == 0)
