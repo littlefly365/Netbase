@@ -74,4 +74,7 @@ int fchflags(int fd, unsigned long flags);
 
 int lutimens(const char *path, const struct timespec *times);
 
+#ifndef UF_NODUMP
+#define     UF_NODUMP       0x00000001
+#endif
 #endif
