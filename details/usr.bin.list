@@ -38,3 +38,4 @@ split
 fold
 du
 mkfifo
+csplit
