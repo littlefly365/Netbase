@@ -1,25 +1,15 @@
-#	$NetBSD: Makefile,v 1.29 2020/10/30 20:05:00 rillig Exp $
-#	@(#)Makefile	8.1 (Berkeley) 6/6/93
+PROG= xinstall
 
-.include <bsd.own.mk>
+CFLAGS += -Wno-format-nonliteral -DHAVE_POSIX_SPAWN
 
-PROG=	xinstall
-SRCS=	xinstall.c getid.c
-MAN=	install.1
+all: obj $(PROG)
 
-.PATH:		${NETBSDSRCDIR}/usr.sbin/mtree
-CPPFLAGS+=	-I${NETBSDSRCDIR}/usr.sbin/mtree
-
-.if (${HOSTPROG:U} == "")
-CPPFLAGS+=	-DHAVE_POSIX_SPAWN
-DPADD+= ${LIBUTIL}
-LDADD+= -lutil
-.endif
-
-COPTS.xinstall.c += -Wno-format-nonliteral
-
-PROGNAME=install
-
-CWARNFLAGS.gcc+=	${GCC_NO_FORMAT_TRUNCATION}
-
-.include <bsd.prog.mk>
+obj:
+	$(CC) $(CPPFLAGS) $(CFLAGS) -I../../usr.sbin/mtree -c $(PROG).c ../../usr.sbin/mtree/getid.c
+$(PROG): obj
+	$(CC) $(PROG).o $(LDFLAGS) $(LIBUTIL) -o $(PROG)
+clean:
+	rm -rf $(PROG).o 
+build: all
+	mv $(PROG) ../../build/usr.bin
+.PHONY: all obj $(PROG) clean build
