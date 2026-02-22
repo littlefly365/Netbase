@@ -76,6 +76,14 @@ static const char sccsid[] = "@(#)main.c	8.2 (Berkeley) 1/3/94";
 #include "extern.h"
 
 /*
+ * musl doesn't have ALLPERMS
+ */
+
+#ifndef ALLPERMS
+# define ALLPERMS (S_ISUID|S_ISGID|S_ISVTX|S_IRWXU|S_IRWXG|S_IRWXO)/* 07777 */
+#endif
+
+/*
  * Linked list of units (strings and files) to be compiled
  */
 struct s_compunit {
