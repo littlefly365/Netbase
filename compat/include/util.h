@@ -40,7 +40,7 @@ size_t estrlcat(char *dst, const char *src, size_t len);
 char *estrdup(const char *s);
 char *estrndup(const char *s, size_t len);
 void *emalloc(size_t n);
-void *calloc(size_t n, size_t s);
+void *ecalloc(size_t n, size_t s);
 void *erealloc(void *p, size_t n);
 void ereallocarr(void *p, size_t n, size_t s);
 FILE *efopen(const char *p, const char *m);
