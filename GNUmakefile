@@ -1,4 +1,3 @@
-LIBS=lib/libnetbsd lib/libutil 
 SRC= bin/ sbin/ usr.bin/ usr.sbin/
 
 ifeq ($(shell command -v clang 2>/dev/null),)
@@ -23,7 +22,8 @@ export CC AR CFLAGS CPPFLAGS LDFLAGS LIBUTIL
 all: $(SRC)
 
 $(LIBS):
-	$(MAKE) -C $@ build
+	$(MAKE) -C lib/libnetbsd/ build
+	$(MAKE) -C lib/libutil/ build
 $(SRC): $(LIBS)
 	mkdir -p build
 	$(MAKE) -C $@ build
