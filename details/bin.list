@@ -16,3 +16,4 @@ test
 ksh
 cp
 ls
+expr
