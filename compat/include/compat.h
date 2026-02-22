@@ -15,6 +15,7 @@
 #include "nb_locale.h"
 #include "nb_regex.h"
 #include "nb_stdlib.h"
+#include "nb_stdio.h"
 #include "nb_time.h"
 #include "nb_unistd.h"
 #include "tzfile.h"
@@ -59,21 +60,15 @@
 #define      SIZE_T_MAX      ULONG_MAX
 #endif
 
-#if defined(__linux__) || defined(__GNU__) 
-
 static inline char *group_from_gid(unsigned long group, int gid) { return NULL; }
 static inline char *user_from_uid(unsigned long user, int uid) { return NULL; }
 static inline char *uid_from_user(const char *user, unsigned int *uid) { return NULL; }
 static inline int undelete(const char *path) { return 0; }
 
-char *fgetln(FILE *stream, size_t *len);
-
 #define fcpxattr
 #define CLK_TCK             0
 #define setproctitle             
 #define  O_EXLOCK  	0
-
-#endif
 
 #ifndef REG_STARTEND
 #define REG_STARTEND  0x0080
@@ -179,4 +174,9 @@ acl_is_trivial_np(acl_t acl, int *trivial)
 #define NODEV ((dev_t)-1)
 #endif
 
+#ifndef _EXT
+#define _EXT(fp) ((struct __sfileext *)(void *)((fp)->_ext._base))
+#endif
+
+static int debug;
 #endif

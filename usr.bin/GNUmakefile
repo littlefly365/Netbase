@@ -1,6 +1,6 @@
 SUBDIRS = env dirname basename id tee yes head printf wc false true whoami \
 	tty uniq nice grep sed nl seq base64 comm expand logname printenv \
-	timeout	sort join paste cut tail c11 c89 c99 
+	timeout	sort join paste cut tail c11 c89 c99 dir fmt realpath
 
 all: $(SUBDIRS)
 

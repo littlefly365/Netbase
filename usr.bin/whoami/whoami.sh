@@ -1,2 +1,2 @@
 #!/bin/sh
-id -un
+exec id -un

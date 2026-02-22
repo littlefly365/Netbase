@@ -3,9 +3,9 @@ PROG= fmt
 all: obj $(PROG)
 
 obj:
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $(PROG).c 
+	$(CC) $(CPPFLAGS) $(CFLAGS) -I../mail/ -c $(PROG).c ../mail/head.c
 $(PROG): obj
-	$(CC) $(PROG).o $(LDFLAGS) -o $(PROG)
+	$(CC) *.o $(LDFLAGS) -o $(PROG)
 clean:
 	rm -rf $(PROG).o 
 build: all

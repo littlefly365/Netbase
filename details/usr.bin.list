@@ -31,3 +31,6 @@ c89
 c99
 paste
 tail
+dir
+realpath
+fmt
