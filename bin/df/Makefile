@@ -1,11 +1,13 @@
-#	$NetBSD: Makefile,v 1.19 2011/08/28 08:20:58 christos Exp $
-#	@(#)Makefile	8.3 (Berkeley) 5/8/95
+PROG= df
 
-.include <bsd.own.mk>
+all: obj $(PROG)
 
-PROG=	df
-
-LDADD+=-lutil
-DPADD+=${LIBUTIL}
-
-.include <bsd.prog.mk>
+obj:
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $(PROG).c 
+$(PROG): obj
+	$(CC) $(PROG).o $(LDFLAGS) $(LIBUTIL) -o $(PROG)
+clean:
+	rm -rf $(PROG).o 
+build: all
+	mv $(PROG) ../../build/bin
+.PHONY: all obj $(PROG) clean build

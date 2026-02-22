@@ -37,3 +37,4 @@ fmt
 split
 fold
 du
+mkfifo
