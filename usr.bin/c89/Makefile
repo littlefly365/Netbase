@@ -1,8 +1,13 @@
-#	$NetBSD: Makefile,v 1.1 2016/01/14 04:27:26 christos Exp $
+PROG = c89
 
-SCRIPTS=       c89.sh
-SCRIPTSDIR=    /usr/bin
+all: copy chmod 
 
-MAN=		c89.1
-
-.include <bsd.prog.mk>
+chmod: copy
+	chmod +x $(PROG)
+copy:
+	cp $(PROG).sh $(PROG)
+clean:
+	@echo "rm -rf c89.o"
+build: all
+	mv $(PROG) ../../build/usr.bin
+.PHONY: all chmod copy clean build

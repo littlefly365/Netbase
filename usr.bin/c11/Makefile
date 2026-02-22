@@ -1,8 +1,13 @@
-#	$NetBSD: Makefile,v 1.1 2016/10/03 01:00:27 kamil Exp $
+PROG = c11
 
-SCRIPTS=       c11.sh
-SCRIPTSDIR=    /usr/bin
+all: copy chmod 
 
-MAN=		c11.1
-
-.include <bsd.prog.mk>
+chmod: copy
+	chmod +x $(PROG)
+copy:
+	cp $(PROG).sh $(PROG)
+clean:
+	@echo "rm -rf c11.o"
+build: all
+	mv $(PROG) ../../build/usr.bin
+.PHONY: all chmod copy clean build

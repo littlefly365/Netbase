@@ -26,3 +26,8 @@ timeout
 sort
 join
 cut
+c11
+c89
+c99
+paste
+tail

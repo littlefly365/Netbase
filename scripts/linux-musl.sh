@@ -3,13 +3,11 @@
 	cp $(pwd)/scripts/linux/extattr.h $(pwd)/include/sys/ && \
 	cp $(pwd)/scripts/musl/cdefs.h $(pwd)/include/sys/ && \
 	cp $(pwd)/scripts/musl/queue.h $(pwd)/include/sys/ && \
+	cp $(pwd)/scripts/linux/event.h $(pwd)/include/sys/ && \
 	cp $(pwd)/scripts/musl/timed.h $(pwd)/include/protocols/
 
 	if [ -f $(pwd)/include/sys/extattr.h ]; then
-		if [ -f $(pwd)/include/sys/cdefs.h ]; then		
-			export LDFTS="-lfts"
-			make -j"$(nproc)"
-		else
+		if [ ! -f $(pwd)/include/sys/cdefs.h ]; then		
 			echo "error"
 			exit 1
 		fi

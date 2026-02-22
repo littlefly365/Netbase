@@ -1,12 +1,13 @@
-#	@(#)Makefile	8.1 (Berkeley) 6/6/93
-#	$NetBSD: Makefile,v 1.10 2009/04/14 22:15:20 lukem Exp $
+PROG= fmt
 
-.include <bsd.own.mk>
+all: obj $(PROG)
 
-PROG=	fmt
-SRCS=	fmt.c head.c
-CPPFLAGS+=	-DFMT_PROG
-
-.PATH: ${NETBSDSRCDIR}/usr.bin/mail
-
-.include <bsd.prog.mk>
+obj:
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $(PROG).c 
+$(PROG): obj
+	$(CC) $(PROG).o $(LDFLAGS) -o $(PROG)
+clean:
+	rm -rf $(PROG).o 
+build: all
+	mv $(PROG) ../../build/usr.bin
+.PHONY: all obj $(PROG) clean build
