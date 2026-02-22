@@ -51,8 +51,8 @@ remove object files and clean the source tree.
 
 # TODO
 
-|    Plataform/Goal	    |     Status	  |
-|-----------------------|---------------|
-| linux (glibc/musl)  	| ☑️ yes	      |
-| Full Userland (! GNU) | ❌ Incomplete	|
+|    Plataform/Goal	    |     Status	          |
+|-----------------------|-----------------------|
+| linux (glibc/musl)  	| ☑️ yes	              |
+| Full Userland (! GNU) | 🧪 close (coreutils)	|
 
