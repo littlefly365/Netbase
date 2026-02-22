@@ -1,3 +1,4 @@
+LIBS= lib/libnetbsd lib/libutil
 SRC= bin/ sbin/ usr.bin/ usr.sbin/
 
 ifeq ($(shell command -v clang 2>/dev/null),)
