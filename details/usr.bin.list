@@ -34,3 +34,4 @@ tail
 dir
 realpath
 fmt
+split
