@@ -1,4 +1,4 @@
-SUBDIRS = chown
+SUBDIRS = chown mknod
 
 all: $(SUBDIRS)
 

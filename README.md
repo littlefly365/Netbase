@@ -54,5 +54,5 @@ remove object files and clean the source tree.
 |    Plataform/Goal	    |     Status	          |
 |-----------------------|-----------------------|
 | linux (glibc/musl)  	| ☑️ yes	              |
-| Full Userland (! GNU) | 🧪 close (coreutils)	|
+| Full Userland (! GNU) | 🧪 partial (coreutils)	|
 
