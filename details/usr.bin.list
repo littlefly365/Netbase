@@ -40,3 +40,5 @@ du
 mkfifo
 csplit
 stat
+mktemp
+nohup
