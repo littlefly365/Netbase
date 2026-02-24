@@ -9,6 +9,7 @@ fi
 					Linux)
 						if  ldd --version 2>&1 | grep -q musl; then
 							if scripts/linux-musl.sh; then
+								export LDFTS="-lfts"
 								make -j"$cores"
 							fi
 						elif  ldd --version 2>&1 | grep -q GNU; then
