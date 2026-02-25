@@ -43,3 +43,4 @@ stat
 mktemp
 nohup
 cksum
+pr
