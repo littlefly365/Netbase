@@ -4,7 +4,8 @@
 	cp $(pwd)/scripts/musl/cdefs.h $(pwd)/include/sys/ && \
 	cp $(pwd)/scripts/musl/queue.h $(pwd)/include/sys/ && \
 	cp $(pwd)/scripts/linux/event.h $(pwd)/include/sys/ && \
-	cp $(pwd)/scripts/musl/timed.h $(pwd)/include/protocols/
+	cp $(pwd)/scripts/musl/timed.h $(pwd)/include/protocols/ &&
+	cp $(pwd)/scripts/linux/endian.h $(pwd)/include/sys/
 
 	if [ -f $(pwd)/include/sys/extattr.h ]; then
 		if [ ! -f $(pwd)/include/sys/cdefs.h ]; then		

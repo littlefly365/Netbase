@@ -3,9 +3,9 @@ PROG= cksum
 all: obj $(PROG)
 
 obj:
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c *.c 
+	$(CC) $(CPPFLAGS) $(CFLAGS) -include sha256.h -include sha512.h -c *.c 
 $(PROG): obj
-	$(CC) *.o $(LDFLAGS) -o $(PROG)
+	$(CC) *.o $(LDFLAGS) -lmd -o $(PROG)
 clean:
 	rm -rf *.o 
 build: all

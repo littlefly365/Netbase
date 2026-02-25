@@ -42,3 +42,4 @@ csplit
 stat
 mktemp
 nohup
+cksum
