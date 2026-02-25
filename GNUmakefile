@@ -13,7 +13,7 @@ else
     AR := llvm-ar
 endif
 
-CFLAGS=-O2 -Wno-old-style-definition
+CFLAGS=-O2 -Wno-old-style-definition -Wno-c23-extensions -Wno-visibility
 CPPFLAGS=-I$(CURDIR)/include -include compat.h 
 LDFLAGS=$(CURDIR)/lib/libnetbsd/libnetbsd.a
 LIBUTIL=$(CURDIR)/lib/libutil/libutil.a 

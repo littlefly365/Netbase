@@ -1,8 +1,5 @@
 #!/bin/sh
 cores="$2"
-if [ ! -z "$2" ]; then
-	cores="$(nproc)"
-fi
 	case "$1" in
 		''| -b | --build)
 			case "$(uname -s)" in

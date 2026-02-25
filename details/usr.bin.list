@@ -44,3 +44,4 @@ mktemp
 nohup
 cksum
 pr
+install

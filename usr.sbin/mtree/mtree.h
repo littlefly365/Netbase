@@ -50,7 +50,9 @@ typedef struct _node {
 #define	MBITS	(S_ISUID|S_ISGID|S_ISTXT|S_IRWXU|S_IRWXG|S_IRWXO)
 	mode_t	st_mode;			/* mode */
 	dev_t	st_rdev;			/* device type */
+	#ifndef st_flags
 	u_long	st_flags;			/* flags */
+	#endif
 	nlink_t	st_nlink;			/* link count */
 	u_long	cksum;				/* check sum */
 	char	*md5digest;			/* MD5 digest */

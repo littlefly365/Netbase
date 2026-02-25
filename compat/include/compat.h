@@ -5,6 +5,8 @@
 #include <stddef.h>
 #include <unistd.h>
 #include <errno.h>
+#include <pwd.h>
+#include <grp.h>
 
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -62,7 +64,8 @@
 
 static inline char *group_from_gid(unsigned long group, int gid) { return NULL; }
 static inline char *user_from_uid(unsigned long user, int uid) { return NULL; }
-static inline char *uid_from_user(const char *user, unsigned int *uid) { return NULL; }
+static inline int gid_from_group(const char *user, unsigned int *uid) { return 0; }
+static inline int uid_from_user(const char *user, unsigned int *uid) { return 0; }
 static inline int undelete(const char *path) { return 0; }
 
 #define fcpxattr
@@ -97,6 +100,30 @@ flags_to_string(u_long f, char *d)
     (void)f;
     return d;
 }
+
+static inline u_long
+*string_to_flags(char **f, u_long *d, char *N)
+{
+    (void)f;
+    (void)N;
+    return d;
+}
+
+
+#ifdef _EXT_SOURCE
+#include <sys/nb_cdefs_aout.h>
+static inline int              
+pwcache_userdb(int (*)(int), void (*)(void), struct passwd *(*)(const char *), struct passwd *(*)(uid_t))
+{
+	return 0;
+}
+
+static inline int 
+pwcache_groupdb(int (*)(int), void (*)(void), struct group *(*)(const char *), struct group *(*)(gid_t))
+{
+	return 0;
+}
+#endif
 
 typedef int32_t __devmajor_t, __devminor_t;
 #define devmajor_t __devmajor_t
@@ -177,6 +204,10 @@ acl_is_trivial_np(acl_t acl, int *trivial)
 #ifndef _EXT
 #define _EXT(fp) ((struct __sfileext *)(void *)((fp)->_ext._base))
 #endif
-
 static int debug;
+#define SF_IMMUTABLE	0
+#define SF_APPEND	0
+#define UF_IMMUTABLE	0
+#define UF_APPEND	0
+
 #endif

@@ -361,11 +361,6 @@ struct var {
 	char	*v_value;		/* And its current value */
 };
 
-struct group {
-	struct	group *ge_link;		/* Next person in this group */
-	char	*ge_name;		/* This person's user name */
-};
-
 struct grouphead {
 	struct	grouphead *g_link;	/* Next grouphead in list */
 	char	*g_name;		/* Name of this group */
