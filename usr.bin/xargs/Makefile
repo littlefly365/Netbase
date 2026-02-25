@@ -1,7 +1,13 @@
-#	$NetBSD: Makefile,v 1.5 2009/04/14 22:15:29 lukem Exp $
-#	@(#)Makefile	8.1 (Berkeley) 6/6/93
+PROG= xargs
 
-PROG=	xargs
-SRCS=	xargs.c strnsubst.c
+all: obj $(PROG)
 
-.include <bsd.prog.mk>
+obj:
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c *.c 
+$(PROG): obj
+	$(CC) *.o $(LDFLAGS) -o $(PROG)
+clean:
+	rm -rf *.o 
+build: all
+	mv $(PROG) ../../build/usr.bin
+.PHONY: all obj $(PROG) clean build

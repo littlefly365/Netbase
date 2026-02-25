@@ -46,3 +46,4 @@ cksum
 pr
 install
 tr
+xargs
