@@ -1,11 +1,6 @@
 # NetBase
 Netbase is a port of the NetBSD's utilities to another unix like operating systems.
 
-# Important Note
-- im working to add new utilities and add some functions to libutil so if you see eny error on build time remove efun.c on lib/libutil/Makefile and sort from usr.bin/GNUmakefile
-
-- now are avaible ~70 commands ported from netbsd
-
 # Deps
 - gnu make
 - clang/llvm (or gcc and binutils)
@@ -15,16 +10,13 @@ Netbase is a port of the NetBSD's utilities to another unix like operating syste
 - libfts ( for musl )
 - posix shell (link to /bin/sh )
 
-# How does it work?
-in the compat/include folder there are some headers for compatibility.
-they add some macros like __COPYRIGHT and __RCSID, besides in compat/libcompat are two libraries, libnetbsd(libcompat) and libutil, with these the programs link statically against these librarues but dynamically with the rest of the system ,so no additional runtime dependencies are need(Note: This may change in the future).
-
 # Info
-- The compat libraries use only code from the netbsd source tree.
-- The goal of this project is port netbsd userland to another systems without any (or tiny) modifications to the original source.
+- The compat libraries use only code from the netbsd source tree(or libbsd).
+- The goal of this project is port netbsd userland to another systems with tiny modifications to the original source.
+- now are avaible ~80 commands ported from netbsd
 
 # important
-if you see build or runtime errors tell me.(Note: The utils are tested on Arch and only with a basic use of them).
+if you see build or runtime errors tell me.(Note: The utils are tested on Arch/Alpine and only with a basic use of them).
 
 # What commands are available?
 the commands available are listed on details/
