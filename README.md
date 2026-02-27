@@ -10,10 +10,6 @@ Netbase is a port of the NetBSD's utilities to another unix like operating syste
 - libfts ( for musl )
 - posix shell (link to /bin/sh )
 
-# How does it work?
-in the compat/include folder there are some headers for compatibility.
-they add some macros like __COPYRIGHT and __RCSID, besides in compat/libcompat are two libraries, libnetbsd(libcompat) and libutil, with these the programs link statically against these librarues but dynamically with the rest of the system ,so no additional runtime dependencies are need(Note: This may change in the future).
-
 # Info
 - The compat libraries use only code from the netbsd source tree(or libbsd).
 - The goal of this project is port netbsd userland to another systems with tiny modifications to the original source.
