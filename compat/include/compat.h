@@ -3,11 +3,14 @@
 
 #include <stdio.h>
 #include <stddef.h>
+#include <stdarg.h>
+#include <string.h>
 #include <unistd.h>
 #include <errno.h>
 #include <pwd.h>
 #include <grp.h>
 
+#include <sys/vfs.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/acl.h>
@@ -62,6 +65,9 @@
 #define      SIZE_T_MAX      ULONG_MAX
 #endif
 
+#ifndef INT_MAX
+#define INT_MAX		LONG_MAX
+#endif
 static inline char *group_from_gid(unsigned long group, int gid) { return NULL; }
 static inline char *user_from_uid(unsigned long user, int uid) { return NULL; }
 static inline int gid_from_group(const char *user, unsigned int *uid) { return 0; }
@@ -209,5 +215,37 @@ static int debug;
 #define SF_APPEND	0
 #define UF_IMMUTABLE	0
 #define UF_APPEND	0
+
+// fstypes.h
+#define     MNT_LOCAL       0x00001000
+#define      MNT_RDONLY      0x00000001
+
+// fnmatch.h
+#define      FNM_CASEFOLD    0x08
+
+struct bsd_statfs {
+    long f_type;
+    char f_fstypename[32];
+    /* lo demás que necesites */
+};
+
+static const char *fsname_from_magic(long magic) {
+    switch (magic) {
+        case 0xEF53: return "ext2/3/4";
+        case 0x01021994: return "tmpfs";
+        default: return "unknown";
+    }
+}
+
+static int bsd_statfs(const char *path, struct bsd_statfs *buf) {
+    struct statfs s;
+
+    if (statfs(path, &s) != 0)
+        return -1;
+
+    buf->f_type = s.f_type;
+    strcpy(buf->f_fstypename, fsname_from_magic(s.f_type));
+    return 0;
+}
 
 #endif

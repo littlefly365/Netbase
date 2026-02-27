@@ -43,6 +43,7 @@ __RCSID("$NetBSD: function.c,v 1.79.6.1 2023/08/04 13:09:17 martin Exp $");
 
 #include <sys/param.h>
 #include <sys/stat.h>
+#include <sys/statvfs.h>
 #include <sys/wait.h>
 #include <sys/mount.h>
 
@@ -1055,9 +1056,10 @@ f_fstype(PLAN *plan, FTSENT *entry)
 {
 	static dev_t curdev;	/* need a guaranteed illegal dev value */
 	static int first = 1;
-	struct statvfs sb;
+	struct statvfs  sb;
+	struct bsd_statfs cb;
 	static short val;
-	static char fstype[sizeof(sb.f_fstypename)];
+	static char fstype[sizeof(cb.f_fstypename)];
 	char *p, save[2];
 
 	memset(&save, 0, sizeof save);	/* XXX gcc */
@@ -1099,7 +1101,7 @@ f_fstype(PLAN *plan, FTSENT *entry)
 		 * always copy both of them.
 		 */
 		val = sb.f_flag;
-		strlcpy(fstype, sb.f_fstypename, sizeof(fstype));
+		strlcpy(fstype, cb.f_fstypename, sizeof(fstype));
 	}
 	switch (plan->flags) {
 	case F_MTFLAG:
