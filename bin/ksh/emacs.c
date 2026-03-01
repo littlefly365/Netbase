@@ -7,7 +7,7 @@
  *  modified by Doug Kingston, Doug Gwyn, and Lou Salkind
  *  adapted to PD ksh by Eric Gisin
  */
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 
 #ifndef lint
 __RCSID("$NetBSD: emacs.c,v 1.38 2018/05/08 16:37:59 kamil Exp $");

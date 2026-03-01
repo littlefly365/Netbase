@@ -6,7 +6,7 @@
 /*
  * todo: better error handling: if in builtin, should be builtin error, etc.
  */
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 
 #ifndef lint
 __RCSID("$NetBSD: expr.c,v 1.13 2022/07/03 06:30:31 kre Exp $");

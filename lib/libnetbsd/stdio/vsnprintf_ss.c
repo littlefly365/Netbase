@@ -50,6 +50,9 @@ __RCSID("$NetBSD: vsnprintf_ss.c,v 1.14 2022/04/19 20:32:16 rillig Exp $");
 #include <stdarg.h>
 #include <string.h>
 
+#include "nb_assert.h"
+#include "sys/nb_syslimits.h"
+
 #ifdef __weak_alias
 __weak_alias(vsnprintf_ss,_vsnprintf_ss)
 #endif

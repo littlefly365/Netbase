@@ -36,7 +36,7 @@
 #include "nbtool_config.h"
 #endif
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #if !defined(lint)
 __COPYRIGHT(
 "@(#) Copyright (c) 1989, 1993\
@@ -60,6 +60,8 @@ __RCSID("$NetBSD: cat.c,v 1.57 2016/06/16 00:52:37 sevan Exp $");
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#include "nb_stdlib.h"
 
 static int bflag, eflag, fflag, lflag, nflag, sflag, tflag, vflag;
 static size_t bsize;

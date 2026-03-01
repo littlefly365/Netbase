@@ -1,6 +1,6 @@
 /*	$NetBSD: var.c,v 1.24 2018/05/08 16:37:59 kamil Exp $	*/
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 
 #ifndef lint
 __RCSID("$NetBSD: var.c,v 1.24 2018/05/08 16:37:59 kamil Exp $");
@@ -14,6 +14,8 @@ __RCSID("$NetBSD: var.c,v 1.24 2018/05/08 16:37:59 kamil Exp $");
 
 #include "sh.h"
 #include "ksh_limval.h"
+
+#include "compat.h"
 
 /*
  * Variables

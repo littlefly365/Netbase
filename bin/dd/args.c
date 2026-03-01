@@ -33,7 +33,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)args.c	8.3 (Berkeley) 4/2/94";
@@ -57,6 +57,8 @@ __RCSID("$NetBSD: args.c,v 1.42 2022/01/14 23:55:16 christos Exp $");
 
 #include "dd.h"
 #include "extern.h"
+
+#include "nb_stdlib.h"
 
 static int	c_arg(const void *, const void *);
 

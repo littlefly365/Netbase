@@ -48,6 +48,8 @@ __RCSID("$NetBSD: parsedate.y,v 1.37 2022/04/23 13:02:04 christos Exp $");
 #include <util.h>
 #include <stdlib.h>
 
+#include "nb_time.h"
+
 /* NOTES on rebuilding parsedate.c (particularly for inclusion in CVS
    releases):
 

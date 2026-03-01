@@ -88,6 +88,8 @@ __RCSID("$NetBSD: strsuftoll.c,v 1.9 2011/10/22 22:08:47 christos Exp $");
 #include <stdlib.h>
 #include <string.h>
 
+#include "nb_assert.h"
+
 #ifdef _LIBC
 # ifdef __weak_alias
 __weak_alias(strsuftoll, _strsuftoll)

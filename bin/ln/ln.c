@@ -40,7 +40,7 @@ static char const copyright[] =
 static char sccsid[] = "@(#)ln.c	8.2 (Berkeley) 3/31/94";
 #endif /* not lint */
 #endif
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifdef __FBSDID
 __FBSDID("$FreeBSD: head/bin/ln/ln.c 251261 2013-06-02 17:55:00Z eadler $");
 #endif
@@ -58,6 +58,8 @@ __RCSID("$NetBSD: ln.c,v 1.40 2018/08/26 23:01:06 sevan Exp $");
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#include "nb_stdlib.h"
 
 static int	fflag;			/* Unlink existing files. */
 static int	Fflag;			/* Remove empty directories also. */

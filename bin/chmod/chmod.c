@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT(
 "@(#) Copyright (c) 1989, 1993, 1994\
@@ -58,6 +58,9 @@ __RCSID("$NetBSD: chmod.c,v 1.38 2012/10/22 18:00:46 christos Exp $");
 #include <string.h>
 #include <unistd.h>
 #include <getopt.h>
+
+#include "nb_stdlib.h"
+#include "nb_unistd.h"
 
 __dead static void	usage(void);
 

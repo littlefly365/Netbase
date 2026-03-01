@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)print.c	8.5 (Berkeley) 7/28/94";
@@ -64,6 +64,11 @@ __RCSID("$NetBSD: print.c,v 1.57 2020/05/17 23:34:11 christos Exp $");
 
 #include "ls.h"
 #include "extern.h"
+
+#include "nb_stdlib.h"
+#include "nb_unistd.h"
+#include "sys/nb_stat.h"
+#include "compat.h"
 
 extern int termwidth;
 

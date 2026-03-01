@@ -33,7 +33,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1991, 1993, 1994\
  The Regents of the University of California.  All rights reserved.");
@@ -66,6 +66,8 @@ __RCSID("$NetBSD: dd.c,v 1.53 2019/10/04 08:57:37 mrg Exp $");
 
 #include "dd.h"
 #include "extern.h"
+
+#include "nb_stdlib.h"
 
 static void dd_close(void);
 static void dd_in(void);

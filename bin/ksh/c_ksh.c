@@ -3,7 +3,7 @@
 /*
  * built-in Korn commands: c_*
  */
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 
 #ifndef lint
 __RCSID("$NetBSD: c_ksh.c,v 1.30 2021/09/16 19:43:33 christos Exp $");
@@ -13,6 +13,8 @@ __RCSID("$NetBSD: c_ksh.c,v 1.30 2021/09/16 19:43:33 christos Exp $");
 #include <ctype.h>
 
 #include "sh.h"
+
+#include "compat.h"
 
 int
 c_cd(wp)

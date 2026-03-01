@@ -59,6 +59,9 @@ __RCSID("$NetBSD: setmode.c,v 1.38 2022/04/19 20:32:15 rillig Exp $");
 #include <stdio.h>
 #endif
 
+#include "nb_assert.h"
+#include "sys/nb_stat.h"
+
 #ifdef __weak_alias
 __weak_alias(getmode,_getmode)
 __weak_alias(setmode,_setmode)

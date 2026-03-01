@@ -48,6 +48,8 @@ __RCSID("$NetBSD: strmode.c,v 1.19 2012/06/25 22:32:46 abs Exp $");
 #include <assert.h>
 #include <unistd.h>
 
+#include "nb_assert.h"
+
 #if !HAVE_STRMODE
 void
 strmode(mode_t mode, char *p)

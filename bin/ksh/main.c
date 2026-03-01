@@ -3,7 +3,7 @@
 /*
  * startup, main loop, environments and error handling
  */
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #include <sys/stat.h>
 #include <sys/time.h>
 #include <locale.h>

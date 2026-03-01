@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1992, 1993, 1994\
  The Regents of the University of California.  All rights reserved.");
@@ -51,6 +51,8 @@ __RCSID("$NetBSD: rmdir.c,v 1.27.14.1 2025/05/15 18:04:05 martin Exp $");
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#include "nb_stdlib.h"
 
 static int vflag;
 

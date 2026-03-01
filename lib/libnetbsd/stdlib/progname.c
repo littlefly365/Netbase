@@ -38,7 +38,7 @@
 
 #include "compat.h"
 
-char *__progname;
+const char *__progname;
 
 const char *
 getprogname(void)
@@ -48,7 +48,7 @@ getprogname(void)
 }
 
 void
-setprogname(char *progname)
+setprogname(const char *progname)
 {
 	__progname = strrchr(progname, '/');
 	if (__progname == NULL)

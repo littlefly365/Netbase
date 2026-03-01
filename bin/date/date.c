@@ -33,7 +33,7 @@
 #include "nbtool_config.h"
 #endif
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT(
 "@(#) Copyright (c) 1985, 1987, 1988, 1993\
@@ -69,6 +69,8 @@ __RCSID("$NetBSD: date.c,v 1.63.2.2 2024/10/14 17:44:57 martin Exp $");
 #endif
 
 #include "extern.h"
+
+#include "nb_stdlib.h"
 
 static time_t tval;
 static int Rflag, aflag, jflag, rflag, nflag;

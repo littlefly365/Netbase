@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1988, 1993, 1994\
  The Regents of the University of California.  All rights reserved.");
@@ -54,6 +54,11 @@ __RCSID("$NetBSD: sleep.c,v 1.30 2019/03/10 15:18:45 kre Exp $");
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
+
+#include "nb_stdlib.h"
+#include "nb_locale.h"
+#include "sys/nb_time.h"
+#include "compat.h"
 
 __dead static void alarmhandle(int);
 __dead static void usage(void);

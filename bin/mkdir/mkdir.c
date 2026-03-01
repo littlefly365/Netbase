@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1983, 1992, 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -54,6 +54,9 @@ __RCSID("$NetBSD: mkdir.c,v 1.39 2021/09/13 22:46:02 kre Exp $");
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#include "nb_stdlib.h"
+#include "nb_unistd.h"
 
 static int		mkpath(char *, mode_t, mode_t);
 __dead static void	usage(void);

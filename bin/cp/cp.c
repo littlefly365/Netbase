@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT(
 "@(#) Copyright (c) 1988, 1993, 1994\
@@ -77,6 +77,9 @@ __RCSID("$NetBSD: cp.c,v 1.62 2020/05/22 14:54:30 christos Exp $");
 #include <unistd.h>
 
 #include "extern.h"
+
+#include "nb_stdlib.h"
+#include "compat.h"
 
 #define	STRIP_TRAILING_SLASH(p) {					\
         while ((p).p_end > (p).p_path + 1 && (p).p_end[-1] == '/')	\

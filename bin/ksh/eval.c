@@ -3,7 +3,7 @@
 /*
  * Expansion - quoting, separation, substitution, globbing
  */
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 
 #ifndef lint
 __RCSID("$NetBSD: eval.c,v 1.26 2019/09/26 11:01:09 mlelstv Exp $");

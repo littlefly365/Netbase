@@ -3,7 +3,7 @@
 /*
  * Miscellaneous functions
  */
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 
 #ifndef lint
 __RCSID("$NetBSD: misc.c,v 1.25 2019/10/29 16:19:59 joerg Exp $");
@@ -13,6 +13,7 @@ __RCSID("$NetBSD: misc.c,v 1.25 2019/10/29 16:19:59 joerg Exp $");
 #include "sh.h"
 #include <ctype.h>	/* for FILECHCONV */
 #include <limits.h>
+#include <string.h>
 
 #ifndef UCHAR_MAX
 # define UCHAR_MAX	0xFF

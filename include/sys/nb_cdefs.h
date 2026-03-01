@@ -1,0 +1,117 @@
+/*      $NetBSD: cdefs.h,v 1.159.4.1 2024/10/13 16:15:07 martin Exp $   */
+
+/* * Copyright (c) 1991, 1993
+ *      The Regents of the University of California.  All rights reserved.
+ *
+ * This code is derived from software contributed to Berkeley by
+ * Berkeley Software Design, Inc.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ *      @(#)cdefs.h     8.8 (Berkeley) 1/9/95
+ */
+
+#ifndef _SYS_NB_CDEFS_H
+#define _SYS_NB_CDEFS_H
+
+#ifndef __COPYRIGHT
+#define __COPYRIGHT(_s)
+#endif
+
+#ifndef __RCSID
+#define __RCSID(_s)
+#endif
+
+#ifndef __predict_false
+#define	__predict_false(exp)	__builtin_expect((exp) != 0, 0)
+#endif
+
+#ifndef __packed
+#define     __packed        __attribute__((__packed__))
+#endif
+
+#ifndef __dso_hidden
+#define __dso_hidden      __attribute__((__visibility__("hidden")))
+#endif
+
+#ifndef __dead
+#define __dead __attribute__((__noreturn__))
+#endif
+
+#ifndef __arraycount
+#define __arraycount(__x)       (sizeof(__x) / sizeof(__x[0]))
+#endif
+
+#ifndef __printflike
+#define __printflike(fmtarg, firstvararg)       \
+            __attribute__((__format__ (__printf__, fmtarg, firstvararg)))
+#endif
+
+#ifndef __USE
+#define __USE(a) (/*LINTED*/(void)(a))
+#endif
+
+#ifdef __COUNTER__
+#define __CTASSERT(x)           __CTASSERT0(x, __ctassert, __COUNTER__)
+#else
+#define __CTASSERT(x)           __CTASSERT99(x, __INCLUDE_LEVEL__, __LINE__)
+#define __CTASSERT99(x, a, b)   __CTASSERT0(x, __CONCAT(__ctassert,a), \
+                                               __CONCAT(_,b))
+#endif
+#define __CTASSERT0(x, y, z)    __CTASSERT1(x, y, z)
+#define __CTASSERT1(x, y, z)    \
+        struct y ## z ## _struct { \
+                unsigned int y ## z : /*CONSTCOND*/(x) ? 1 : -1; \
+        }
+
+#ifndef __inline
+#define     __inline        inline
+#endif
+
+#ifndef __RENAME
+#define      __RENAME(x)  
+#endif
+
+#ifndef __unused
+#define __unused
+#endif
+
+#ifndef __used
+#define __used __unused
+#endif
+
+#ifdef __cplusplus
+#define __BEGIN_DECLS extern "C" {
+#define __END_DECLS   }
+#else
+#define __BEGIN_DECLS
+#define __END_DECLS
+#endif
+
+#ifndef __UNCONST
+#define __UNCONST(a)   ((void *)(unsigned long)(const void *)(a))
+#endif
+
+#endif

@@ -3,7 +3,7 @@
 /*
  * dynamic hashed associative table for commands and variables
  */
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 
 #ifndef lint
 __RCSID("$NetBSD: table.c,v 1.8 2018/06/03 12:18:29 kamil Exp $");

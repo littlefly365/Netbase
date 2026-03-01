@@ -10,7 +10,7 @@
  * This program is in the Public Domain.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __RCSID("$NetBSD: test.c,v 1.45 2022/08/27 21:18:39 dholland Exp $");
 #endif
@@ -28,6 +28,9 @@ __RCSID("$NetBSD: test.c,v 1.45 2022/08/27 21:18:39 dholland Exp $");
 #include <string.h>
 #include <unistd.h>
 #include <stdarg.h>
+
+#include "nb_stdlib.h"
+#include "sys/nb_time.h"
 
 /* test(1) accepts the following grammar:
 	oexpr	::= aexpr | aexpr "-o" oexpr ;

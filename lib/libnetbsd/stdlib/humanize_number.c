@@ -42,6 +42,8 @@ __RCSID("$NetBSD: humanize_number.c,v 1.18 2019/03/11 15:10:51 kre Exp $");
 #include <string.h>
 #include <locale.h>
 
+#include "nb_assert.h"
+
 int
 humanize_number(char *buf, size_t len, int64_t bytes,
     const char *suffix, int scale, int flags)

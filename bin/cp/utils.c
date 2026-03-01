@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)utils.c	8.3 (Berkeley) 4/1/94";
@@ -46,7 +46,6 @@ __RCSID("$NetBSD: utils.c,v 1.49.6.1 2024/07/20 14:41:10 martin Exp $");
 #ifndef SMALL
 #include <sys/acl.h>
 #endif
-#include <sys/extattr.h>
 
 #include <err.h>
 #include <errno.h>
@@ -59,6 +58,11 @@ __RCSID("$NetBSD: utils.c,v 1.49.6.1 2024/07/20 14:41:10 martin Exp $");
 #include <unistd.h>
 
 #include "extern.h"
+
+#include "nb_stdlib.h"
+#include "sys/nb_param.h"
+#include "sys/nb_stat.h"
+#include "compat.h"
 
 #define	MMAP_MAX_SIZE	(8 * 1048576)
 #define	MMAP_MAX_WRITE	(64 * 1024)

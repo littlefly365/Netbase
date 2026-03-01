@@ -6,7 +6,7 @@
  *	bludgeoned to fit pdksh by Larry Bouzane, Jeff Sparkes & Eric Gisin
  *
  */
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 
 #ifndef lint
 __RCSID("$NetBSD: vi.c,v 1.21 2021/09/16 19:44:01 christos Exp $");
@@ -19,6 +19,8 @@ __RCSID("$NetBSD: vi.c,v 1.21 2021/09/16 19:44:01 christos Exp $");
 #include <sys/stat.h>
 #include <ctype.h>
 #include "edit.h"
+
+#include "compat.h"
 
 #define CMDLEN		1024
 #define Ctrl(c)		(c&0x1f)

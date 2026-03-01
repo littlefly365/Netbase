@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1989, 1993, 1994\
  The Regents of the University of California.  All rights reserved.");
@@ -67,6 +67,10 @@ __RCSID("$NetBSD: ls.c,v 1.77.6.1 2024/07/20 14:46:10 martin Exp $");
 
 #include "ls.h"
 #include "extern.h"
+
+#include "nb_stdlib.h"
+#include "nb_pwd.h"
+#include "compat.h"
 
 static void	 display(FTSENT *, FTSENT *);
 static int	 mastercmp(const FTSENT **, const FTSENT **);

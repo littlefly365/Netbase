@@ -3,7 +3,7 @@
 /*
  * shell parser (C version)
  */
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 
 #ifndef lint
 __RCSID("$NetBSD: syn.c,v 1.11 2018/05/08 16:37:59 kamil Exp $");

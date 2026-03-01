@@ -3,7 +3,7 @@
 /*
  *  Shell file I/O routines
  */
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 
 #ifndef lint
 __RCSID("$NetBSD: shf.c,v 1.15 2021/11/06 06:40:33 msaitoh Exp $");

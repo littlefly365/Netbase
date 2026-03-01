@@ -149,7 +149,7 @@ static inline const char	*init_color(const char *);
 int	 tail;		/* lines left to print */
 bool	 notfound;	/* file not found */
 
-extern char	*__progname;
+extern const char	*__progname;
 
 /*
  * Prints usage information and returns 2.

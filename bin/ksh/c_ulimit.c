@@ -17,7 +17,7 @@
 	the extended 4.nBSD resource limits.  It now includes the code
 	that was originally under case SYSULIMIT in source file "xec.c".
 */
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 
 #ifndef lint
 __RCSID("$NetBSD: c_ulimit.c,v 1.16 2017/06/30 03:43:57 kamil Exp $");

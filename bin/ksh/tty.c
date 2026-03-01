@@ -1,6 +1,6 @@
 /*	$NetBSD: tty.c,v 1.10 2021/07/24 21:31:31 andvar Exp $	*/
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 
 #ifndef lint
 __RCSID("$NetBSD: tty.c,v 1.10 2021/07/24 21:31:31 andvar Exp $");

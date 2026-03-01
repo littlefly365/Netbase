@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1989, 1993, 1994\
  The Regents of the University of California.  All rights reserved.");
@@ -50,7 +50,6 @@ __RCSID("$NetBSD: mv.c,v 1.46 2020/06/24 16:58:12 riastradh Exp $");
 #include <sys/time.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
-#include <sys/extattr.h>
 
 #include <err.h>
 #include <errno.h>
@@ -65,6 +64,11 @@ __RCSID("$NetBSD: mv.c,v 1.46 2020/06/24 16:58:12 riastradh Exp $");
 
 #include "pathnames.h"
 
+#include "nb_stdlib.h"
+#include "nb_pwd.h"
+#include "nb_unistd.h"
+#include "compat.h"
+
 static int fflg, hflg, iflg, vflg;
 static int stdin_ok;
 static sig_atomic_t pinfo;
@@ -73,8 +77,6 @@ static int	copy(char *, char *);
 static int	do_move(char *, char *);
 static int	fastcopy(char *, char *, struct stat *);
 __dead static void	usage(void);
-
-#include "sys/nb_cdefs_aout.h"
 
 static void
 progress(int sig __unused)

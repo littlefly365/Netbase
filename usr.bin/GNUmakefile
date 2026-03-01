@@ -1,8 +1,9 @@
-SUBDIRS = env dirname basename id tee yes head printf wc false true whoami \
+SUBDIRS = env dirname basename id tee yes head printf wc false true  \
 	tty uniq nice grep sed nl seq base64 comm expand logname printenv \
-	timeout	sort join paste cut tail c11 c89 c99 dir fmt realpath \
-	split fold du mkfifo csplit stat mktemp nohup cksum pr xinstall \
+	timeout	sort join paste cut tail c11 c89 c99 fmt realpath \
+	split fold du mkfifo csplit stat mktemp nohup pr xinstall \
 	tr xargs pathchk find uname
+# cksum
 
 all: $(SUBDIRS)
 

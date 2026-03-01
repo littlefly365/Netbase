@@ -47,6 +47,8 @@ __RCSID("$NetBSD: snprintf_ss.c,v 1.4 2007/02/02 23:00:28 christos Exp $");
 #include <stdarg.h>
 #include <stdio.h>
 
+#include "nb_stdio.h"
+
 #ifdef __weak_alias
 __weak_alias(snprintf_ss,_snprintf_ss)
 #endif

@@ -3,7 +3,7 @@
 /*
  * lexical analysis and source input
  */
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 
 #ifndef lint
 __RCSID("$NetBSD: lex.c,v 1.24 2019/09/26 11:01:09 mlelstv Exp $");

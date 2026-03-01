@@ -3,7 +3,7 @@
 /*
  * built-in Bourne commands
  */
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 
 #ifndef lint
 __RCSID("$NetBSD: c_sh.c,v 1.24 2018/05/08 16:37:59 kamil Exp $");
@@ -15,6 +15,8 @@ __RCSID("$NetBSD: c_sh.c,v 1.24 2018/05/08 16:37:59 kamil Exp $");
 #include <time.h>
 
 #include "sh.h"
+
+#include "compat.h"
 
 static	char *clocktos ARGS((clock_t t));
 

@@ -16,7 +16,7 @@
  *		things. You need to have the mmap system call for this
  *		to work on your system
  */
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 
 #ifndef lint
 __RCSID("$NetBSD: history.c,v 1.19 2018/05/08 16:37:59 kamil Exp $");
@@ -25,6 +25,8 @@ __RCSID("$NetBSD: history.c,v 1.19 2018/05/08 16:37:59 kamil Exp $");
 #include <sys/stat.h>
 
 #include "sh.h"
+
+#include "compat.h"
 
 #ifdef HISTORY
 # ifdef EASY_HISTORY

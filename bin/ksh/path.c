@@ -1,5 +1,5 @@
 /*	$NetBSD: path.c,v 1.14 2022/10/31 21:22:05 andvar Exp $	*/
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 
 #ifndef lint
 __RCSID("$NetBSD: path.c,v 1.14 2022/10/31 21:22:05 andvar Exp $");

@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1990, 1993, 1994\
  The Regents of the University of California.  All rights reserved.");
@@ -60,7 +60,10 @@ __RCSID("$NetBSD: rm.c,v 1.54 2021/09/10 22:11:03 rillig Exp $");
 #include <string.h>
 #include <unistd.h>
 
-#include "sys/nb_cdefs_aout.h"
+#include "nb_stdlib.h"
+#include "nb_pwd.h"
+#include "nb_unistd.h"
+#include "sys/nb_stat.h"
 #include "compat.h"
 
 static int dflag, eval, fflag, iflag, Pflag, stdin_ok, vflag, Wflag;

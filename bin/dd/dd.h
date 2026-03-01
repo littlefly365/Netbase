@@ -37,6 +37,8 @@
 
 #include <sys/stat.h>
 
+#include "compat.h"
+
 struct ddfops {
 	int (*op_init)(void);
 

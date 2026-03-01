@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)netdate.c	8.2 (Berkeley) 4/28/95";
@@ -55,6 +55,8 @@ __RCSID("$NetBSD: netdate.c,v 1.30 2011/01/29 02:16:52 christos Exp $");
 #include <unistd.h>
 
 #include "extern.h"
+
+#include "nb_stdlib.h"
 
 #define	WAITACK		2000	/* milliseconds */
 #define	WAITDATEACK	5000	/* milliseconds */

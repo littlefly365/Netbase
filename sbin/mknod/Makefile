@@ -2,7 +2,7 @@ PROG= mknod
 all: obj $(PROG)
 
 obj:
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c *.c 
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c *.c -include nb_unistd.h
 $(PROG): obj
 	$(CC) *.o $(LDFLAGS) -o $(PROG)
 clean:

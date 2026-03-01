@@ -21,7 +21,7 @@
 #define YYPURE 0
 
 #line 33 "expr.y"
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __RCSID("$NetBSD: expr.y,v 1.46 2020/06/11 13:08:07 kamil Exp $");
 #endif /* not lint */
@@ -37,6 +37,9 @@ __RCSID("$NetBSD: expr.y,v 1.46 2020/06/11 13:08:07 kamil Exp $");
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "nb_stdlib.h"
+#include "nb_regex.h"
 
 static const char * const *av;
 

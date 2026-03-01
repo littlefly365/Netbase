@@ -35,7 +35,8 @@
  *	@(#)extern.h	8.3 (Berkeley) 4/2/94
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
+#include "compat.h"
 
 #ifdef NO_CONV
 __dead void block(void);

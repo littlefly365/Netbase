@@ -5,7 +5,7 @@ all: obj $(PROG)
 obj:
 	$(CC) $(CPPFLAGS) $(CFLAGS) -include sha256.h -include sha512.h -c *.c 
 $(PROG): obj
-	$(CC) *.o $(LDFLAGS) -lmd -o $(PROG)
+	$(CC) *.o $(LDFLAGS) -lmd  -lcrypto -o $(PROG)
 clean:
 	rm -rf *.o 
 build: all

@@ -26,7 +26,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __RCSID("$NetBSD: dd_hostops.c,v 1.1 2011/02/04 19:42:12 pooka Exp $");
 #endif /* !lint */

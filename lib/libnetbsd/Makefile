@@ -5,7 +5,7 @@ SRC_STDIO=stdio/*.c
 SRC_GEN=gen/*.c
 SRC_SYS_STAT=sys/stat/*.c
 
-CFLAGS += -Wno-macro-redefined
+CFLAGS += -Wno-macro-redefined -fPIC -I../ -include nb_stdlib.h
 
 OBJ=obj/*.o
 LIB=netbsd
@@ -21,7 +21,7 @@ obj:
 	$(CC) $(CFLAGS) $(CPPFLAGS) -include nb_errc.h -c -I../gen ../$(SRC_GEN) && \
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c ../$(SRC_SYS_STAT)
 build: obj
-	$(AR) rcs lib$(LIB).a $(OBJ)
+	$(CC) -shared $(OBJ) -o libnetbsd.so
 clean:
-	rm -rf lib$(LIB).a obj/
+	rm -rf lib$(LIB).so obj/
 .PHONY: all obj build clean

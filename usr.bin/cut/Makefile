@@ -3,7 +3,7 @@ CFLAGS += -D_EXT_SOURCE
 all: obj $(PROG)
 
 obj:
-	$(CC) $(CPPFLAGS) $(CFLAGS) -include sys/nb_cdefs_aout.h -c cut.c 
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c cut.c 
 $(PROG): obj
 	$(CC) cut.o $(LDFLAGS) $(LIBUTIL) -o $(PROG)
 clean:

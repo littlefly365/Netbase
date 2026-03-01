@@ -55,6 +55,7 @@ __RCSID("$NetBSD: logwtmp.c,v 1.14 2003/08/07 16:44:59 agc Exp $");
 #include <util.h>
 #include <fcntl.h>
 
+#include "nb_assert.h"
 
 void
 logwtmp(const char *line, const char *name, const char *host)

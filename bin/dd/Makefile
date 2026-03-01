@@ -1,13 +1,6 @@
-PROG= dd
-CFLAGS += -DNO_CONV -DNO_MSGFMT -DNO_IOFLAG -DSMALL -fcommon
-all: obj $(PROG)
+PROG=dd
+SRCS=args.c conv.c conv_tab.c dd.c dd_hostops.c dd_swab.c misc.c position.c
 
-obj:
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c *.c 
-$(PROG): obj
-	$(CC) *.o $(LDFLAGS) $(LIBUTIL) -o $(PROG)
-clean:
-	rm -rf *.o 
-build: all
-	mv $(PROG) ../../build/bin
-.PHONY: all obj $(PROG) clean build
+CFLAGS += -DNO_CONV -DNO_MSGFMT -DNO_IOFLAG
+LDADD += -lnutil
+.include "../../mk/prog.mk"
