@@ -59,6 +59,11 @@ __dead static void usage(void);
 #define	PRINT_ALL		\
     (PRINT_SYSNAME|PRINT_NODENAME|PRINT_RELEASE|PRINT_VERSION|PRINT_MACHINE)
 
+/* musl doesn't have SYS_NMLN */
+#ifndef SYS_NMLN
+#define SYS_NMLN 65
+#endif
+
 int
 main(int argc, char **argv)
 {
