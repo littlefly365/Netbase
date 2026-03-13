@@ -27,11 +27,12 @@ if you see build or runtime errors tell me (Note: The utils are tested on Arch/A
 | Linux musl      | ☑️ Works         |
 
 # Building
-use:
 
-`bmake` build utilities
-`bmake clean` clean the src tree
-`bmake install` install the utilities (default path /usr/local/bin)
+# Only Musl
+`ln -svf ../netbsd/sys/cdefs.h include/sys/cdefs.h`
+`export LBFTS="-lfts"` 
+
+`bmake`
 
 # TODO
 
