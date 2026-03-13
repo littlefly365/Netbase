@@ -32,6 +32,7 @@ if you see build or runtime errors tell me (Note: The utils are tested on Arch/A
 `ln -svf ../netbsd/sys/cdefs.h include/sys/cdefs.h`
 
 `export LBFTS="-lfts"` 
+# Both
 
 `bmake`
 
