@@ -30,7 +30,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1991, 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -51,6 +51,8 @@ __RCSID("$NetBSD: tail.c,v 1.20 2018/03/06 03:33:26 eadler Exp $");
 #include <stdlib.h>
 #include <string.h>
 #include "extern.h"
+
+#include "nb_stdlib.h"
 
 int fflag, rflag, rval;
 const char *fname;

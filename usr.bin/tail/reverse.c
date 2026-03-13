@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)reverse.c	8.1 (Berkeley) 6/6/93";
@@ -47,6 +47,7 @@ __RCSID("$NetBSD: reverse.c,v 1.23 2011/09/03 10:59:11 christos Exp $");
 #include <limits.h>
 #include <errno.h>
 #include <unistd.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -113,7 +114,7 @@ r_reg(FILE *fp, enum STYLE style, off_t off, struct stat *sbp)
 	if (!(size = sbp->st_size))
 		return;
 
-	if ((uint64_t)size > SIZE_T_MAX) {
+	if ((uint64_t)size > SIZE_MAX) {
 			/* XXX: need a cleaner way to check this on amd64 */
 		errno = EFBIG;
 		xerr(0, "%s", fname);

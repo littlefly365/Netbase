@@ -6,4 +6,6 @@
  * Public domain.
  */
 
+#include "sys/nb_cdefs.h"
+
 __dead void cleanup(const char *);

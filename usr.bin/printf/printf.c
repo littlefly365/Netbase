@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if !defined(BUILTIN) && !defined(SHELL)
 __COPYRIGHT("@(#) Copyright (c) 1989, 1993\
@@ -58,6 +58,8 @@ __RCSID("$NetBSD: printf.c,v 1.54 2021/05/20 02:01:07 christos Exp $");
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#include "nb_stdlib.h"
 
 #ifdef __GNUC__
 #define ESCAPE '\e'

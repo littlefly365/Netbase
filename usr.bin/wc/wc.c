@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1980, 1987, 1991, 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -61,6 +61,10 @@ __RCSID("$NetBSD: wc.c,v 1.35 2011/09/16 15:39:30 joerg Exp $");
 #include <unistd.h>
 #include <wchar.h>
 #include <wctype.h>
+
+#include "nb_stdlib.h"
+
+#define     MAXBSIZE         (64 * 1024)
 
 #ifdef NO_QUAD
 typedef u_long wc_count_t;

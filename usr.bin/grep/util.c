@@ -33,7 +33,7 @@
 #include "nbtool_config.h"
 #endif
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 __RCSID("$NetBSD: util.c,v 1.19 2018/02/05 22:14:26 mrg Exp $");
 
 #include <sys/stat.h>
@@ -54,6 +54,8 @@ __RCSID("$NetBSD: util.c,v 1.19 2018/02/05 22:14:26 mrg Exp $");
 #include <wctype.h>
 
 #include "grep.h"
+
+#include "nb_stdlib.h"
 
 static bool	 first, first_global = true;
 static unsigned long long since_printed;

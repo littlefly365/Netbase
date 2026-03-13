@@ -1,13 +1,6 @@
-PROG= find
-CFLAGS += -D_EXT_SOURCE -include sys/nb_syslimits.h
-all: obj $(PROG)
+PROG=find
+SRCS=find.c function.c ls.c main.c misc.c operator.c option.c
 
-obj:
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c *.c 
-$(PROG): obj
-	$(CC) *.o $(LDFLAGS) $(LIBUTIL) -o $(PROG)
-clean:
-	rm -rf *.o 
-build: all
-	mv $(PROG) ../../build/usr.bin
-.PHONY: all obj $(PROG) clean build
+LDADD += -lnutil
+
+.include "../../mk/prog.mk"

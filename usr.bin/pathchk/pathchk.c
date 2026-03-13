@@ -28,7 +28,7 @@
  * from FreeBSD: pathchk.c,v 1.4 2002/12/15 00:40:47 tjr Exp
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __RCSID("$NetBSD: pathchk.c,v 1.2 2011/09/16 15:39:28 joerg Exp $");
 #endif /* !lint */

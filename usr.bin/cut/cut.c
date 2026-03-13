@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1989, 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -57,6 +57,9 @@ __RCSID("$NetBSD: cut.c,v 1.29 2014/02/03 20:22:19 wiz Exp $");
 #include <util.h>
 #include <wchar.h>
 #include <sys/param.h>
+
+#include "nb_stdlib.h"
+#include "nb_stdio.h"
 
 static int bflag;
 static int	cflag;

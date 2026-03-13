@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -58,6 +58,10 @@ __RCSID("$NetBSD: touch.c,v 1.33 2015/03/02 03:17:24 enami Exp $");
 #include <unistd.h>
 #include <util.h>
 #include <getopt.h>
+
+#include "nb_stdlib.h"
+#include "sys/nb_stat.h"
+#include "compat.h"
 
 static void	stime_arg0(char *, struct timespec *);
 static void	stime_arg1(char *, struct timespec *);

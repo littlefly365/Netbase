@@ -62,7 +62,7 @@
 #include "nbtool_config.h"
 #endif
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #if defined(__RCSID) && !defined(lint)
 #if 0
 static char sccsid[] = "@(#)spec.c	8.2 (Berkeley) 4/28/95";
@@ -90,6 +90,11 @@ __RCSID("$NetBSD: spec.c,v 1.90 2017/12/14 18:34:41 christos Exp $");
 
 #include "extern.h"
 #include "pack_dev.h"
+
+#include "nb_stdio.h"
+#include "nb_unistd.h"
+#include "nb_pwd.h"
+#include "compat.h"
 
 size_t	mtree_lineno;			/* Current spec line number */
 int	mtree_Mflag;			/* Merge duplicate entries */
@@ -570,7 +575,7 @@ set(char *t, NODE *ip)
 		case F_FLAGS:
 			if (strcmp("none", val) == 0)
 				ip->st_flags = 0;
-			else if (string_to_flags(&val, &ip->st_flags, NULL)
+			else if (string_to_flags2(&val, &ip->st_flags, NULL)
 			    != 0)
 				mtree_err("invalid flag `%s'", val);
 			break;

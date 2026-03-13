@@ -67,7 +67,7 @@
 #define HAVE_STRUCT_STAT_ST_FLAGS 1
 #endif
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #if defined(__COPYRIGHT) && !defined(lint)
 __COPYRIGHT("@(#) Copyright (c) 1987, 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -101,6 +101,8 @@ __RCSID("$NetBSD: xinstall.c,v 1.126 2020/10/30 20:05:00 rillig Exp $");
 #include <unistd.h>
 #include <util.h>
 #include <vis.h>
+#include <sha256.h>
+#include <sha512.h>
 
 #ifdef HAVE_POSIX_SPAWN
 #include <spawn.h>
@@ -113,6 +115,14 @@ __RCSID("$NetBSD: xinstall.c,v 1.126 2020/10/30 20:05:00 rillig Exp $");
 
 #include "pathnames.h"
 #include "mtree.h"
+
+#include "nb_stdlib.h"
+#include "nb_unistd.h"
+#include "nb_pwd.h"
+#include "nb_errc.h"
+#include "sys/nb_syslimits.h"
+#include "sys/nb_stat.h"
+#include "sys/nb_param.h"
 
 #define BACKUP_SUFFIX ".old"
 

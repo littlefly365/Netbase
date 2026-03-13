@@ -40,6 +40,7 @@
 #ifndef __DEF_H__
 #define __DEF_H__
 
+#include "sys/nb_cdefs.h"
 #include <sys/types.h>
 #include <sys/file.h>
 #include <sys/ioctl.h>

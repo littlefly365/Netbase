@@ -1,13 +1,6 @@
-PROG= sort
+PROG=sort
+SRCS=append.c fields.c files.c fsort.c init.c msort.c radix_sort.c sort.c tmp.c
 
-all: obj $(PROG)
+LDADD += -lnutil
 
-obj:
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c *.c 
-$(PROG): obj
-	$(CC) *.o $(LIBUTIL) $(LDFLAGS) -o $(PROG)
-clean:
-	rm -rf *.o 
-build: all
-	mv $(PROG) ../../build/usr.bin
-.PHONY: all obj $(PROG) clean build
+.include "../../mk/prog.mk"

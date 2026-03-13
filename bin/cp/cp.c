@@ -221,7 +221,7 @@ main(int argc, char *argv[])
 	/* Set end of argument list for fts(3). */
 	argv[argc] = NULL;     
 	
-	(void)signal(SIGINFO, progress);
+	(void)signal(SIGUSR1, progress);
 	
 	/*
 	 * Cp has two distinct cases:

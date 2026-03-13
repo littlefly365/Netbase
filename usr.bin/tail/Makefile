@@ -1,13 +1,5 @@
-PROG= tail
+PROG=tail
+SRCS+=forward.c misc.c read.c reverse.c tail.c
 
-all: obj $(PROG)
-
-obj:
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c *.c 
-$(PROG): obj
-	$(CC) *.o $(LDFLAGS) -o $(PROG)
-clean:
-	rm -rf *.o 
-build: all
-	mv $(PROG) ../../build/usr.bin
-.PHONY: all obj $(PROG) clean build
+CPPFLAGS += -Wno-c23-extensions
+.include "../../mk/prog.mk"

@@ -35,7 +35,7 @@
 #include "nbtool_config.h"
 #endif
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 __RCSID("$NetBSD: queue.c,v 1.5 2011/08/31 16:24:57 plunky Exp $");
 
 #include <sys/param.h>
@@ -45,6 +45,8 @@ __RCSID("$NetBSD: queue.c,v 1.5 2011/08/31 16:24:57 plunky Exp $");
 #include <string.h>
 
 #include "grep.h"
+
+#include "nb_stdlib.h"
 
 struct qentry {
 	STAILQ_ENTRY(qentry)	list;

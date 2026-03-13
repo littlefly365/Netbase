@@ -188,7 +188,7 @@ main(int argc, char *argv[])
 	    endtime.tv_nsec <= now.tv_nsec))
 		errx(EXIT_FAILURE, "cannot sleep beyond the end of time");
 
-	signal(SIGINFO, report_request);
+	signal(SIGUSR1, report_request);
 	for (;;) {
 		int e;
 

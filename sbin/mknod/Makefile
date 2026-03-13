@@ -1,12 +1,4 @@
-PROG= mknod
-all: obj $(PROG)
+PROG=mknod
+SRCS=mknod.c pack_dev.c
 
-obj:
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c *.c -include nb_unistd.h
-$(PROG): obj
-	$(CC) *.o $(LDFLAGS) -o $(PROG)
-clean:
-	rm -rf *.o 
-build: all
-	mv $(PROG) ../../build/sbin
-.PHONY: all obj $(PROG) clean build
+.include "../../mk/prog.mk"

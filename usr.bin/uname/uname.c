@@ -31,7 +31,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __RCSID("$NetBSD: uname.c,v 1.11 2011/09/06 18:35:13 joerg Exp $");
 #endif /* not lint */
@@ -41,11 +41,13 @@ __RCSID("$NetBSD: uname.c,v 1.11 2011/09/06 18:35:13 joerg Exp $");
 #include <locale.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <err.h>
 
-//#include <sys/sysctl.h>
 #include <sys/utsname.h>
+
+#include "nb_stdlib.h"
 
 __dead static void usage(void);
 

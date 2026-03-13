@@ -1,8 +1,5 @@
-#	$NetBSD: Makefile,v 1.5 2010/02/03 15:34:45 roy Exp $
-#	@(#)Makefile	8.1 (Berkeley) 6/6/93
+PROG=cal
 
-PROG=	cal
-LDADD+=	-lterminfo
-DPADD+=	${LIBTERMINFO}
+LDADD += -lcurses
 
-.include <bsd.prog.mk>
+.include "../../mk/prog.mk"

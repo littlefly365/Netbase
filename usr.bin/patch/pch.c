@@ -30,7 +30,7 @@
  * behaviour
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 __RCSID("$NetBSD: pch.c,v 1.32 2021/05/25 11:25:59 cjep Exp $");
 
 #include <sys/types.h>

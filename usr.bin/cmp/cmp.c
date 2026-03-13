@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1987, 1990, 1993, 1994\
  The Regents of the University of California.  All rights reserved.");
@@ -56,6 +56,8 @@ __RCSID("$NetBSD: cmp.c,v 1.21 2021/03/20 14:27:47 cheusov Exp $");
 #include <locale.h>
 
 #include "extern.h"
+
+#include "nb_stdlib.h"
 
 int	lflag, sflag;
 

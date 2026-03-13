@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1989, 1993, 1994\
  The Regents of the University of California.  All rights reserved.");
@@ -52,6 +52,8 @@ __RCSID("$NetBSD: comm.c,v 1.20 2012/09/05 04:01:23 simonb Exp $");
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#include "nb_stdlib.h"
 
 #define	MAXLINELEN	(LINE_MAX + 1)
 

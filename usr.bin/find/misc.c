@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "from: @(#)misc.c	8.2 (Berkeley) 4/1/94";
@@ -55,6 +55,9 @@ __RCSID("$NetBSD: misc.c,v 1.15 2022/01/22 14:08:19 christos Exp $");
 #include <fcntl.h>
 
 #include "find.h"
+
+#include "nb_stdlib.h"
+#include "nb_stdio.h"
 
 /*
  * brace_subst --

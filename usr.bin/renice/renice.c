@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1983, 1989, 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -50,6 +50,8 @@ __RCSID("$NetBSD: renice.c,v 1.20 2020/10/23 16:16:10 wiz Exp $");
 #include <stdlib.h>
 #include <string.h>
 #include <sysexits.h>
+
+#include "nb_stdlib.h"
 
 static int	getnum(const char *, const char *, int *);
 static int	donice(int, id_t, int, int);

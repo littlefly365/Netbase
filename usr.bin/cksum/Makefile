@@ -1,13 +1,6 @@
-PROG= cksum
+PROG=cksum
+SRCS=cksum.c crc.c md2.c md4.c md5.c print.c rmd160.c sha1.c sha256.c sha384.c sha512.c sum1.c sum2.c
 
-all: obj $(PROG)
+LDADD += -lmd
 
-obj:
-	$(CC) $(CPPFLAGS) $(CFLAGS) -include sha256.h -include sha512.h -c *.c 
-$(PROG): obj
-	$(CC) *.o $(LDFLAGS) -lmd  -lcrypto -o $(PROG)
-clean:
-	rm -rf *.o 
-build: all
-	mv $(PROG) ../../build/usr.bin
-.PHONY: all obj $(PROG) clean build
+.include "../../mk/prog.mk"

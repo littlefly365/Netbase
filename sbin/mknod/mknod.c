@@ -33,7 +33,7 @@
 #include "nbtool_config.h"
 #endif
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1998\
  The NetBSD Foundation, Inc.  All rights reserved.");
@@ -56,6 +56,10 @@ __RCSID("$NetBSD: mknod.c,v 1.42 2014/08/22 22:28:50 mlelstv Exp $");
 #include <ctype.h>
 
 #include "pack_dev.h"
+
+#include "nb_stdlib.h"
+#include "nb_unistd.h"
+#include "nb_pwd.h"
 
 static int gid_name(const char *, gid_t *);
 static dev_t callPack(pack_t *, int, u_long *);

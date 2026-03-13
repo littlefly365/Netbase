@@ -1,7 +1,5 @@
-#	$NetBSD: Makefile,v 1.6 2020/11/01 22:27:15 christos Exp $
-#	@(#)Makefile	8.1 (Berkeley) 6/6/93
+PROG=col
 
-WARNS=6
-PROG=	col
+CPPFLAGS += -D_XOPEN_SOURCE=700
 
-.include <bsd.prog.mk>
+.include "../../mk/prog.mk"

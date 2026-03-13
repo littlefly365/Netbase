@@ -39,6 +39,9 @@
 /*
  * Types of address specifications
  */
+
+#include "compat.h"
+
 enum e_atype {
 	AT_RE	    = 1,			/* Line that match RE */
 	AT_LINE,				/* Specific line */

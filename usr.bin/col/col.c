@@ -34,7 +34,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1990, 1993, 1994\
  The Regents of the University of California.  All rights reserved.");
@@ -62,6 +62,9 @@ __RCSID("$NetBSD: col.c,v 1.20 2021/09/10 21:52:17 rillig Exp $");
 #include <unistd.h>
 #include <wchar.h>
 #include <wctype.h>
+
+#include "nb_stdlib.h"
+#include "nb_errc.h"
 
 #define	BS	'\b'		/* backspace */
 #define	TAB	'\t'		/* tab */

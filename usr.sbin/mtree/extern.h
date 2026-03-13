@@ -31,6 +31,7 @@
  *	@(#)extern.h	8.1 (Berkeley) 6/6/93
  */
 
+#include "sys/nb_cdefs.h"
 #include "mtree.h"
 
 #if HAVE_NBTOOL_CONFIG_H

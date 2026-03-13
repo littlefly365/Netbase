@@ -35,7 +35,7 @@
 #undef HAVE_DEVNAME
 #endif
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #if !defined(lint)
 __RCSID("$NetBSD: stat.c,v 1.48 2022/06/22 18:20:30 kre Exp $");
 #endif
@@ -68,6 +68,10 @@ __RCSID("$NetBSD: stat.c,v 1.48 2022/06/22 18:20:30 kre Exp $");
 #include <time.h>
 #include <unistd.h>
 #include <vis.h>
+
+#include "nb_stdlib.h"
+#include "nb_unistd.h"
+#include "sys/nb_stat.h"
 
 #if HAVE_STRUCT_STAT_ST_FLAGS
 #define DEF_F "%#Xf "

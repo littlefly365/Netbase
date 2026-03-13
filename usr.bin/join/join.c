@@ -37,7 +37,7 @@
 #include "nbtool_config.h"
 #endif
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1991\
  The Regents of the University of California.  All rights reserved.");
@@ -59,6 +59,9 @@ __RCSID("$NetBSD: join.c,v 1.34 2021/11/02 10:05:49 nia Exp $");
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#include "nb_stdlib.h"
+#include "nb_stdio.h"
 
 /*
  * There's a structure per input file which encapsulates the state of the

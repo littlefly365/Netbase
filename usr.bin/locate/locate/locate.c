@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1989, 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -87,6 +87,7 @@ __RCSID("$NetBSD: locate.c,v 1.19 2018/05/14 05:17:10 lukem Exp $");
 #include "locate.h"
 #include "pathnames.h"
 
+#include "nb_stdlib.h"
 
 struct locate_db {
 	LIST_ENTRY(locate_db) db_link;

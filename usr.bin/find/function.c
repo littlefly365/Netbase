@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "from: @(#)function.c	8.10 (Berkeley) 5/4/95";
@@ -65,6 +65,13 @@ __RCSID("$NetBSD: function.c,v 1.79.6.1 2023/08/04 13:09:17 martin Exp $");
 #include <util.h>
 
 #include "find.h"
+
+#include "nb_unistd.h"
+#include "nb_pwd.h"
+#include "sys/nb_time.h"
+#include "sys/nb_syslimits.h"
+#include "sys/nb_stat.h"
+#include "compat.h"
 
 #define	COMPARE(a, b) {							\
 	switch (plan->flags) {						\

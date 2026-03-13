@@ -38,7 +38,7 @@
 #include "nbtool_config.h"
 #endif
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 __RCSID("$NetBSD: main.c,v 1.38 2021/03/11 15:45:55 christos Exp $");
 #ifdef __FBSDID
 __FBSDID("$FreeBSD: head/usr.bin/sed/main.c 252231 2013-06-26 04:14:19Z pfg $");
@@ -74,6 +74,9 @@ static const char sccsid[] = "@(#)main.c	8.2 (Berkeley) 1/3/94";
 
 #include "defs.h"
 #include "extern.h"
+
+#include "nb_stdlib.h"
+#include "nb_regex.h"
 
 /*
  * Linked list of units (strings and files) to be compiled

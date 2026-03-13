@@ -35,7 +35,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -65,6 +65,8 @@ __RCSID("$NetBSD: pr.c,v 1.27 2022/05/23 19:52:35 andvar Exp $");
 
 #include "pr.h"
 #include "extern.h"
+
+#include "nb_stdlib.h"
 
 /*
  * pr:	a printing and pagination filter. If multiple input files

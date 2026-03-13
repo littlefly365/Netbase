@@ -30,7 +30,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #if !defined(lint)
 #if 0
 __FBSDID("$FreeBSD: head/bin/realpath/realpath.c 326025 2017-11-20 19:49:47Z pfg $");
@@ -49,6 +49,8 @@ __RCSID("$NetBSD: realpath.c,v 1.2 2022/07/21 09:47:31 kre Exp $");
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#include "nb_stdlib.h"
 
 static bool process(char *path);
 static void usage(void) __dead;

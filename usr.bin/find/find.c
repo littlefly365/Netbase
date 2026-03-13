@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "from: @(#)find.c	8.5 (Berkeley) 8/5/94";
@@ -165,12 +165,12 @@ sig_init(void)
 	if (notty)
 		return;
 	sigemptyset(&ss);
-	sigaddset(&ss, SIGINFO); /* block SIGINFO */
+	sigaddset(&ss, SIGUSR1); /* block SIGINFO */
 
 	memset(&sa, 0, sizeof(sa));
 	sa.sa_flags = SA_RESTART;
 	sa.sa_handler = show_path;
-	(void)sigaction(SIGINFO, &sa, NULL);
+	(void)sigaction(SIGUSR1, &sa, NULL);
 
 }
 

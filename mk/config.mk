@@ -1,21 +1,22 @@
 TOP=../..
 
-CC ?= cc
+CC ?= gcc
 
-LIBPATH =-L$(TOP)/lib/libnetbsd -L$(TOP)/lib/libutil
+LIBPATH =-L$(TOP)/lib/netbsd -L$(TOP)/lib/util
 LCFLAGS ?=
 LLDFLAGS ?=
 
-CFLAGS ?=
+CFLAGS ?= -O2
 CPPFLAGS +=-I$(TOP)/include 
 LDFLAGS += $(LIBPATH)
 LDADD ?=
 LDLIBS += $(LDADD) -lnetbsd
 
-PREFIX ?= /usr
-BINDIR ?= $(PREFIX)/bin
-SBINDIR ?= $(PREFIX)/sbin
+DESTDIR ?= 
+PREFIX ?= usr/local
 LIBDIR ?= $(PREFIX)/lib
-INCDIR ?= $(PREFIX)/include/nb/
+INCDIR ?= $(PREFIX)/include/netbsd/
+
+NETBSDSRCDIR = $(TOP)
 
 .SILENT:

@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __RCSID("$NetBSD: progress.c,v 1.25 2021/08/17 07:18:43 gson Exp $");
 #endif				/* not lint */
@@ -49,6 +49,8 @@ __RCSID("$NetBSD: progress.c,v 1.25 2021/08/17 07:18:43 gson Exp $");
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#include "nb_stdlib.h"
 
 #define GLOBAL			/* force GLOBAL decls in progressbar.h to be
 				 * declared */

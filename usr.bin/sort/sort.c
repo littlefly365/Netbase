@@ -60,7 +60,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -88,6 +88,8 @@ __RCSID("$NetBSD: sort.c,v 1.64 2017/01/10 21:13:45 christos Exp $");
 #include "sort.h"
 #include "fsort.h"
 #include "pathnames.h"
+
+#include "nb_stdlib.h"
 
 int REC_D = '\n';
 u_char d_mask[NBINS];		/* flags for rec_d, field_d, <blank> */

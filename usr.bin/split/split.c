@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1987, 1993, 1994\
  The Regents of the University of California.  All rights reserved.");
@@ -53,6 +53,9 @@ __RCSID("$NetBSD: split.c,v 1.27 2017/01/10 21:14:13 christos Exp $");
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#include "nb_stdlib.h"
+#include "sys/nb_param.h"
 
 #define DEFLINE	1000		/* Default num lines per file. */
 

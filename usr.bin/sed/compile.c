@@ -37,7 +37,7 @@
 #include "nbtool_config.h"
 #endif
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 __RCSID("$NetBSD: compile.c,v 1.50 2021/03/13 15:46:54 christos Exp $");
 #ifdef __FBSDID
 __FBSDID("$FreeBSD: head/usr.bin/sed/compile.c 259132 2013-12-09 18:57:20Z eadler $");
@@ -63,6 +63,10 @@ static const char sccsid[] = "@(#)compile.c	8.1 (Berkeley) 6/6/93";
 
 #include "defs.h"
 #include "extern.h"
+
+#include "nb_stdlib.h"
+#include "sys/nb_stat.h"
+#include "nb_errc.h"
 
 #define LHSZ	128
 #define	LHMASK	(LHSZ - 1)

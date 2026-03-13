@@ -34,7 +34,7 @@
 #include "nbtool_config.h"
 #endif
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 __RCSID("$NetBSD: file.c,v 1.11.10.1 2024/09/12 20:04:58 martin Exp $");
 
 #include <sys/param.h>
@@ -52,6 +52,8 @@ __RCSID("$NetBSD: file.c,v 1.11.10.1 2024/09/12 20:04:58 martin Exp $");
 #include <wctype.h>
 
 #include "grep.h"
+
+#include "nb_stdlib.h"
 
 #define	MAXBUFSIZ	(32 * 1024)
 #define	LNBUFBUMP	80

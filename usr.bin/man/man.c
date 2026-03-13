@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1987, 1993, 1994, 1995\
@@ -64,6 +64,8 @@ __RCSID("$NetBSD: man.c,v 1.73 2022/05/10 00:42:00 gutteridge Exp $");
 
 #include "manconf.h"
 #include "pathnames.h"
+
+#include "nb_stdlib.h"
 
 #ifndef MAN_DEBUG
 #define MAN_DEBUG 0		/* debug path output */

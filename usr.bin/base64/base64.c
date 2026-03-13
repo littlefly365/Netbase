@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 __RCSID("$NetBSD: base64.c,v 1.5 2021/08/27 17:53:13 christos Exp $");
 
 #include <ctype.h>
@@ -41,6 +41,9 @@ __RCSID("$NetBSD: base64.c,v 1.5 2021/08/27 17:53:13 christos Exp $");
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#include "nb_stdlib.h"
+#include "nb_errc.h"
 
 static const char B64[] =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";

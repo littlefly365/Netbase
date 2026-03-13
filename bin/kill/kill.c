@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #if !defined(lint) && !defined(SHELL)
 __COPYRIGHT("@(#) Copyright (c) 1988, 1993, 1994\
  The Regents of the University of California.  All rights reserved.");
@@ -56,6 +56,8 @@ __RCSID("$NetBSD: kill.c,v 1.33 2022/05/16 10:53:14 kre Exp $");
 #include <unistd.h>
 #include <locale.h>
 #include <sys/ioctl.h>
+
+#include "nb_stdlib.h"
 
 #ifdef SHELL            /* sh (aka ash) builtin */
 int killcmd(int, char *argv[]);

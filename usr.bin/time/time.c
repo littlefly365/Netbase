@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1987, 1988, 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -55,6 +55,9 @@ __RCSID("$NetBSD: time.c,v 1.24 2020/04/23 07:54:53 simonb Exp $");
 #include <unistd.h>
 
 #include "ext.h"
+
+#include "nb_stdlib.h"
+#include "sys/nb_time.h"
 
 __dead static void	usage(void);
 static void	prl(long, const char *);

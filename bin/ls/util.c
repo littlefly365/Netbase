@@ -69,7 +69,7 @@ safe_print(const char *src)
 		flags |= VIS_CSTYLE;
 
 	len = strlen(src);
-	if (len != 0 && SIZE_T_MAX/len <= 4) {
+	if (len != 0 && SIZE_MAX/len <= 4) {
 		errx(EXIT_FAILURE, "%s: name too long", src);
 		/* NOTREACHED */
 	}

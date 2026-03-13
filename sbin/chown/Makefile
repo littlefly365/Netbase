@@ -1,12 +1,3 @@
-PROG= chown
-all: obj $(PROG)
+PROG=chown
 
-obj:
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $(PROG).c 
-$(PROG): obj
-	$(CC) $(PROG).o $(LDFLAGS)  $(LDFTS) -o $(PROG)
-clean:
-	rm -rf $(PROG).o 
-build: all
-	mv $(PROG) ../../build/sbin
-.PHONY: all obj $(PROG) clean build
+.include "../../mk/prog.mk"

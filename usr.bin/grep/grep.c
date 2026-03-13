@@ -33,7 +33,7 @@
 #include "nbtool_config.h"
 #endif
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 __RCSID("$NetBSD: grep.c,v 1.16 2022/10/15 21:53:22 andvar Exp $");
 
 #include <sys/stat.h>
@@ -53,6 +53,8 @@ __RCSID("$NetBSD: grep.c,v 1.16 2022/10/15 21:53:22 andvar Exp $");
 #include <unistd.h>
 
 #include "grep.h"
+
+#include "nb_stdlib.h"
 
 #ifndef WITHOUT_NLS
 #include <nl_types.h>
@@ -149,7 +151,7 @@ static inline const char	*init_color(const char *);
 int	 tail;		/* lines left to print */
 bool	 notfound;	/* file not found */
 
-extern const char	*__progname;
+extern char	*__progname;
 
 /*
  * Prints usage information and returns 2.

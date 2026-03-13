@@ -27,7 +27,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 2005\
  The NetBSD Foundation, Inc.  All rights reserved.");
@@ -43,6 +43,8 @@ __RCSID("$NetBSD: seq.c,v 1.12 2021/03/20 22:10:17 cheusov Exp $");
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#include "nb_stdlib.h"
 
 #define ZERO	'0'
 #define SPACE	' '

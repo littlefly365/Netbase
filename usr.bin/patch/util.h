@@ -29,6 +29,7 @@
  * -C option added in 1998, original code by Marc Espie, based on FreeBSD
  * behaviour
  */
+#include "sys/nb_cdefs.h"
 
 char		*fetchname(const char *, bool *, int);
 char		*checked_in(char *);

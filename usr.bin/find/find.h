@@ -36,6 +36,7 @@
 
 #include <regex.h>
 #include <time.h>
+#include <stdint.h>
 
 /* node type */
 enum ntype {

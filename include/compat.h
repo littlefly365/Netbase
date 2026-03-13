@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdint.h>
+#include <limits.h>
 #include <stddef.h>
 #include <stdarg.h>
 #include <string.h>
@@ -16,18 +17,7 @@
 #include <sys/types.h>
 #include <sys/acl.h>
 
-#ifdef SIGINFO
-#else
-#define SIGINFO SIGUSR1
-#endif
-
-#ifdef SIZE_T_MAX
-#else
-#define SIZE_T_MAX SIZE_MAX
-#endif
-
 #define fcpxattr
-#define CLK_TCK             0
 #define setproctitle             
 #define  O_EXLOCK  	0
 
@@ -67,15 +57,27 @@ static inline u_long
     (void)N;
     return d;
 }
+static inline mode_t
+*string_to_flags2(char **f, mode_t *d, char *N)
+{
+    (void)f;
+    (void)N;
+    return d;
+}
 
 
 typedef int32_t __devmajor_t, __devminor_t;
 #define devmajor_t __devmajor_t
 #define devminor_t __devminor_t
 #define NODEVMAJOR (-1)
+#ifndef major
 #define major(x)        ((devmajor_t)(((uint32_t)(x) & 0x000fff00) >>  8))
+#endif
+
+#ifndef minor
 #define minor(x)        ((devminor_t)((((uint32_t)(x) & 0xfff00000) >> 12) | \
                                    (((uint32_t)(x) & 0x000000ff) >>  0)))
+#endif
 
 static inline long
 lpathconf(const char *path, int name)
@@ -150,10 +152,6 @@ acl_is_trivial_np(acl_t acl, int *trivial)
 #define _EXT(fp) ((struct __sfileext *)(void *)((fp)->_ext._base))
 #endif
 static int debug;
-#define SF_IMMUTABLE	0
-#define SF_APPEND	0
-#define UF_IMMUTABLE	0
-#define UF_APPEND	0
 
 // fstypes.h
 #define     MNT_LOCAL       0x00001000

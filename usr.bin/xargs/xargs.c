@@ -34,7 +34,7 @@
  * $xMach: xargs.c,v 1.6 2002/02/23 05:27:47 tim Exp $
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1990, 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -62,6 +62,10 @@ __RCSID("$NetBSD: xargs.c,v 1.20 2010/12/17 11:32:57 plunky Exp $");
 #include <unistd.h>
 
 #include "pathnames.h"
+
+#include "nb_stdlib.h"
+#include "nb_stdio.h"
+#include "nb_regex.h"
 
 static void	parse_input(int, char *[]);
 static void	prerun(int, char *[]);

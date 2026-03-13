@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1980, 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -50,18 +50,19 @@ __RCSID("$NetBSD: mt.c,v 1.49 2022/01/24 09:14:36 andvar Exp $");
 #include <sys/types.h>
 #include <sys/param.h>
 #include <sys/ioctl.h>
-#include <sys/mtio.h>
 #include <sys/stat.h>
 
 #include <ctype.h>
 #include <err.h>
 #include <fcntl.h>
 #include <paths.h>
-#include <rmt.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#include "nb_stdlib.h"
+#include "sys/nb_mtio.h"
 
 /* pseudo ioctl constants */
 #define MTASF	100

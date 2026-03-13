@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT(
 "@(#) Copyright (c) 1999\
@@ -41,6 +41,8 @@ __RCSID("$NetBSD: link.c,v 1.5 2011/08/30 19:18:17 joerg Exp $");
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+#include "nb_stdlib.h"
 
 __dead static void	usage(void);
 

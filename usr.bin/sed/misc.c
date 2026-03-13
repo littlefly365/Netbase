@@ -37,7 +37,7 @@
 #include "nbtool_config.h"
 #endif
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 __RCSID("$NetBSD: misc.c,v 1.15 2014/06/26 02:14:32 christos Exp $");
 #ifdef __FBSDID
 __FBSDID("$FreeBSD: head/usr.bin/sed/misc.c 200462 2009-12-13 03:14:06Z delphij $");
@@ -58,6 +58,8 @@ static const char sccsid[] = "@(#)misc.c	8.1 (Berkeley) 6/6/93";
 
 #include "defs.h"
 #include "extern.h"
+
+#include "nb_stdlib.h"
 
 /*
  * malloc with result test

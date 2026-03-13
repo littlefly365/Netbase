@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1990, 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -52,6 +52,8 @@ __RCSID("$NetBSD: fold.c,v 1.17 2011/09/04 20:24:59 joerg Exp $");
 #include <unistd.h>
 #include <wchar.h>
 #include <err.h>
+
+#include "nb_stdlib.h"
 
 #define	DEFLINEWIDTH	80
 

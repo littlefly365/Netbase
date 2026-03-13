@@ -30,6 +30,7 @@
  *
  *	@(#)extern.h	8.1 (Berkeley) 6/6/93
  */
+#include "sys/nb_cdefs.h"
 
 #define	WR(p, size) \
 	if (write(STDOUT_FILENO, p, size) != size) \

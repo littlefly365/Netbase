@@ -33,7 +33,7 @@
 #include "nbtool_config.h"
 #endif
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #if !defined(lint)
 __RCSID("$NetBSD: pack_dev.c,v 1.12 2013/06/14 16:28:20 tsutsui Exp $");
 #endif /* not lint */

@@ -27,7 +27,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #if !defined(lint)
 #if 0
 __FBSDID("$FreeBSD: head/usr.bin/timeout/timeout.c 268763 2014-07-16 13:52:05Z bapt $");
@@ -50,6 +50,8 @@ __RCSID("$NetBSD: timeout.c,v 1.5 2022/12/13 13:25:36 kre Exp $");
 #include <string.h>
 #include <sysexits.h>
 #include <unistd.h>
+
+#include "nb_stdlib.h"
 
 #define EXIT_TIMEOUT 124
 

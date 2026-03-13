@@ -8,7 +8,7 @@
  * 	For the man who taught me vi, and who got too old, too young.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 __FBSDID("$FreeBSD: src/usr.bin/xargs/strnsubst.c,v 1.8 2005/12/30 23:22:50 jmallett Exp $");

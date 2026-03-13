@@ -37,7 +37,7 @@
 #include "nbtool_config.h"
 #endif
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 __RCSID("$NetBSD: process.c,v 1.53.6.1 2024/10/14 17:44:57 martin Exp $");
 #ifdef __FBSDID
 __FBSDID("$FreeBSD: head/usr.bin/sed/process.c 192732 2009-05-25 06:45:33Z brian $");
@@ -67,6 +67,10 @@ static const char sccsid[] = "@(#)process.c	8.6 (Berkeley) 4/20/94";
 
 #include "defs.h"
 #include "extern.h"
+
+#include "nb_stdlib.h"
+#include "sys/nb_stat.h"
+#include "compat.h"
 
 static SPACE HS, PS, SS, YS;
 #define	pd		PS.deleted

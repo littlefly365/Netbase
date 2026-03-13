@@ -2,12 +2,13 @@
 Netbase is a port of the NetBSD's utilities to another unix like operating systems.
 
 # Deps
-- gnu make
-- clang/llvm (or gcc and binutils)
+- bsd make
+- gcc or clang
 - zlib
 - libbz2
 - libacl
 - libfts ( for musl )
+- libmd
 - posix shell (link to /bin/sh )
 
 # Info
@@ -16,10 +17,7 @@ Netbase is a port of the NetBSD's utilities to another unix like operating syste
 - now are avaible ~80 commands ported from netbsd
 
 # important
-if you see build or runtime errors tell me.(Note: The utils are tested on Arch/Alpine and only with a basic use of them).
-
-# What commands are available?
-the commands available are listed on details/
+if you see build or runtime errors tell me (Note: The utils are tested on Arch/Alpine and only with a basic use of them).
 
 # Compatibility Matrix
 
@@ -27,24 +25,20 @@ the commands available are listed on details/
 |-----------------|------------------|
 | Linux glibc     | ☑️ Works         |
 | Linux musl      | ☑️ Works         |
-| GNU/Hurd        | ⚠️ May work      |
 
 # Building
-if you run only g/make may fail so i recommend execute the build script instead:
-`./build.sh`       
 use:
 
-`-b, --build` 
-
-run make with configs and variables depending on the platform (default).
-
-`-c, --clean`
-remove object files and clean the source tree.
+`bmake` build utilities
+`bmake clean` clean the src tree
+`bmake install` install the utilities (default path /usr/local/bin)
 
 # TODO
 
-|    Plataform/Goal	    |     Status	          |
-|-----------------------|-----------------------|
-| linux (glibc/musl)  	| ☑️ yes	              |
+|    Plataform/Goal	|     Status	          	|
+|-----------------------|-------------------------------|
+| glibc		  	| ☑️ yes	                |
+| musl		  	| 🧪 WIP	            	|
+| another libc		| 🧪 untested               	|
 | Full Userland (! GNU) | 🧪 partial (coreutils)	|
 

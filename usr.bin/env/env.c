@@ -28,7 +28,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1988, 1993, 1994\
  The Regents of the University of California.  All rights reserved.");
@@ -46,6 +46,8 @@ __RCSID("$NetBSD: env.c,v 1.23.8.1 2024/11/01 14:39:50 martin Exp $");
 #include <unistd.h>
 #include <locale.h>
 #include <errno.h>
+
+#include "nb_stdlib.h"
 
 static void usage(void) __dead;
 

@@ -1,13 +1,5 @@
-PROG= fold
-CFLAGS +=  -D_XOPEN_SOURCE=700
-all: obj $(PROG)
+PROG=fold
 
-obj:
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $(PROG).c 
-$(PROG): obj
-	$(CC) $(PROG).o $(LDFLAGS) -o $(PROG)
-clean:
-	rm -rf $(PROG).o 
-build: all
-	mv $(PROG) ../../build/usr.bin
-.PHONY: all obj $(PROG) clean build
+CPPFLAGS += -D_XOPEN_SOURCE=700
+
+.include "../../mk/prog.mk"

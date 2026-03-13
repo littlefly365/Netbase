@@ -30,7 +30,7 @@
  * behaviour
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 __RCSID("$NetBSD: util.c,v 1.30 2021/05/25 11:25:59 cjep Exp $");
 
 #include <sys/param.h>

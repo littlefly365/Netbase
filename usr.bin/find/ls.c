@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "from: @(#)ls.c	8.1 (Berkeley) 6/6/93";
@@ -54,6 +54,11 @@ __RCSID("$NetBSD: ls.c,v 1.21 2011/08/31 16:24:57 plunky Exp $");
 #include <unistd.h>
 
 #include "find.h"
+
+#include "nb_stdlib.h"
+#include "nb_unistd.h"
+#include "nb_pwd.h"
+#include "compat.h"
 
 /* Derived from the print routines in the ls(1) source code. */
 

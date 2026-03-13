@@ -71,7 +71,7 @@
 #include "nbtool_config.h"
 #endif
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #if defined(__COPYRIGHT) && !defined(lint)
 __COPYRIGHT("@(#) Copyright (c) 1991, 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -102,7 +102,12 @@ __RCSID("$NetBSD: cksum.c,v 1.52 2022/06/25 02:22:42 gutteridge Exp $");
 #include <string.h>
 #include <unistd.h>
 
+#include <sha256.h>
+#include <sha512.h>
+
 #include "extern.h"
+
+#include "nb_stdlib.h"
 
 #define PRINT_NORMAL     0x01
 #define PRINT_QUIET      0x02

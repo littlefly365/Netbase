@@ -5,11 +5,770 @@
 #include "shell.h"
 #include "mystring.h"
 #include "init.h"
+#include "eval.h"
+#include <stdio.h>
+#include "input.h"
+#include "error.h"
+#include <stdlib.h>
+#include "options.h"
+#include "output.h"
+#include "memalloc.h"
+#include "parser.h"
+#include "redir.h"
+#include <signal.h>
+#include "trap.h"
+#include "show.h"
+#include <unistd.h>
+#include <time.h>
+#include "var.h"
+#include "version.h"
 
 
 
+#undef	ATABSIZE
+#define ATABSIZE 39
+#undef	ALIASINUSE
+#define ALIASINUSE	1
+#undef	ARITH_MAX_PREC
+#define ARITH_MAX_PREC 8
+#undef	ARITH_FORMAT_STR
+#define	ARITH_FORMAT_STR	"%" PRIdMAX
+#undef	ARITH_BAD
+#define	ARITH_BAD	0
+#undef	ARITH_ASS
+#define	ARITH_ASS	1
+#undef	ARITH_OR
+#define	ARITH_OR	2
+#undef	ARITH_AND
+#define	ARITH_AND	3
+#undef	ARITH_NUM
+#define	ARITH_NUM	5
+#undef	ARITH_VAR
+#define	ARITH_VAR	6
+#undef	ARITH_NOT
+#define	ARITH_NOT	7
+#undef	ARITH_BINOP_MIN
+#define	ARITH_BINOP_MIN	8
+#undef	ARITH_LE
+#define	ARITH_LE	8
+#undef	ARITH_GE
+#define	ARITH_GE	9
+#undef	ARITH_LT
+#define	ARITH_LT	10
+#undef	ARITH_GT
+#define	ARITH_GT	11
+#undef	ARITH_EQ
+#define	ARITH_EQ	12	/* Must be ARITH_ASS + ARITH_ASS_GAP */
+#undef	ARITH_ASS_BASE
+#define	ARITH_ASS_BASE	13
+#undef	ARITH_REM
+#define	ARITH_REM	13
+#undef	ARITH_BAND
+#define	ARITH_BAND	14
+#undef	ARITH_LSHIFT
+#define	ARITH_LSHIFT	15
+#undef	ARITH_RSHIFT
+#define	ARITH_RSHIFT	16
+#undef	ARITH_MUL
+#define	ARITH_MUL	17
+#undef	ARITH_ADD
+#define	ARITH_ADD	18
+#undef	ARITH_BOR
+#define	ARITH_BOR	19
+#undef	ARITH_SUB
+#define	ARITH_SUB	20
+#undef	ARITH_BXOR
+#define	ARITH_BXOR	21
+#undef	ARITH_DIV
+#define	ARITH_DIV	22
+#undef	ARITH_NE
+#define	ARITH_NE	23
+#undef	ARITH_BINOP_MAX
+#define	ARITH_BINOP_MAX	24
+#undef	ARITH_ASS_MIN
+#define	ARITH_ASS_MIN	ARITH_BINOP_MAX
+#undef	ARITH_ASS_GAP
+#define	ARITH_ASS_GAP	(ARITH_ASS_MIN - ARITH_ASS_BASE)
+#undef	ARITH_REMASS
+#define	ARITH_REMASS	(ARITH_ASS_GAP + ARITH_REM)
+#undef	ARITH_BANDASS
+#define	ARITH_BANDASS	(ARITH_ASS_GAP + ARITH_BAND)
+#undef	ARITH_LSHIFTASS
+#define	ARITH_LSHIFTASS	(ARITH_ASS_GAP + ARITH_LSHIFT)
+#undef	ARITH_RSHIFTASS
+#define	ARITH_RSHIFTASS	(ARITH_ASS_GAP + ARITH_RSHIFT)
+#undef	ARITH_MULASS
+#define	ARITH_MULASS	(ARITH_ASS_GAP + ARITH_MUL)
+#undef	ARITH_ADDASS
+#define	ARITH_ADDASS	(ARITH_ASS_GAP + ARITH_ADD)
+#undef	ARITH_BORASS
+#define	ARITH_BORASS	(ARITH_ASS_GAP + ARITH_BOR)
+#undef	ARITH_SUBASS
+#define	ARITH_SUBASS	(ARITH_ASS_GAP + ARITH_SUB)
+#undef	ARITH_BXORASS
+#define	ARITH_BXORASS	(ARITH_ASS_GAP + ARITH_BXOR)
+#undef	ARITH_DIVASS
+#define	ARITH_DIVASS	(ARITH_ASS_GAP + ARITH_BXOR)
+#undef	ARITH_ASS_MAX
+#define	ARITH_ASS_MAX	34
+#undef	ARITH_LPAREN
+#define	ARITH_LPAREN	34
+#undef	ARITH_RPAREN
+#define	ARITH_RPAREN	35
+#undef	ARITH_BNOT
+#define	ARITH_BNOT	36
+#undef	ARITH_QMARK
+#define	ARITH_QMARK	37
+#undef	ARITH_COLON
+#define	ARITH_COLON	38
+#undef	ARITH_INCR
+#define	ARITH_INCR	39
+#undef	ARITH_DECR
+#define	ARITH_DECR	40
+#undef	ARITH_COMMA
+#define	ARITH_COMMA	41
+#undef	MAXPWD
+#define MAXPWD 256
+#undef	ALL
+#define ALL (E_OPEN|E_CREAT|E_EXEC)
+#undef	E_OPEN
+#define E_OPEN 01	/* opening a file */
+#undef	E_CREAT
+#define E_CREAT 02	/* creating a file */
+#undef	E_EXEC
+#define E_EXEC 04	/* executing a program */
+#undef	EXINT
+#define EXINT 0		/* SIGINT received */
+#undef	EXERROR
+#define EXERROR 1	/* a generic error */
+#undef	EXSHELLPROC
+#define EXSHELLPROC 2	/* execute a shell procedure */
+#undef	EXEXEC
+#define EXEXEC 3	/* command execution failed */
+#undef	EXEXIT
+#define EXEXIT 4	/* shell wants to exit(exitstatus) */
+#undef	INTOFF
+#define INTOFF suppressint++
+#undef	INTON
+#define INTON do { if (--suppressint == 0 && intpending) onint(); } while (0)
+#undef	FORCEINTON
+#define FORCEINTON do { suppressint = 0; if (intpending) onint(); } while (0)
+#undef	CLEAR_PENDING_INT
+#define CLEAR_PENDING_INT (intpending = 0)
+#undef	evalskip
+#define	evalskip	(s_k_i_p.state)
+#undef	skipcount
+#define	skipcount	(s_k_i_p.count)
+#undef	EV_EXIT
+#define EV_EXIT		0x01	/* exit after evaluating tree */
+#undef	EV_TESTED
+#define EV_TESTED	0x02	/* exit status is checked; ignore -e flag */
+#undef	EV_BACKCMD
+#define EV_BACKCMD	0x04	/* command executing within back quotes */
+#undef	CMDTABLESIZE
+#define CMDTABLESIZE 31		/* should be prime */
+#undef	ARB
+#define ARB 1			/* actual size determined at run time */
+#undef	NEWARGS
+#define NEWARGS 5
+#undef	CMDUNKNOWN
+#define CMDUNKNOWN	-1	/* no entry in table for command */
+#undef	CMDNORMAL
+#define CMDNORMAL	0	/* command is an executable program */
+#undef	CMDFUNCTION
+#define CMDFUNCTION	1	/* command is a shell function */
+#undef	CMDBUILTIN
+#define CMDBUILTIN	2	/* command is a shell builtin */
+#undef	CMDSPLBLTIN
+#define CMDSPLBLTIN	3	/* command is a special shell builtin */
+#undef	DO_ERR
+#define DO_ERR		0x01	/* prints errors */
+#undef	DO_ABS
+#define DO_ABS		0x02	/* checks absolute paths */
+#undef	DO_NOFUNC
+#define DO_NOFUNC	0x04	/* don't return shell functions, for command */
+#undef	DO_ALTPATH
+#define DO_ALTPATH	0x08	/* using alternate path */
+#undef	DO_ALTBLTIN
+#define DO_ALTBLTIN	0x20	/* %builtin in alt. path */
+#undef	SPACE_NEEDED
+#define SPACE_NEEDED ((int)((sizeof(intmax_t) * CHAR_BIT + 2) / 3 + 2))
+#undef	EXP_SPLIT
+#define EXP_SPLIT	0x1	/* perform word splitting */
+#undef	EXP_TILDE
+#define EXP_TILDE	0x2	/* do normal tilde expansion */
+#undef	EXP_VARTILDE
+#define EXP_VARTILDE	0x4	/* expand tildes in an assignment */
+#undef	EXP_REDIR
+#define EXP_REDIR	0x8	/* file glob for a redirection (1 match only) */
+#undef	EXP_CASE
+#define EXP_CASE	0x10	/* keeps quotes around for CASE pattern */
+#undef	EXP_IFS_SPLIT
+#define EXP_IFS_SPLIT	0x20	/* need to record arguments for ifs breakup */
+#undef	EXP_IN_QUOTES
+#define EXP_IN_QUOTES	0x40	/* don't set EXP_IFS_SPLIT again */
+#undef	EXP_GLOB
+#define EXP_GLOB	0x80	/* perform filename globbing */
+#undef	EXP_NL
+#define EXP_NL		0x100	/* keep CRTNONL in output */
+#undef	EXP_FULL
+#define EXP_FULL	(EXP_SPLIT | EXP_GLOB)
+#undef	EXP_QNEEDED
+#define EXP_QNEEDED	(EXP_GLOB | EXP_CASE | EXP_REDIR)
+#undef	MAXHISTLOOPS
+#define MAXHISTLOOPS	4	/* max recursions through fc */
+#undef	DEFEDITOR
+#define DEFEDITOR	"ed"	/* default editor *should* be $EDITOR */
+#undef	editing
+#define editing (Eflag || Vflag)
+#undef	EOF_NLEFT
+#define EOF_NLEFT -99		/* value of parsenleft when EOF pushed back */
+#undef	WCONTINUED
+#define	WCONTINUED 0		/* So we can compile on old systems */
+#undef	WBLOCK
+#define WBLOCK	1
+#undef	WNOFREE
+#define WNOFREE 2
+#undef	WSILENT
+#define WSILENT 4
+#undef	FORK_FG
+#define FORK_FG 0
+#undef	FORK_BG
+#define FORK_BG 1
+#undef	FORK_NOJOB
+#define FORK_NOJOB 2
+#undef	SHOW_PGID
+#define	SHOW_PGID	0x01	/* only show pgid - for jobs -p */
+#undef	SHOW_MULTILINE
+#define	SHOW_MULTILINE	0x02	/* one line per process */
+#undef	SHOW_PID
+#define	SHOW_PID	0x04	/* include process pid */
+#undef	SHOW_CHANGED
+#define	SHOW_CHANGED	0x08	/* only jobs whose state has changed */
+#undef	SHOW_SIGNALLED
+#define	SHOW_SIGNALLED	0x10	/* only if stopped/exited on signal */
+#undef	SHOW_ISSIG
+#define	SHOW_ISSIG	0x20	/* job was signalled */
+#undef	SHOW_NO_FREE
+#define	SHOW_NO_FREE	0x40	/* do not free job */
+#undef	SHOW_PROCTITLE
+#define	SHOW_PROCTITLE	0x80	/* set the process title */
+#undef	MAXCMDTEXT
+#define	MAXCMDTEXT	200
+#undef	JOBRUNNING
+#define	JOBRUNNING	0	/* at least one proc running */
+#undef	JOBSTOPPED
+#define	JOBSTOPPED	1	/* all procs are stopped */
+#undef	JOBDONE
+#define	JOBDONE		2	/* all procs are completed */
+#undef	JOBCHANGED
+#define	JOBCHANGED	1	/* set if status has changed */
+#undef	JOBWANTED
+#define	JOBWANTED	2	/* set if this is a job being sought */
+#undef	JPIPEFAIL
+#define	JPIPEFAIL	4	/* set if -o pipefail when job created */
+#undef	SHELL_SIZE
+#define SHELL_SIZE (sizeof(union {int i; char *cp; double d; }) - 1)
+#undef	MAXMBOXES
+#define MAXMBOXES 10
+#undef	PROFILE
+#define PROFILE 0
+#undef	SIGSSIZE
+#define SIGSSIZE (sizeof(sigs)/sizeof(sigs[0]))
+#undef	MINSIZE
+#define MINSIZE 504		/* minimum size of a block */
+#undef	STSTRC_END
+#define STSTRC_END	((const char *)0)
+#undef	OPTSTRING_BASE
+#define	OPTSTRING_BASE "HSa"
+#undef	OPTSTRING_t
+#define	OPTSTRING_t	OPTSTRING_BASE "t"
+#undef	OPTSTRING_t
+#define	OPTSTRING_t	OPTSTRING_BASE
+#undef	OPTSTRING_f
+#define	OPTSTRING_f	OPTSTRING_t "f"
+#undef	OPTSTRING_f
+#define	OPTSTRING_f	OPTSTRING_t
+#undef	OPTSTRING_d
+#define	OPTSTRING_d	OPTSTRING_f "d"
+#undef	OPTSTRING_d
+#define	OPTSTRING_d	OPTSTRING_f
+#undef	OPTSTRING_s
+#define	OPTSTRING_s	OPTSTRING_d "s"
+#undef	OPTSTRING_s
+#define	OPTSTRING_s	OPTSTRING_d
+#undef	OPTSTRING_c
+#define	OPTSTRING_c	OPTSTRING_s "c"
+#undef	OPTSTRING_c
+#define	OPTSTRING_c	OPTSTRING_s
+#undef	OPTSTRING_m
+#define	OPTSTRING_m	OPTSTRING_c "m"
+#undef	OPTSTRING_m
+#define	OPTSTRING_m	OPTSTRING_c
+#undef	OPTSTRING_l
+#define	OPTSTRING_l	OPTSTRING_m "l"
+#undef	OPTSTRING_l
+#define	OPTSTRING_l	OPTSTRING_m
+#undef	OPTSTRING_r
+#define	OPTSTRING_r	OPTSTRING_l "r"
+#undef	OPTSTRING_r
+#define	OPTSTRING_r	OPTSTRING_l
+#undef	OPTSTRING_p
+#define	OPTSTRING_p	OPTSTRING_r "p"
+#undef	OPTSTRING_p
+#define	OPTSTRING_p	OPTSTRING_r
+#undef	OPTSTRING_n
+#define	OPTSTRING_n	OPTSTRING_p "n"
+#undef	OPTSTRING_n
+#define	OPTSTRING_n	OPTSTRING_p
+#undef	OPTSTRING_v
+#define	OPTSTRING_v	OPTSTRING_n "v"
+#undef	OPTSTRING_v
+#define	OPTSTRING_v	OPTSTRING_n
+#undef	OPTSTRING_w
+#define	OPTSTRING_w	OPTSTRING_v "w"
+#undef	OPTSTRING_w
+#define	OPTSTRING_w	OPTSTRING_v
+#undef	OPTSTRING_b
+#define	OPTSTRING_b	OPTSTRING_w "b"
+#undef	OPTSTRING_b
+#define	OPTSTRING_b	OPTSTRING_w
+#undef	OPTSTRING
+#define	OPTSTRING	OPTSTRING_b
+#undef	DEFINE_OPTIONS
+#define DEFINE_OPTIONS
+#undef	OUTBUFSIZ
+#define OUTBUFSIZ BUFSIZ
+#undef	BLOCK_OUT
+#define BLOCK_OUT -2		/* output to a fixed block of memory */
+#undef	MEM_OUT
+#define MEM_OUT -3		/* output to dynamically allocated memory */
+#undef	CHAIN
+#define	CHAIN
+#undef	CHAIN
+#define	CHAIN	,NULL
+#undef	TEMPSIZE
+#define TEMPSIZE 24
+#undef	HAVE_VASPRINTF
+#define HAVE_VASPRINTF 1
+#undef	OUTPUT_ERR
+#define OUTPUT_ERR	0x01		/* error occurred on output */
+#undef	OUTPUT_CLONE
+#define OUTPUT_CLONE	0x02		/* this is a clone of another */
+#undef	outx
+#define outx out2
+#undef	outxstr
+#define outxstr out2str
+#undef	outxshstr
+#define outxshstr out2shstr
+#undef	OUTPUT_INCL
+#define OUTPUT_INCL
+#undef	OPENBRACE
+#define OPENBRACE '{'
+#undef	CLOSEBRACE
+#define CLOSEBRACE '}'
+#undef	NQ
+#define	NQ	0x00	/* Unquoted */
+#undef	SQ
+#define	SQ	0x01	/* Single Quotes */
+#undef	DQ
+#define	DQ	0x02	/* Double Quotes (or equivalent) */
+#undef	CQ
+#define	CQ	0x03	/* C style Single Quotes */
+#undef	QF
+#define	QF	0x0F		/* Mask to extract previous values */
+#undef	QS
+#define	QS	0x10	/* Quoting started at this level in stack */
+#undef	LEVELS_PER_BLOCK
+#define	LEVELS_PER_BLOCK	8
+#undef	VSS
+#define	VSS			struct statestack
+#undef	syntax
+#define	syntax		(currentstate(stack)->ts_syntax)
+#undef	parenlevel
+#define	parenlevel	(currentstate(stack)->ts_parenlevel)
+#undef	varnest
+#define	varnest		(currentstate(stack)->ts_varnest)
+#undef	arinest
+#define	arinest		(currentstate(stack)->ts_arinest)
+#undef	quoted
+#define	quoted		(currentstate(stack)->ts_quoted)
+#undef	magicq
+#define	magicq		(currentstate(stack)->ts_magicq)
+#undef	CTL_FIRST
+#define CTL_FIRST '\201'	/* first 'special' character */
+#undef	CTLESC
+#define CTLESC '\201'		/* escape next character */
+#undef	CTLVAR
+#define CTLVAR '\202'		/* variable defn */
+#undef	CTLENDVAR
+#define CTLENDVAR '\203'
+#undef	CTLBACKQ
+#define CTLBACKQ '\204'
+#undef	CTLQUOTE
+#define CTLQUOTE 01		/* ored with CTLBACKQ code if in quotes */
+#undef	CTLARI
+#define	CTLARI	'\206'		/* arithmetic expression */
+#undef	CTLENDARI
+#define	CTLENDARI '\207'
+#undef	CTLQUOTEMARK
+#define	CTLQUOTEMARK '\210'
+#undef	CTLQUOTEEND
+#define	CTLQUOTEEND '\211'	/* only inside ${...} */
+#undef	CTLNONL
+#define	CTLNONL '\212'		/* The \n in a deleted \ \n sequence */
+#undef	CTLCNL
+#define	CTLCNL	'\213'		/* A $'\n' - newline not counted */
+#undef	CTL_LAST
+#define	CTL_LAST '\213'		/* last 'special' character */
+#undef	VSTYPE
+#define VSTYPE		0x0f	/* type of variable substitution */
+#undef	VSNUL
+#define VSNUL		0x10	/* colon--treat the empty string as unset */
+#undef	VSLINENO
+#define VSLINENO	0x20	/* expansion of $LINENO, the line number
+#undef	VSPATQ
+#define VSPATQ		0x40	/* ensure correct pattern quoting in ${x#pat} */
+#undef	VSQUOTE
+#define VSQUOTE	 	0x80	/* inside double quotes--suppress splitting */
+#undef	VSNORMAL
+#define VSNORMAL	0x1		/* normal variable:  $var or ${var} */
+#undef	VSMINUS
+#define VSMINUS		0x2		/* ${var-text} */
+#undef	VSPLUS
+#define VSPLUS		0x3		/* ${var+text} */
+#undef	VSQUESTION
+#define VSQUESTION	0x4		/* ${var?message} */
+#undef	VSASSIGN
+#define VSASSIGN	0x5		/* ${var=text} */
+#undef	VSTRIMLEFT
+#define VSTRIMLEFT	0x6		/* ${var#pattern} */
+#undef	VSTRIMLEFTMAX
+#define VSTRIMLEFTMAX	0x7		/* ${var##pattern} */
+#undef	VSTRIMRIGHT
+#define VSTRIMRIGHT	0x8		/* ${var%pattern} */
+#undef	VSTRIMRIGHTMAX
+#define VSTRIMRIGHTMAX 	0x9		/* ${var%%pattern} */
+#undef	VSLENGTH
+#define VSLENGTH	0xa		/* ${#var} */
+#undef	current_parser
+#define	current_parser (psp.c_current_parser)
+#undef	tokpushback
+#define	tokpushback	(current_parser->ps_tokpushback)
+#undef	checkkwd
+#define	checkkwd	(current_parser->ps_checkkwd)
+#undef	heredoclist
+#define	heredoclist	(current_parser->ps_heredoclist)
+#undef	parsebackquote
+#define	parsebackquote	(current_parser->ps_parsebackquote)
+#undef	doprompt
+#define	doprompt	(current_parser->ps_doprompt)
+#undef	needprompt
+#define	needprompt	(current_parser->ps_needprompt)
+#undef	lasttoken
+#define	lasttoken	(current_parser->ps_lasttoken)
+#undef	wordtext
+#define	wordtext	(current_parser->ps_wordtext)
+#undef	backquotelist
+#define	backquotelist	(current_parser->ps_backquotelist)
+#undef	redirnode
+#define	redirnode	(current_parser->ps_redirnode)
+#undef	heredoc
+#define	heredoc		(current_parser->ps_heredoc)
+#undef	quoteflag
+#define	quoteflag	(current_parser->ps_quoteflag)
+#undef	startlinno
+#define	startlinno	(current_parser->ps_startlinno)
+#undef	funclinno
+#define	funclinno	(current_parser->ps_funclinno)
+#undef	elided_nl
+#define	elided_nl	(current_parser->ps_elided_nl)
+#undef	CHKKWD
+#define CHKKWD		0x01		/* turn word into keyword (if it is) */
+#undef	CHKNL
+#define CHKNL		0x02		/* ignore leading \n's */
+#undef	CHKALIAS
+#define CHKALIAS	0x04		/* lookup words as aliases and ... */
+#undef	NEOF
+#define NEOF ((union node *)&psp)
+#undef	EMPTY
+#define EMPTY -2		/* marks an unused slot in redirtab */
+#undef	CLOSED
+#define CLOSED -1		/* fd was not open before redir */
+#undef	F_DUPFD_CLOEXEC
+#define F_DUPFD_CLOEXEC	F_DUPFD
+#undef	REDIR_PUSH
+#define REDIR_PUSH  0x01	/* save previous values of file descriptors */
+#undef	REDIR_BACKQ
+#define REDIR_BACKQ 0x02	/* save the command output in memory */
+#undef	REDIR_VFORK
+#define REDIR_VFORK 0x04	/* running under vfork(2), be careful */
+#undef	REDIR_KEEP
+#define REDIR_KEEP  0x08	/* don't close-on-exec */
+#undef	SHELL_H
+#define SHELL_H
+#undef	JOBS
+#define JOBS 1
+#undef	BSD
+#define BSD 1
+#undef	DO_SHAREDVFORK
+#define DO_SHAREDVFORK
+#undef	NULL
+#define NULL (void *)0
+#undef	STATIC
+#define STATIC	/* empty */
+#undef	MKINIT
+#define MKINIT	/* empty */
+#undef	DBG_VBOSE_SHIFT
+#define	DBG_VBOSE_SHIFT		27
+#undef	VFORK_BLOCK
+#define VFORK_BLOCK	{ const int _ShNest = ShNest;
+#undef	VFORK_END
+#define VFORK_END	}
+#undef	DBG_ALWAYS
+#define	DBG_ALWAYS	(1LL << 0)
+#undef	DBG_PARSE
+#define	DBG_PARSE	(1LL << 1)		/* r (read commands) */
+#undef	DBG_EVAL
+#define	DBG_EVAL	(1LL << 2)		/* e */
+#undef	DBG_EXPAND
+#define	DBG_EXPAND	(1LL << 3)		/* x */
+#undef	DBG_JOBS
+#define	DBG_JOBS	(1LL << 4)		/* j */
+#undef	DBG_PROCS
+#define	DBG_PROCS	(1LL << 5)		/* p */
+#undef	DBG_REDIR
+#define	DBG_REDIR	(1LL << 6)		/* f (fds) */
+#undef	DBG_CMDS
+#define	DBG_CMDS	(1LL << 7)		/* c */
+#undef	DBG_ERRS
+#define	DBG_ERRS	(1LL << 8)		/* z (?) */
+#undef	DBG_WAIT
+#define	DBG_WAIT	(1LL << 9)		/* w */
+#undef	DBG_TRAP
+#define	DBG_TRAP	(1LL << 10)		/* t */
+#undef	DBG_VARS
+#define	DBG_VARS	(1LL << 11)		/* v */
+#undef	DBG_INPUT
+#define	DBG_INPUT	(1LL << 12)		/* i */
+#undef	DBG_OUTPUT
+#define	DBG_OUTPUT	(1LL << 13)		/* o */
+#undef	DBG_MEM
+#define	DBG_MEM		(1LL << 14)		/* m */
+#undef	DBG_ARITH
+#define	DBG_ARITH	(1LL << 15)		/* a */
+#undef	DBG_HISTORY
+#define	DBG_HISTORY	(1LL << 16)		/* h */
+#undef	DBG_SIG
+#define	DBG_SIG		(1LL << 17)		/* s */
+#undef	DBG_MATCH
+#define	DBG_MATCH	(1LL << 18)		/* g (glob) */
+#undef	DBG_LEXER
+#define	DBG_LEXER	(1LL << 19)		/* l */
+#undef	DBG_VERBOSE
+#define	DBG_VERBOSE	(1LL << DBG_VBOSE_SHIFT)
+#undef	DBG_U0
+#define	DBG_U0		(1LL << DBG_EXTRAS(0))	/* 0 - ad-hoc extra flags */
+#undef	DBG_U1
+#define	DBG_U1		(1LL << DBG_EXTRAS(1))	/* 1 - for short term */
+#undef	DBG_U2
+#define	DBG_U2		(1LL << DBG_EXTRAS(2))	/* 2 - extra tracing */
+#undef	DBG_U3
+#define	DBG_U3		(1LL << DBG_EXTRAS(3))	/* 3 - when needed */
+#undef	DBG_LINE
+#define	DBG_LINE	(1LL << DBG_EXTRAS(7))	/* @ ($LINENO) */
+#undef	DBG_PID
+#define	DBG_PID		(1LL << DBG_EXTRAS(8))	/* $ ($$) */
+#undef	DBG_NEST
+#define	DBG_NEST	(1LL << DBG_EXTRAS(9))	/* ^ */
+#undef	VFORK_BLOCK
+#define VFORK_BLOCK
+#undef	VFORK_END
+#define VFORK_END
+#undef	DEFINE_NODENAMES
+#define DEFINE_NODENAMES
+#undef	TR_STD_WIDTH
+#define	TR_STD_WIDTH	60	/* tend to fold lines wider than this */
+#undef	TR_IOVECS
+#define	TR_IOVECS	10	/* number of lines or trace (max) / write */
+#undef	SUP_NL
+#define	SUP_NL	0x01	/* don't print \n */
+#undef	SUP_SP
+#define	SUP_SP	0x03	/* suppress spaces */
+#undef	SUP_WSP
+#define	SUP_WSP	0x04	/* suppress all white space */
+#undef	CWORD
+#define CWORD 0			/* character is nothing special */
+#undef	CNL
+#define CNL 1			/* newline character */
+#undef	CBACK
+#define CBACK 2			/* a backslash character */
+#undef	CSQUOTE
+#define CSQUOTE 3		/* single quote */
+#undef	CDQUOTE
+#define CDQUOTE 4		/* double quote */
+#undef	CBQUOTE
+#define CBQUOTE 5		/* backwards single quote */
+#undef	CVAR
+#define CVAR 6			/* a dollar sign */
+#undef	CENDVAR
+#define CENDVAR 7		/* a '}' character */
+#undef	CLP
+#define CLP 8			/* a left paren in arithmetic */
+#undef	CRP
+#define CRP 9			/* a right paren in arithmetic */
+#undef	CEOF
+#define CEOF 10			/* end of file */
+#undef	CSPCL
+#define CSPCL 11		/* these terminate a word */
+#undef	CCTL
+#define CCTL 12			/* like CWORD, except it must be escaped */
+#undef	CSBACK
+#define CSBACK 13		/* a backslash in a single quote syntax */
+#undef	CFAKE
+#define CFAKE 14		/* a delimiter that does not exist */
+#undef	ISDIGIT
+#define ISDIGIT 01		/* a digit */
+#undef	ISUPPER
+#define ISUPPER 02		/* an upper case letter */
+#undef	ISLOWER
+#define ISLOWER 04		/* a lower case letter */
+#undef	ISUNDER
+#define ISUNDER 010		/* an underscore */
+#undef	ISSPECL
+#define ISSPECL 020		/* the name of a special parameter */
+#undef	ISSPACE
+#define ISSPACE 040		/* a white space character */
+#undef	PEOF
+#define PEOF	(CHAR_MIN - 1)
+#undef	PFAKE
+#define PFAKE	(CHAR_MIN - 2)
+#undef	SYNBASE
+#define SYNBASE	(-PFAKE)
+#undef	BASESYNTAX
+#define BASESYNTAX (basesyntax + SYNBASE)
+#undef	DQSYNTAX
+#define DQSYNTAX (dqsyntax + SYNBASE)
+#undef	SQSYNTAX
+#define SQSYNTAX (sqsyntax + SYNBASE)
+#undef	ARISYNTAX
+#define ARISYNTAX (arisyntax + SYNBASE)
+#undef	S_DFL
+#define S_DFL 1			/* default signal handling (SIG_DFL) */
+#undef	S_CATCH
+#define S_CATCH 2		/* signal is caught */
+#undef	S_IGN
+#define S_IGN 3			/* signal is ignored (SIG_IGN) */
+#undef	S_HARD_IGN
+#define S_HARD_IGN 4		/* signal is ignored permenantly */
+#undef	S_RESET
+#define S_RESET 5		/* temporary - to reset a hard ignored sig */
+#undef	VTABSIZE
+#define VTABSIZE 39
+#undef	VTABSIZE
+#define VTABSIZE 517
+#undef	func
+#define	func v_u.set_func
+#undef	rfunc
+#define	rfunc v_u.ref_func
+#undef	EXPORT_OPTS
+#define EXPORT_OPTS "np"
+#undef	EXPORT_OPTS
+#define	EXPORT_OPTS "npqx"
+#undef	length
+#define length (8 + 10)		/* 10 digits is enough for a 32 bit line num */
+#undef	result
+#define result buf.b
+#undef	length
+#define length buf.len
+#undef	random
+#define random lrand48
+#undef	srandom
+#define srandom srand48
+#undef	VUNSET
+#define VUNSET		0x0001	/* the variable is not set */
+#undef	VEXPORT
+#define VEXPORT		0x0002	/* variable is exported */
+#undef	VREADONLY
+#define VREADONLY	0x0004	/* variable cannot be modified */
+#undef	VNOEXPORT
+#define VNOEXPORT	0x0008	/* variable may not be exported */
+#undef	VSTRFIXED
+#define VSTRFIXED	0x0010	/* variable struct is statically allocated */
+#undef	VTEXTFIXED
+#define VTEXTFIXED	0x0020	/* text is statically allocated */
+#undef	VSTACK
+#define VSTACK		0x0040	/* text is allocated on the stack */
+#undef	VNOFUNC
+#define VNOFUNC		0x0100	/* don't call the callback function */
+#undef	VFUNCREF
+#define VFUNCREF	0x0200	/* the function is called on ref, not set */
+#undef	VSPECIAL
+#define VSPECIAL	0x1000	/* magic properties not lost when set */
+#undef	VDOEXPORT
+#define VDOEXPORT	0x2000	/* obey VEXPORT even if VNOEXPORT */
+#undef	VNOSET
+#define VNOSET		0x4000	/* do not set variable - just readonly test */
+#undef	VNOERROR
+#define VNOERROR	0x8000	/* be quiet if set fails (no error msg) */
+#undef	NETBSD_SHELL
+#define	NETBSD_SHELL	"20220122"
 
 
+
+extern void rmaliases(int);
+
+extern void deletefuncs(void);
+extern void hash_special_builtins(void);
+
+struct strpush {
+	struct strpush *prev;	/* preceding string on stack */
+	const char *prevstring;
+	int prevnleft;
+	int prevlleft;
+	struct alias *ap;	/* if push was associated with an alias */
+};
+
+struct parsefile {
+	struct parsefile *prev;	/* preceding file on stack */
+	int linno;		/* current line */
+	int fd;			/* file descriptor (or -1 if string) */
+	int nleft;		/* number of chars left in this line */
+	int lleft;		/* number of chars left in this buffer */
+	int nskip;		/* number of \0's dropped in previous line */
+	const char *nextc;	/* next char in buffer */
+	char *buf;		/* input buffer */
+	struct strpush *strpush; /* for pushing strings at this level */
+	struct strpush basestrpush; /* so pushing one is fast */
+};
+
+extern int parselleft;		/* copy of parsefile->lleft */
+extern struct parsefile basepf;	/* top level input file */
+extern char basebuf[BUFSIZ];	/* buffer for top level input file */
+
+extern pid_t backgndpid;	/* pid of last background process */
+extern int jobctl;
+
+extern struct parse_state parse_state;
+
+struct renamelist {
+	struct renamelist *next;
+	int orig;
+	int into;
+};
+
+struct redirtab {
+	struct redirtab *next;
+	struct renamelist *renamed;
+};
+
+extern struct redirtab *redirlist;
+
+extern alone on a line introduces a structure or union declara-; alone on a line introduces a structure or union declara-
+
+extern char sigmode[NSIG];	/* current value of signal */
+
+extern char **environ;
 
 
 
@@ -20,6 +779,98 @@
 void
 init(void)
 {
+
+	/* from exec.c: */
+	{
+		hash_special_builtins();
+	}
+
+	/* from input.c: */
+	{
+		basepf.nextc = basepf.buf = basebuf;
+	}
+
+	/* from var.c: */
+	{
+		char **envp;
+		char buf[64];
+
+#ifndef SMALL
+		sh_start_time = (intmax_t)time((time_t *)0);
+#endif
+		/*
+		 * Set up our default variables and their values.
+		 */
+		initvar();
+
+		/*
+		 * Import variables from the environment, which will
+		 * override anything initialised just previously.
+		 */
+		for (envp = environ ; *envp ; envp++) {
+			if (strchr(*envp, '=')) {
+				setvareq(*envp, VEXPORT|VTEXTFIXED);
+			}
+		}
+
+		/*
+		 * Set variables which override anything read from environment.
+		 *
+		 * PPID is readonly
+		 * Always default IFS
+		 * POSIX: "Whenever the shell is invoked, OPTIND shall
+		 *         be initialized to 1."
+		 * PSc indicates the root/non-root status of this shell.
+		 * START_TIME belongs only to this shell.
+		 * NETBSD_SHELL is a constant (readonly), and is never exported
+		 * LINENO is simply magic...
+		 */
+		snprintf(buf, sizeof(buf), "%d", (int)getppid());
+		setvar("PPID", buf, VREADONLY);
+		setvar("IFS", ifs_default, VTEXTFIXED);
+		setvar("OPTIND", "1", VTEXTFIXED);
+		setvar("PSc", (geteuid() == 0 ? "#" : "$"), VTEXTFIXED);
+
+#ifndef SMALL
+		snprintf(buf, sizeof(buf), "%jd", sh_start_time);
+		setvar("START_TIME", buf, VTEXTFIXED);
+#endif
+
+		setvar("NETBSD_SHELL", NETBSD_SHELL
+#ifdef BUILD_DATE
+			" BUILD:" BUILD_DATE
+#endif
+#ifdef DEBUG
+			" DEBUG"
+#endif
+#if !defined(JOBS) || JOBS == 0
+			" -JOBS"
+#endif
+#ifndef DO_SHAREDVFORK
+			" -VFORK"
+#endif
+#ifdef SMALL
+			" SMALL"
+#endif
+#ifdef TINY
+			" TINY"
+#endif
+#ifdef OLD_TTY_DRIVER
+			" OLD_TTY"
+#endif
+#ifdef SYSV
+			" SYSV"
+#endif
+#ifndef BSD
+			" -BSD"
+#endif
+#ifdef BOGUS_NOT_COMMAND
+			" BOGUS_NOT"
+#endif
+			    , VTEXTFIXED|VREADONLY|VNOEXPORT);
+
+		setvar("LINENO", "1", VTEXTFIXED);
+	}
 
 }
 
@@ -34,6 +885,43 @@ void
 reset(void)
 {
 
+	/* from eval.c: */
+	{
+		reset_eval();
+	}
+
+	/* from input.c: */
+	{
+		if (exception != EXSHELLPROC)
+			parselleft = parsenleft = 0;	/* clear input buffer */
+		popallfiles();
+	}
+
+	/* from output.c: */
+	{
+		out1 = &output;
+		out2 = &errout;
+		if (memout.buf != NULL) {
+			ckfree(memout.buf);
+			memout.buf = NULL;
+		}
+	}
+
+	/* from parser.c: */
+	{
+		psp.v_current_parser = &parse_state;
+
+		parse_state.ps_tokpushback = 0;
+		parse_state.ps_checkkwd = 0;
+		parse_state.ps_heredoclist = NULL;
+	}
+
+	/* from redir.c: */
+	{
+		while (redirlist)
+			popredir();
+	}
+
 }
 
 
@@ -45,5 +933,69 @@ reset(void)
 void
 initshellproc(void)
 {
+
+	/* from alias.c: */
+	{
+		rmaliases(1);
+	}
+
+	/* from eval.c: */
+	{
+		exitstatus = 0;
+	}
+
+	/* from exec.c: */
+	{
+		deletefuncs();
+	}
+
+	/* from input.c: */
+	{
+		popallfiles();
+	}
+
+	/* from jobs.c: */
+	{
+		backgndpid = -1;
+#if JOBS
+		jobctl = 0;
+#endif
+	}
+
+	/* from options.c: */
+	{
+		int i;
+
+		for (i = 0; optlist[i].name; i++)
+			optlist[i].val = 0;
+		optschanged();
+
+	}
+
+	/* from redir.c: */
+	{
+		clearredir(0);
+	}
+
+	/* from trap.c: */
+	{
+		char *sm;
+
+		INTOFF;
+		clear_traps(2);
+		for (sm = sigmode ; sm < sigmode + NSIG ; sm++) {
+			if (*sm == S_IGN) {
+				*sm = S_HARD_IGN;
+				VTRACE(DBG_TRAP, ("SHELLPROC: %d -> hard_ign\n",
+				    (sm - sigmode)));
+			}
+		}
+		INTON;
+	}
+
+	/* from var.c: */
+	{
+		shprocvar();
+	}
 
 }

@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1989, 1993, 1994\
  The Regents of the University of California.  All rights reserved.");
@@ -61,6 +61,10 @@ __RCSID("$NetBSD: du.c,v 1.36 2012/03/11 11:23:20 shattered Exp $");
 #include <string.h>
 #include <unistd.h>
 #include <limits.h>
+
+#include "nb_stdlib.h"
+#include "sys/nb_stat.h"
+#include "compat.h"
 
 /* Count inodes or file size */
 #define	COUNT	(iflag ? 1 : p->fts_statp->st_blocks)

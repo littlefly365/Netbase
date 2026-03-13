@@ -31,7 +31,7 @@
 #include "nbtool_config.h"
 #endif
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 __RCSID("$NetBSD: tic.c,v 1.40.6.2 2024/09/12 19:53:41 martin Exp $");
 
 #include <sys/types.h>
@@ -42,7 +42,7 @@ __RCSID("$NetBSD: tic.c,v 1.40.6.2 2024/09/12 19:53:41 martin Exp $");
 #include <sys/endian.h>
 #endif
 
-#include <cdbw.h>
+//#include <cdbw.h>
 #include <ctype.h>
 #include <err.h>
 #include <errno.h>
@@ -59,6 +59,8 @@ __RCSID("$NetBSD: tic.c,v 1.40.6.2 2024/09/12 19:53:41 martin Exp $");
 #include <term.h>
 #include <unistd.h>
 #include <util.h>
+
+#include "nb_stdlib.h"
 
 #define	HASH_SIZE	16384	/* 2012-06-01: 3600 entries */
 

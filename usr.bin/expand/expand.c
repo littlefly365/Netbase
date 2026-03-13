@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1980, 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -47,6 +47,8 @@ __RCSID("$NetBSD: expand.c,v 1.14 2016/09/05 00:40:28 sevan Exp $");
 #include <ctype.h>
 #include <unistd.h>
 #include <err.h>
+
+#include "nb_stdlib.h"
 
 /*
  * expand - expand tabs to equivalent spaces

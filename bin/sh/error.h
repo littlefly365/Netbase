@@ -34,6 +34,7 @@
  *	@(#)error.h	8.2 (Berkeley) 5/4/95
  */
 
+#include "sys/nb_cdefs.h"
 #include <stdarg.h>
 
 /*

@@ -33,7 +33,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 __RCSID("$NetBSD: mkpath.c,v 1.1 2008/09/19 18:33:34 joerg Exp $");
 
 #include <sys/types.h>

@@ -31,6 +31,8 @@
  *	@(#)extern.h	8.3 (Berkeley) 4/2/94
  */
 
+#include "sys/nb_cdefs.h"
+
 #define OK_EXIT		0
 #define DIFF_EXIT	1
 #define ERR_EXIT	2	/* error exit code */

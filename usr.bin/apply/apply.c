@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)apply.c	8.4 (Berkeley) 4/4/94";
@@ -51,6 +51,8 @@ __RCSID("$NetBSD: apply.c,v 1.19 2016/03/12 22:28:04 dholland Exp $");
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#include "nb_stdlib.h"
 
 static __dead void usage(void);
 static int shell_system(const char *);

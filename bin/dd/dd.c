@@ -138,10 +138,10 @@ main(int argc, char *argv[])
 #endif
 	setup();
 
-	(void)signal(SIGINFO, summaryx);
+	(void)signal(SIGUSR1, summaryx);
 	(void)signal(SIGINT, terminate);
 	(void)sigemptyset(&infoset);
-	(void)sigaddset(&infoset, SIGINFO);
+	(void)sigaddset(&infoset, SIGUSR1);
 
 	(void)atexit(summary);
 

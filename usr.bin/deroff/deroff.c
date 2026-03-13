@@ -64,7 +64,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 __RCSID("$NetBSD: deroff.c,v 1.12 2019/02/03 03:19:29 mrg Exp $");
 
 #include <err.h>

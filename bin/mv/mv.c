@@ -124,7 +124,7 @@ main(int argc, char *argv[])
 
 	stdin_ok = isatty(STDIN_FILENO);
 
-	(void)signal(SIGINFO, progress);
+	(void)signal(SIGUSR1, progress);
 
 	/*
 	 * If the stat on the target fails or the target isn't a directory,

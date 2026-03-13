@@ -48,7 +48,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1983, 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -68,6 +68,8 @@ __RCSID("$NetBSD: banner.c,v 1.15 2012/02/29 08:55:25 wiz Exp $");
 #include <unistd.h>
 
 #include "banner.h"
+
+#include "nb_stdlib.h"
 
 static long PW = LINELEN;
 /*

@@ -144,7 +144,7 @@ main(int argc, char *argv[])
 		usage();
 	}
 
-	(void)signal(SIGINFO, progress);
+	(void)signal(SIGUSR1, progress);
 
 	checkdot(argv);
 

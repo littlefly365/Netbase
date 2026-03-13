@@ -33,7 +33,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 from: static char sccsid[] = "@(#)egetopt.c	8.1 (Berkeley) 6/6/93";

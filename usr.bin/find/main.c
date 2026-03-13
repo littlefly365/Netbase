@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)main.c	8.4 (Berkeley) 5/4/95";
@@ -58,6 +58,9 @@ __RCSID("$NetBSD: main.c,v 1.31.40.1 2023/08/04 13:09:17 martin Exp $");
 #include <unistd.h>
 
 #include "find.h"
+
+#include "nb_stdlib.h"
+#include "nb_regex.h"
 
 time_t now;			/* time find was run */
 int dotfd;			/* starting directory */

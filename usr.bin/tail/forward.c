@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)forward.c	8.1 (Berkeley) 6/6/93";
@@ -54,6 +54,8 @@ __RCSID("$NetBSD: forward.c,v 1.33 2015/10/09 17:51:26 christos Exp $");
 #include <stdlib.h>
 #include <string.h>
 #include "extern.h"
+
+#include "nb_stdlib.h"
 
 static int rlines(FILE *, off_t, struct stat *);
 

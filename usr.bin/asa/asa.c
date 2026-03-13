@@ -30,7 +30,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __RCSID("$NetBSD: asa.c,v 1.17 2016/09/05 00:40:28 sevan Exp $");
 #endif
@@ -38,6 +38,8 @@ __RCSID("$NetBSD: asa.c,v 1.17 2016/09/05 00:40:28 sevan Exp $");
 #include <err.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "nb_stdio.h"
 
 static void asa(FILE *);
 

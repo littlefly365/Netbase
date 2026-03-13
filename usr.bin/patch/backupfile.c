@@ -21,7 +21,7 @@
  * David MacKenzie <djm@ai.mit.edu>. Some algorithms adapted from GNU Emacs.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 __RCSID("$NetBSD: backupfile.c,v 1.16 2021/02/19 17:46:53 nia Exp $");
 
 #include <ctype.h>
@@ -114,7 +114,7 @@ max_backup_version(const char *file, const char *dir)
 	file_name_length = strlen(file);
 
 	while ((dp = readdir(dirp)) != NULL) {
-		if (dp->d_namlen <= file_name_length)
+		if ((strlen(dp->d_name)) <= file_name_length)
 			continue;
 
 		this_version = version_number(file, dp->d_name, file_name_length);

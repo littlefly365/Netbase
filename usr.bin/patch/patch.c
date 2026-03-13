@@ -30,7 +30,7 @@
  * behaviour
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 __RCSID("$NetBSD: patch.c,v 1.33 2021/09/20 23:22:36 dholland Exp $");
 
 #include <sys/types.h>
@@ -50,6 +50,8 @@ __RCSID("$NetBSD: patch.c,v 1.33 2021/09/20 23:22:36 dholland Exp $");
 #include "inp.h"
 #include "backupfile.h"
 #include "pathnames.h"
+
+#include "nb_unistd.h"
 
 mode_t		filemode = 0644;
 

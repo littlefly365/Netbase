@@ -1,4 +1,4 @@
-.include "../../mk/config.mk"
+.include "config.mk"
 
 SRCS ?= $(PROG).c
 OBJS ?= $(SRCS:.c=.o)
@@ -10,8 +10,9 @@ $(PROG): $(OBJS)
 	@echo "$(CC) $(OBJS) -o $(PROG)"
 	@$(CC) $(LDFLAGS) $(OBJS) $(LDLIBS) -o $(PROG)
 .c.o: 
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@ >/dev/null 2>&1
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 clean:
-	rm -f $(PROG) $(OBJS)
-
-.PHONY: all $(PROG) clean
+	rm -rf $(PROG) $(OBJS)
+install:
+	install -D -m 755 $(PROG) $(DESTDIR)/$(BINT)/$(PROG)
+.PHONY: all $(PROG) clean install

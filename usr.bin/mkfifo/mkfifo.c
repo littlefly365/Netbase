@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1990, 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -51,6 +51,9 @@ __RCSID("$NetBSD: mkfifo.c,v 1.13 2011/09/04 20:30:34 joerg Exp $");
 #include <sys/stat.h>
 #include <unistd.h>
 #include <err.h>
+
+#include "nb_stdlib.h"
+#include "nb_unistd.h"
 
 __dead static void usage(void);
 

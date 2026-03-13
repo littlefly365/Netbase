@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1989, 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -52,6 +52,9 @@ __RCSID("$NetBSD: uniq.c,v 1.22 2019/04/23 17:35:10 christos Exp $");
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#include "nb_stdlib.h"
+#include "nb_stdio.h"
 
 static int cflag, dflag, uflag;
 static int numchars, numfields, repeats;

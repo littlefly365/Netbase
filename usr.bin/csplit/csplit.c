@@ -45,7 +45,7 @@
  * assumption about the input.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __RCSID("$NetBSD: csplit.c,v 1.7 2017/07/30 23:02:53 cheusov Exp $");
 #endif
@@ -65,6 +65,9 @@ __RCSID("$NetBSD: csplit.c,v 1.7 2017/07/30 23:02:53 cheusov Exp $");
 #include <string.h>
 #include <unistd.h>
 #include <util.h>
+
+#include "nb_stdlib.h"
+#include "nb_regex.h"
 
 static void	 cleanup(void);
 static void	 do_lineno(const char *);

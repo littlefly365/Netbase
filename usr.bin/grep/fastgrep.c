@@ -39,7 +39,7 @@
 #include "nbtool_config.h"
 #endif
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 __RCSID("$NetBSD: fastgrep.c,v 1.5 2011/04/18 03:27:40 joerg Exp $");
 
 #include <limits.h>
@@ -50,6 +50,8 @@ __RCSID("$NetBSD: fastgrep.c,v 1.5 2011/04/18 03:27:40 joerg Exp $");
 #include <wctype.h>
 
 #include "grep.h"
+
+#include "nb_stdlib.h"
 
 static inline int	grep_cmp(const unsigned char *, const unsigned char *, size_t);
 static inline void	grep_revstr(unsigned char *, int);
