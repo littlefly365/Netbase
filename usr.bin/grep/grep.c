@@ -55,6 +55,7 @@ __RCSID("$NetBSD: grep.c,v 1.16 2022/10/15 21:53:22 andvar Exp $");
 #include "grep.h"
 
 #include "nb_stdlib.h"
+#include "compat.h"
 
 #ifndef WITHOUT_NLS
 #include <nl_types.h>

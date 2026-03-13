@@ -53,6 +53,7 @@ __RCSID("$NetBSD: apply.c,v 1.19 2016/03/12 22:28:04 dholland Exp $");
 #include <unistd.h>
 
 #include "nb_stdlib.h"
+#include "compat.h"
 
 static __dead void usage(void);
 static int shell_system(const char *);
@@ -209,7 +210,6 @@ shell_system(const char *command)
 {
 	static const char *name, *shell;
 	int status;
-	int omask;
 	pid_t pid;
 	sig_t intsave, quitsave;
 
@@ -227,7 +227,12 @@ shell_system(const char *command)
 		return(1);
 	}
 
-	omask = sigblock(sigmask(SIGCHLD));
+	sigset_t set, old;
+
+	sigemptyset(&set);
+	sigaddset(&set, SIGCHLD);
+	sigprocmask(SIG_BLOCK, &set, &old);
+	
 	switch (pid = vfork()) {
 	case -1:
 		/* error */
@@ -235,7 +240,9 @@ shell_system(const char *command)
 		/*NOTREACHED*/
 	case 0:
 		/* child */
-		(void)sigsetmask(omask);
+		sigemptyset(&set);
+		sigaddset(&set, SIGCHLD);
+		sigprocmask(SIG_SETMASK, &set, NULL);
 		(void)execl(shell, name, "-c", command, (char *)NULL);
 		warn("%s", shell);
 		_exit(1);
@@ -245,7 +252,9 @@ shell_system(const char *command)
 		intsave = signal(SIGINT, SIG_IGN);
 		quitsave = signal(SIGQUIT, SIG_IGN);
 		pid = waitpid(pid, &status, 0);
-		(void)sigsetmask(omask);
+		sigemptyset(&set);
+		sigaddset(&set, SIGCHLD);
+		sigprocmask(SIG_SETMASK, &set, NULL);
 		(void)signal(SIGINT, intsave);
 		(void)signal(SIGQUIT, quitsave);
 		return pid == -1 ? -1 : status;

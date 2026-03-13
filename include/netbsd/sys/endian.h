@@ -45,7 +45,7 @@ be16dec(const void *pp)
 	return ((p[0] << 8) | p[1]);
 }
 
-static __inline uint16_t __unused
+static __inline uint16_t __nbunused
 le16dec(const void *buf)
 {
         const uint8_t *p = __CAST(const uint8_t *, buf);
@@ -53,7 +53,7 @@ le16dec(const void *buf)
         return (p[0] | (__CAST(uint16_t, p[1]) << 8));
 }
 
-static __inline void __unused
+static __inline void __nbunused
 le16enc(void *buf, uint16_t u)
 {
         uint8_t *p = __CAST(uint8_t *, buf);
@@ -70,7 +70,7 @@ be32dec(const void *pp)
 	return (((unsigned)p[0] << 24) | (p[1] << 16) | (p[2] << 8) | p[3]);
 }
 
-static __inline uint32_t __unused
+static __inline uint32_t __nbunused
 le32dec(const void *buf)
 {
         const uint8_t *p = __CAST(const uint8_t *, buf);
@@ -78,7 +78,7 @@ le32dec(const void *buf)
         return (le16dec(p) | (__CAST(uint32_t, le16dec(p + 2)) << 16));
 }
 
-static __inline void __unused
+static __inline void __nbunused
 le32enc(void *buf, uint32_t u)
 {
         uint8_t *p = __CAST(uint8_t *, buf);
@@ -97,7 +97,7 @@ be64dec(const void *pp)
 	return (((uint64_t)be32dec(p) << 32) | be32dec(p + 4));
 }
 
-static __inline uint64_t __unused
+static __inline uint64_t __nbunused
 le64dec(const void *buf)
 {
         const uint8_t *p = (const uint8_t *)buf;
@@ -105,7 +105,7 @@ le64dec(const void *buf)
         return (le32dec(p) | (__CAST(uint64_t, le32dec(p + 4)) << 32));
 }
 
-static __inline void __unused
+static __inline void __nbunused
 le64enc(void *buf, uint64_t u)
 {
         uint8_t *p = __CAST(uint8_t *, buf);

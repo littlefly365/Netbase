@@ -65,6 +65,7 @@
 
 #include "sys/nb_cdefs.h"
 #include <sys/param.h>
+#include <sys/types.h>
 
 #include <err.h>
 #include <errno.h>

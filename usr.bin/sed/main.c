@@ -77,6 +77,7 @@ static const char sccsid[] = "@(#)main.c	8.2 (Berkeley) 1/3/94";
 
 #include "nb_stdlib.h"
 #include "nb_regex.h"
+#include "sys/nb_stat.h"
 
 /*
  * Linked list of units (strings and files) to be compiled

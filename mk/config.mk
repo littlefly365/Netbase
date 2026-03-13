@@ -7,7 +7,7 @@ LCFLAGS ?=
 LLDFLAGS ?=
 
 CFLAGS ?= -O2
-CPPFLAGS +=-I$(TOP)/include 
+CPPFLAGS +=-I$(TOP)/include -I/usr/include
 LDFLAGS += $(LIBPATH)
 LDADD ?=
 LDLIBS += $(LDADD) -lnetbsd

@@ -790,7 +790,7 @@ static const TABLE TimeNames[] = {
 
 /* ARGSUSED */
 static int
-yyerror(struct dateinfo *param, const char **inp, const char *s __unused)
+yyerror(struct dateinfo *param, const char **inp, const char *s __nbunused)
 {
   return 0;
 }

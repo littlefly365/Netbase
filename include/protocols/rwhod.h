@@ -1,11 +1,8 @@
-/*	$NetBSD: x_cut.c,v 1.2 2007/07/02 18:41:04 christos Exp $	*/
+/*	$NetBSD: rwhod.h,v 1.8 2016/01/22 23:11:50 dholland Exp $	*/
 
 /*
- * Copyright (c) 1989, 1993
+ * Copyright (c) 1983, 1993
  *	The Regents of the University of California.  All rights reserved.
- *
- * This code is derived from software contributed to Berkeley by
- * Adam S. Moskowitz of Menlo Consulting and Marciano Pitargue.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -30,66 +27,42 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
+ *
+ *	@(#)rwhod.h	8.1 (Berkeley) 6/2/93
  */
+
+#ifndef _PROTOCOLS_RWHOD_H_
+#define	_PROTOCOLS_RWHOD_H_
+
+#include <stdint.h>
 
 /*
- *  This file is #include'd twice from cut.c, to generate both
- *  single- and multibyte versions of the same code.
- *
- *  In cut.c #define:
- *   CUT_BYTE=0 to define b_cut (singlebyte), and
- *   CUT_BYTE=1 to define c_cut (multibyte).
- *
+ * rwho protocol packet format.
  */
+struct	outmp {
+	char	out_line[8];		/* tty name */
+	char	out_name[8];		/* user id */
+	int32_t	out_time;		/* time on */
+};
 
-#if (CUT_BYTE == 1)
-#  define CUT_FN 		b_cut
-#  define CUT_CH_T 		int
-#  define CUT_GETC 		getc
-#  define CUT_EOF 		EOF
-#  define CUT_PUTCHAR		putchar
-#else
-#  define CUT_FN 		c_cut
-#  define CUT_CH_T 		wint_t
-#  define CUT_GETC 		getwc
-#  define CUT_EOF		WEOF
-#  define CUT_PUTCHAR		putwchar
-#endif
+struct	whod {
+	char	wd_vers;		/* protocol version # */
+	char	wd_type;		/* packet type, see below */
+	char	wd_pad[2];
+	int32_t	wd_sendtime;		/* time stamp by sender */
+	int32_t	wd_recvtime;		/* time stamp applied by receiver */
+	char	wd_hostname[32];	/* hosts's name */
+	int32_t	wd_loadav[3];		/* load average as in uptime */
+	int32_t	wd_boottime;		/* time system booted */
+	struct	whoent {
+		struct	outmp we_utmp;	/* active tty info */
+		int32_t	we_idle;	/* tty idle time */
+	} wd_we[1024 / sizeof (struct whoent)];
+};
 
+#define	WHODVERSION	1
+#define	WHODTYPE_STATUS	1		/* host status */
 
-/* ARGSUSED */
-void
-CUT_FN(FILE *fp, const char *fname __nbunused)
-{
-	CUT_CH_T ch;
-	int col;
-	char *pos;
+#define	_PATH_RWHODIR	"/var/rwho"
 
-	ch = 0;
-	for (;;) {
-		pos = positions + 1;
-		for (col = maxval; col; --col) {
-			if ((ch = CUT_GETC(fp)) == EOF)
-				return;
-			if (ch == '\n')
-				break;
-			if (*pos++)
-				(void)CUT_PUTCHAR(ch);
-		}
-		if (ch != '\n') {
-			if (autostop)
-				while ((ch = CUT_GETC(fp)) != CUT_EOF && ch != '\n')
-					(void)CUT_PUTCHAR(ch);
-			else
-				while ((ch = CUT_GETC(fp)) != CUT_EOF && ch != '\n');
-		}
-		(void)CUT_PUTCHAR('\n');
-	}
-}
-
-#undef CUT_FN
-#undef CUT_CH_T
-#undef CUT_GETC
-#undef CUT_EOF
-#undef CUT_PUTCHAR
-
+#endif /* !_PROTOCOLS_RWHOD_H_ */

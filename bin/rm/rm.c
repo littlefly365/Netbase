@@ -610,7 +610,7 @@ usage(void)
 }
 
 static void
-progress(int sig __unused)
+progress(int sig __nbunused)
 {
 	
 	pinfo++;

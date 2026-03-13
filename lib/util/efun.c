@@ -52,7 +52,7 @@ __RCSID("$NetBSD: efun.c,v 1.12 2019/10/03 20:29:19 tnn Exp $");
 static void (*efunc)(int, const char *, ...) = err;
 
 static void __dead
-eexit(int e, const char *fmt __unused, ...)
+eexit(int e, const char *fmt __nbunused, ...)
 {
 	exit(e);
 }

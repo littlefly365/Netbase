@@ -94,8 +94,8 @@
 #define      __RENAME(x)  
 #endif
 
-#ifndef __unused
-#define __unused
+#ifndef __nbunused
+#define __nbunused
 #endif
 
 #ifndef __used

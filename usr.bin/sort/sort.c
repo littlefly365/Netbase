@@ -90,6 +90,7 @@ __RCSID("$NetBSD: sort.c,v 1.64 2017/01/10 21:13:45 christos Exp $");
 #include "pathnames.h"
 
 #include "nb_stdlib.h"
+#include "sys/nb_stat.h"
 
 int REC_D = '\n';
 u_char d_mask[NBINS];		/* flags for rec_d, field_d, <blank> */

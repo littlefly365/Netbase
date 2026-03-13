@@ -34,6 +34,8 @@
  *	@(#)ls.h	8.1 (Berkeley) 5/31/93
  */
 
+#include <stdint.h>
+
 #define NO_PRINT	1
 
 extern long blocksize;		/* block size units */
@@ -58,8 +60,8 @@ extern int f_leafonly;		/* when recursing, print leaf names only */
 
 typedef struct {
 	FTSENT *list;
-	u_int64_t btotal;
-	u_int64_t stotal;
+	uint64_t btotal;
+	uint64_t stotal;
 	int entries;
 	unsigned int maxlen;
 	int s_block;

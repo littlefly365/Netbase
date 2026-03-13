@@ -224,7 +224,7 @@ get_list(char *list)
 
 static void
 /*ARGSUSED*/
-f_cut(FILE *fp, const char *fname __unused)
+f_cut(FILE *fp, const char *fname __nbunused)
 {
 	int ch, field, isdelim;
 	char *pos, *p, sep;

@@ -458,7 +458,7 @@ c_ctime(char ***argvp, int isok, char *opt)
  *	Always true.  Makes its best shot and continues on regardless.
  */
 int
-f_delete(PLAN *plan __unused, FTSENT *entry)
+f_delete(PLAN *plan __nbunused, FTSENT *entry)
 {
 	/* ignore these from fts */
 	if (strcmp(entry->fts_accpath, ".") == 0 ||
@@ -498,7 +498,7 @@ f_delete(PLAN *plan __unused, FTSENT *entry)
 }
 
 PLAN *
-c_delete(char ***argvp __unused, int isok, char *opt)
+c_delete(char ***argvp __nbunused, int isok, char *opt)
 {
 
 	ftsoptions &= ~FTS_NOSTAT;	/* no optimize */

@@ -67,7 +67,7 @@ static void report(const time_t, const time_t, const char *const);
 
 static volatile sig_atomic_t report_requested;
 static void
-report_request(int signo __unused)
+report_request(int signo __nbunused)
 {
 
 	report_requested = 1;

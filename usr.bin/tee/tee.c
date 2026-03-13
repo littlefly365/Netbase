@@ -43,7 +43,6 @@ __RCSID("$NetBSD: tee.c,v 1.12 2016/09/05 00:40:30 sevan Exp $");
 #endif
 
 #include <sys/types.h>
-#include <sys/stat.h>
 #include <signal.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -55,6 +54,7 @@ __RCSID("$NetBSD: tee.c,v 1.12 2016/09/05 00:40:30 sevan Exp $");
 #include <err.h>
 
 #include "nb_stdlib.h"
+#include "sys/nb_stat.h"
 
 typedef struct _list {
 	struct _list *next;

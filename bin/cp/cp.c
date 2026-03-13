@@ -99,7 +99,7 @@ enum op { FILE_TO_FILE, FILE_TO_DIR, DIR_TO_DNE };
 static int copy(char *[], enum op, int);
 
 static void
-progress(int sig __unused)
+progress(int sig __nbunused)
 {
 
 	pinfo++;

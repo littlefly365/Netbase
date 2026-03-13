@@ -42,6 +42,7 @@ __RCSID("$NetBSD: id.c,v 1.32 2011/09/16 15:39:26 joerg Exp $");
 #endif /* not lint */
 
 #include <sys/param.h>
+#include <sys/types.h>
 
 #include <err.h>
 #include <errno.h>

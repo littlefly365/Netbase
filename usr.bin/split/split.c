@@ -56,6 +56,7 @@ __RCSID("$NetBSD: split.c,v 1.27 2017/01/10 21:14:13 christos Exp $");
 
 #include "nb_stdlib.h"
 #include "sys/nb_param.h"
+#include "sys/nb_stat.h"
 
 #define DEFLINE	1000		/* Default num lines per file. */
 

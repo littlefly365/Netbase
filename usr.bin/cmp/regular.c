@@ -39,6 +39,7 @@ __RCSID("$NetBSD: regular.c,v 1.25 2021/01/09 15:16:28 christos Exp $");
 #endif /* not lint */
 
 #include <sys/param.h>
+#include <sys/types.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
 

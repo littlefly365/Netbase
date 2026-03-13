@@ -70,5 +70,7 @@
 void *setmode(const char *mode_str);
 mode_t getmode(const void *set, mode_t mode);
 void strmode(mode_t mode, char *bp);
+#ifdef __GLIBC__
 static int optreset;
+#endif
 #endif

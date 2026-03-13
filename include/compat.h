@@ -10,10 +10,10 @@
 #include <unistd.h>
 #include <errno.h>
 #include <pwd.h>
+#include <signal.h>
 #include <grp.h>
 
 #include <sys/vfs.h>
-#include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/acl.h>
 
@@ -26,6 +26,10 @@
 #endif
 #ifndef NL_TEXTMAX
 #define NL_TEXTMAX          2048
+#endif
+
+#ifndef sigmask
+#define sigmask(x) (1 << ((x)-1))
 #endif
 
 #define chflags 
@@ -158,6 +162,8 @@ static int debug;
 #define      MNT_RDONLY      0x00000001
 
 // fnmatch.h
+#ifndef FNM_CASEFOLD
 #define      FNM_CASEFOLD    0x08
+#endif
 
 #endif
