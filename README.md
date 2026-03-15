@@ -10,6 +10,7 @@ Netbase is a port of the NetBSD's utilities to another unix like operating syste
 - libfts ( for musl )
 - libmd
 - posix shell (link to /bin/sh )
+- libcurses (or libterm)
 
 # Info
 - The compat libraries use only code from the netbsd source tree(or libbsd).

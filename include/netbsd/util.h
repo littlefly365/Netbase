@@ -53,5 +53,7 @@ int evasprintf(char ** __restrict ret, const char * __restrict format, va_list a
 intmax_t estrtoi(const char * nptr, int base, intmax_t lo, intmax_t hi);
 uintmax_t estrtou(const char * nptr, int base, uintmax_t lo, uintmax_t hi);
 int raise_default_signal(int rump);
+char *strpct(char *buf, size_t bufsiz, uintmax_t numerator, uintmax_t denominator, size_t digits);
+char *strspct(char *buf, size_t bufsiz, intmax_t numerator, intmax_t denominator, size_t digits);
 
 #endif

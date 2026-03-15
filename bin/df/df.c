@@ -34,7 +34,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT(
 "@(#) Copyright (c) 1980, 1990, 1993, 1994\
@@ -51,6 +51,7 @@ __RCSID("$NetBSD: df.c,v 1.101.2.1 2023/12/18 14:17:42 martin Exp $");
 
 #include <sys/param.h>
 #include <sys/stat.h>
+#include <sys/statvfs.h>
 #include <sys/mount.h>
 
 #include <assert.h>
@@ -65,16 +66,51 @@ __RCSID("$NetBSD: df.c,v 1.101.2.1 2023/12/18 14:17:42 martin Exp $");
 #include <string.h>
 #include <unistd.h>
 #include <util.h>
+#include <mntent.h>
+
+#include "nb_stdlib.h"
+#include "sys/nb_stat.h"
+#include "compat.h"
+
+struct mntinfo {
+    unsigned long int f_frsize;
+    __fsfilcnt_t f_favail;
+    unsigned long int f_namemax;
+    unsigned int f_type;    
+    unsigned long int f_fsid;
+    char *f_mntfromname;          /* mnt_fsname from getmntent */
+    char *f_mntfromlabel;	  /* THIS WONT BE USE IT */
+    char *f_mntonname;            /* mnt_dir from getmntent */
+    char *f_fstypename;           /* mnt_fsname from getmntent */
+    char *f_opts;                 /* mnt_opts from getmntent */
+    unsigned long f_bsize;        /* f_bsize from statvfs */
+    fsblkcnt_t f_blocks;          /* f_blocks from statvfs */
+    fsblkcnt_t f_bfree;           /* f_bfree from statvfs */
+    fsblkcnt_t f_bavail;          /* f_bavail from statvfs */
+    fsfilcnt_t f_files;           /* f_files from statvfs */
+    fsfilcnt_t f_ffree;           /* f_ffree from statvfs */
+    unsigned long f_flag;         /* f_flag from statvfs */
+    dev_t f_dev;                  /* st_dev from stat */
+    unsigned int f_selected;      /* used internally here only */
+    uid_t f_owner; 		  /* THIS WONT BE USE IT */
+    uint64_t f_syncwrites;	  /* THIS WONT BE USE IT */
+    uint64_t f_asyncwrites;	  /* THIS WONT BE USE IT */
+    fsblkcnt_t f_bresvd;	  /* THIS WONT BE USE IT */
+    fsfilcnt_t f_fresvd;	  /* THIS WONT BE USE IT */
+   struct statvfs svfs;
+};
 
 static char	*getmntpt(const char *);
 static void	 addstat(struct statvfs *, const struct statvfs *);
-static void	 prtstat(const struct statvfs *, int);
+static void	 prtstat(const struct mntinfo *, int);
 static int	 selected(const char *, size_t);
 static void	 maketypelist(char *);
-static size_t	 regetmntinfo(struct statvfs **, size_t);
+static size_t	 regetmntinfo(struct mntinfo **, size_t);
 __dead static void usage(void);
 static void	 prthumanval(int64_t, int);
 static void	 prthuman(const struct statvfs *, int64_t, int64_t);
+static int	  getmntinfo(struct mntinfo **);
+static int	  checkvfsselected(char *);
 
 static int	 aflag, cflag, fflag, gflag, hflag, iflag, lflag;
 static int	 Nflag, nflag, Pflag, Wflag;
@@ -87,12 +123,17 @@ static size_t	 mntcount;
 static int blksize_width = WIDTH_BLKSIZE;
 
 static int fudgeunits = 0;
+static int	  skipvfs_l, skipvfs_t;
+static const char **vfslist_l, **vfslist_t;
+
+
+
 
 int
 main(int argc, char *argv[])
 {
 	struct stat stbuf;
-	struct statvfs *mntbuf, totals;
+	struct mntinfo *mntbuf, totals;
 	int ch, maxwidth, width;
 	size_t i;
 	char *mntpt;
@@ -189,7 +230,7 @@ main(int argc, char *argv[])
 	argc -= optind;
 	argv += optind;
 
-	mntcount = getmntinfo(&mntbuf, MNT_NOWAIT);
+	mntcount = getmntinfo(&mntbuf);
 	if (mntcount == 0)
 		err(EXIT_FAILURE,
 		    "retrieving information on mounted file systems");
@@ -215,7 +256,7 @@ main(int argc, char *argv[])
 			 * Statfs does not take a `wait' flag, so we cannot
 			 * implement nflag here.
 			 */
-			if (!statvfs(mntpt, &mntbuf[mntcount]))
+			if (!statvfs(mntpt, &mntbuf[mntcount].svfs))
 				if (lflag &&
 				    (mntbuf[mntcount].f_flag & MNT_LOCAL) == 0)
 					warnx("Warning: %s is not a local %s",
@@ -253,7 +294,7 @@ main(int argc, char *argv[])
 		if (width > maxwidth)
 			maxwidth = width;
 		if (cflag)
-			addstat(&totals, &mntbuf[i]);
+			addstat(&totals, &mntbuf[i].svfs);
 	}
 
 	if (cflag == 0 || fflag == 0)
@@ -271,12 +312,16 @@ static char *
 getmntpt(const char *name)
 {
 	size_t count, i;
-	struct statvfs *mntbuf;
-
-	count = getmntinfo(&mntbuf, MNT_NOWAIT);
+	struct mntinfo *mntbuf;
+	
+	count = getmntinfo(&mntbuf);
 	if (count == 0)
 		err(EXIT_FAILURE, "Can't get mount information");
 	for (i = 0; i < count; i++) {
+		#ifdef __linux__
+		mntbuf->f_mntfromname=0;
+		mntbuf->f_mntonname=0;
+		#endif
 		if (!strcmp(mntbuf[i].f_mntfromname, name))
 			return mntbuf[i].f_mntonname;
 	}
@@ -343,13 +388,13 @@ maketypelist(char *fslist)
  * current (not cached) info.  Returns the new count of valid statvfs bufs.
  */
 static size_t
-regetmntinfo(struct statvfs **mntbufp, size_t count)
+regetmntinfo(struct mntinfo **mntbufp, size_t count)
 {
 	size_t i, j;
-	struct statvfs *mntbuf;
+	struct mntinfo *mntbuf;
 
 	if (!lflag && typelist == NULL && aflag)
-		return nflag ? count : (size_t)getmntinfo(mntbufp, MNT_WAIT);
+		return nflag ? count : (size_t)getmntinfo(&mntbuf);
 
 	mntbuf = *mntbufp;
 	j = 0;
@@ -364,14 +409,14 @@ regetmntinfo(struct statvfs **mntbufp, size_t count)
 		if (nflag)
 			mntbuf[j] = mntbuf[i];
 		else {
-			struct statvfs layerbuf = mntbuf[i];
-			(void)statvfs(mntbuf[i].f_mntonname, &mntbuf[j]);
+			struct mntinfo layerbuf = mntbuf[i];
+			(void)statvfs(mntbuf[i].f_mntonname, &mntbuf[j].svfs);
 			/*
 			 * If the FS name changed, then new data is for
 			 * a different layer and we don't want it.
 			 */
-			if (memcmp(layerbuf.f_mntfromname,
-			    mntbuf[j].f_mntfromname, MNAMELEN))
+			if (strcmp(layerbuf.f_mntfromname,
+			    mntbuf[j].f_mntfromname))
 				mntbuf[j] = layerbuf;
 		}
 		j++;
@@ -412,40 +457,43 @@ prthuman(const struct statvfs *sfsp, int64_t used, int64_t bavail)
 static void
 addstat(struct statvfs *totalfsp, const struct statvfs *sfsp)
 {
+	struct mntinfo *totalsfp, *sfps;
 	uint64_t frsize;
 
 	frsize = sfsp->f_frsize / totalfsp->f_frsize;
 	totalfsp->f_blocks += sfsp->f_blocks * frsize;
 	totalfsp->f_bfree += sfsp->f_bfree * frsize;
 	totalfsp->f_bavail += sfsp->f_bavail * frsize;
-	totalfsp->f_bresvd += sfsp->f_bresvd * frsize;
+	totalsfp->f_bresvd += sfps->f_bresvd * frsize;
 	totalfsp->f_files += sfsp->f_files;
 	totalfsp->f_ffree += sfsp->f_ffree;
 	totalfsp->f_favail += sfsp->f_favail;
-	totalfsp->f_fresvd += sfsp->f_fresvd;
+	totalsfp->f_fresvd += sfps->f_fresvd;
 }
 
 /*
  * Print out status about a filesystem.
  */
 static void
-prtstat(const struct statvfs *sfsp, int maxwidth)
+prtstat(const struct mntinfo *sfps, int maxwidth)
 {
-	static long blocksize;
+	struct statvfs *sfsp = &sfps->svfs;
+
+	static long blocksize = 1024;
 	static int headerlen, timesthrough;
 	static const char *header;
 	static const char full[] = "100";
 	static const char empty[] = "  0";
-	int64_t used, availblks, inodes;
-	int64_t bavail;
+	uint64_t used, availblks, inodes;
+	uint64_t bavail;
 	char pb[64];
-	char mntfromname[sizeof(sfsp->f_mntfromname) + 10];
+	char mntfromname[128];
 
-	if (Wflag && sfsp->f_mntfromlabel[0]) {
+	if (Wflag && sfps->f_mntfromlabel[0]) {
 		snprintf(mntfromname, sizeof(mntfromname), "NAME=%s",
-		    sfsp->f_mntfromlabel);
+		    sfps->f_mntfromlabel);
 	} else {
-		strlcpy(mntfromname, sfsp->f_mntfromname, sizeof(mntfromname));
+		snprintf(mntfromname, sizeof(mntfromname), "%s", sfps->f_mntfromname);
 	}
 
 	if (gflag) {
@@ -459,7 +507,7 @@ prtstat(const struct statvfs *sfsp, int maxwidth)
 		 *
 		 */
 		(void)printf("%10s (%-12s): %7ld block size %12ld frag size\n",
-		    sfsp->f_mntonname, mntfromname,
+		    sfps->f_mntonname, mntfromname,
 		    sfsp->f_bsize,	/* On UFS/FFS systems this is
 					 * also called the "optimal
 					 * transfer block size" but it
@@ -471,20 +519,20 @@ prtstat(const struct statvfs *sfsp, int maxwidth)
 					 * block size" is the frag
 					 * size.
 					 */
-		(void)printf("%10" PRId64 " total blocks %10" PRId64
+		(void)printf("%10" PRIu64 " total blocks %10" PRIu64
 		    " free blocks  %10" PRId64 " available\n",
 		    (uint64_t)sfsp->f_blocks, (uint64_t)sfsp->f_bfree,
 		    (uint64_t)sfsp->f_bavail);
-		(void)printf("%10" PRId64 " total files  %10" PRId64
+		(void)printf("%10" PRIu64 " total files  %10" PRIu64
 		    " free files %12lx filesys id\n",
 		    (uint64_t)sfsp->f_ffree, (uint64_t)sfsp->f_files,
 		    sfsp->f_fsid);
 		(void)printf("%10s fstype  %#15lx flag  %17ld filename "
-		    "length\n", sfsp->f_fstypename, sfsp->f_flag,
+		    "length\n", sfps->f_fstypename, sfsp->f_flag,
 		    sfsp->f_namemax);
-		(void)printf("%10lu owner %17" PRId64 " syncwrites %12" PRId64
-		    " asyncwrites\n\n", (unsigned long)sfsp->f_owner,
-		    sfsp->f_syncwrites, sfsp->f_asyncwrites);
+		(void)printf("%10lu owner %17" PRIu64 " syncwrites %12" PRId64
+		    " asyncwrites\n\n", (unsigned long)sfps->f_owner,
+		    sfps->f_syncwrites, sfps->f_asyncwrites);
 
 		/*
 		 * a concession by the structured programming police to the
@@ -555,8 +603,8 @@ prtstat(const struct statvfs *sfsp, int maxwidth)
 			(void)printf(" Mounted on\n");
 		}
 	}
-	used = sfsp->f_blocks - sfsp->f_bfree;
-	bavail = sfsp->f_bfree - sfsp->f_bresvd;
+	used = (uint64_t)sfps->f_blocks - (uint64_t)sfps->f_bfree;
+	bavail = (uint64_t)sfps->f_bavail;
 	availblks = bavail + used;
 	if (Pflag) {
 		assert(hflag == 0);
@@ -567,12 +615,12 @@ prtstat(const struct statvfs *sfsp, int maxwidth)
 		 * <file system root>
 		 */
 		(void)printf("%s %" PRId64 " %" PRId64 " %" PRId64 " %s%% %s\n",
-		    mntfromname,
+		    sfps->f_mntfromname,
 		    fsbtoblk(sfsp->f_blocks, sfsp->f_frsize, blocksize),
 		    fsbtoblk(used, sfsp->f_frsize, blocksize),
 		    fsbtoblk(bavail, sfsp->f_frsize, blocksize),
 		    availblks == 0 ? full : strspct(pb, sizeof(pb), used,
-		    availblks, 0), sfsp->f_mntonname);
+		    availblks, 0), sfps->f_mntonname);
 		/*
 		 * another concession by the structured programming police to
 		 * the indentation police....
@@ -592,7 +640,7 @@ prtstat(const struct statvfs *sfsp, int maxwidth)
 			    sfsp->f_frsize, blocksize));
 
 		if (mntcount != 1)
-			(void)printf(" %s\n", sfsp->f_mntonname);
+			(void)printf(" %s\n", sfps->f_mntonname);
 		else
 			(void)printf("\n");
 		return;
@@ -620,7 +668,7 @@ prtstat(const struct statvfs *sfsp, int maxwidth)
 		    inodes == 0 ? (used == 0 ? empty : full) :
 		    strspct(pb, sizeof(pb), used, inodes, 0));
 	}
-	(void)printf(" %s\n", sfsp->f_mntonname);
+	(void)printf(" %s\n", sfps->f_mntonname);
 }
 
 static void
@@ -633,4 +681,106 @@ usage(void)
 	    getprogname());
 	exit(1);
 	/* NOTREACHED */
+}
+
+static int
+getmntinfo(struct mntinfo **mntbuf)
+{
+    struct mntinfo *list = NULL;
+    struct mntinfo *cur;
+    struct mntent *ent;
+    struct statvfs sv;
+    struct stat st;
+    FILE *fp;
+    int n = 0;
+
+    fp = setmntent("/proc/self/mounts", "r");
+    if (fp == NULL)
+        err(1, "setmntent");
+
+    while ((ent = getmntent(fp)) != NULL) {
+
+        if (hasmntopt(ent, MNTTYPE_IGNORE))
+            continue;
+
+        if (vfslist_l || vfslist_t) {
+            if (checkvfsselected(ent->mnt_type) != 0)
+                continue;
+        }
+
+        if (statvfs(ent->mnt_dir, &sv) == -1)
+            continue;
+
+        if (stat(ent->mnt_dir, &st) == -1)
+            continue;
+
+        list = realloc(list, (n + 1) * sizeof(*list));
+        if (!list)
+            err(1, "realloc");
+
+        cur = &list[n];
+
+        memset(cur, 0, sizeof(*cur));
+
+        cur->f_fstypename = strdup(ent->mnt_type);
+        cur->f_mntfromname = strdup(ent->mnt_fsname);
+        cur->f_mntonname = strdup(ent->mnt_dir);
+        cur->f_opts = strdup(ent->mnt_opts);
+
+        cur->f_blocks = sv.f_blocks;
+        cur->f_bfree  = sv.f_bfree;
+        cur->f_bavail = sv.f_bavail;
+        cur->f_files  = sv.f_files;
+        cur->f_ffree  = sv.f_ffree;
+        cur->f_bsize  = sv.f_bsize;
+        cur->f_frsize = sv.f_frsize;
+        cur->f_flag   = sv.f_flag;
+        cur->f_namemax = sv.f_namemax;
+
+        /* stat */
+        cur->f_dev = st.st_dev;
+
+        cur->f_selected = 1;
+
+        n++;
+    }
+
+    endmntent(fp);
+
+    *mntbuf = list;
+    return n;
+}
+
+static int
+checkvfsname(const char *vfsname, const char **vfslist, int skip)
+{
+
+	if (vfslist == NULL)
+		return (0);
+	while (*vfslist != NULL) {
+		if (strcmp(vfsname, *vfslist) == 0)
+			return (skip);
+		++vfslist;
+	}
+	return (!skip);
+}
+
+static int
+checkvfsselected(char *fstypename)
+{
+	int result;
+
+	if (vfslist_t) {
+		/* if -t option used then select passed types */
+		result = checkvfsname(fstypename, vfslist_t, skipvfs_t);
+		if (vfslist_l) {
+			/* if -l option then adjust selection */
+			if (checkvfsname(fstypename, vfslist_l, skipvfs_l) == skipvfs_t)
+				result = skipvfs_t;
+		}
+	} else {
+		/* no -t option then -l decides */
+		result = checkvfsname(fstypename, vfslist_l, skipvfs_l);
+	}
+	return (result);
 }

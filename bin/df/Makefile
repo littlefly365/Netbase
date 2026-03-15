@@ -1,13 +1,10 @@
-PROG= df
+PROG=df
 
-all: obj $(PROG)
+LDADD += -lnutil
 
-obj:
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $(PROG).c 
-$(PROG): obj
-	$(CC) $(PROG).o $(LDFLAGS) $(LIBUTIL) -o $(PROG)
-clean:
-	rm -rf $(PROG).o 
-build: all
-	mv $(PROG) ../../build/bin
-.PHONY: all obj $(PROG) clean build
+CPPFLAGS += -Wno-visibility 
+CPPFLAGS += -Wno-incompatible-pointer-types
+CPPFLAGS += -Wno-unused-value
+#xCPPFLAGS += -g -fsanitize=address 
+
+.include "../../mk/prog.mk"
