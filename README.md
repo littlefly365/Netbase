@@ -9,7 +9,7 @@ Netbase is a port of the NetBSD's utilities to another unix like operating syste
 - libacl
 - libfts ( for musl ) ( if your distribution does not have it, you can try this https://github.com/littlefly365/libfts )
 - libmd
-- libcurses ( ncurses or bsd curses)
+- libcurses ( only tested on ncurses )
 
 # Info
 - The compat libraries use only code from the netbsd source tree(or libbsd).
