@@ -120,4 +120,8 @@
 #define __CAST(__dt, __st)      ((__dt)(__st))
 #endif
 
+#ifndef __pure
+#define     __pure          __attribute__((__pure__))
+#endif
+
 #endif

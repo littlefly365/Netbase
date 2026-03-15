@@ -34,6 +34,8 @@
 #ifndef _ERR_H_
 #define	_ERR_H_
 
+#include "sys/nb_cdefs.h"
+
 #include <sys/cdefs.h>
 #include <stdarg.h>
 
