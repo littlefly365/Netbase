@@ -50,6 +50,7 @@ uintmax_t strtou(const char *__restrict nptr, char **__restrict endptr, int base
 long long strsuftoll(const char *desc, const char *val, long long min, long long max);
 long long strsuftollx(const char *desc, const char *val, long long min, long long max, char *ebuf, size_t ebuflen);
 long long strtonum(const char *nptr, long long minval, long long maxval, const char **errstr);
+int heapsort(void *vbase, size_t nmemb, size_t size, int (*compar)(const void *, const void *));
 
 #ifdef __GLIBC__
 #else

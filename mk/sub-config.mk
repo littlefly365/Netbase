@@ -1,4 +1,4 @@
-TOP=../..
+TOP=../../..
 
 
 CC ?= musl-clang
