@@ -1,7 +1,7 @@
 TOP=../..
 
 
-CC ?= musl-clang
+CC ?= clang
 
 LIBPATH =-L$(TOP)/lib/netbsd -L$(TOP)/lib/util
 LCFLAGS ?=

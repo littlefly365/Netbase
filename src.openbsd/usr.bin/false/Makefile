@@ -1,3 +1,3 @@
-PROG=kill
+PROG=false
 
 .include "../../mk/prog.mk"
