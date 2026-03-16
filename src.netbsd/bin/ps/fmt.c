@@ -3,7 +3,6 @@
 #include "sys/nb_cdefs.h"
 __RCSID("$NetBSD: fmt.c,v 1.21 2007/12/12 22:55:43 lukem Exp $");
 
-//#include <kvm.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

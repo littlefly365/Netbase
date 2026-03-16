@@ -1,4 +1,4 @@
-BINT=/usr/sbin
+BINT=usr/sbin
 SUBDIR = chroot link
 
 .export BINT

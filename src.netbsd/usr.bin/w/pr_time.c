@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)pr_time.c	8.2 (Berkeley) 4/4/94";
@@ -42,6 +42,7 @@ __RCSID("$NetBSD: pr_time.c,v 1.19 2021/04/17 06:14:15 maya Exp $");
 #include <sys/time.h>
 
 #include <stdio.h>
+#include <stdint.h>
 #include <string.h>
 #include <time.h>
 #include <tzfile.h>

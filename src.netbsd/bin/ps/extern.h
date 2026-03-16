@@ -41,6 +41,7 @@ extern int eval, fscale, mempages, nlistread, maxslp, uspace;
 extern int sumrusage, termwidth, totwidth;
 extern int needenv, needcomm, commandonly;
 extern uid_t myuid;
+typedef void kvm_t;
 extern kvm_t *kd;
 extern VAR var[];
 extern VARLIST displaylist;

@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1980, 1991, 1993, 1994\
  The Regents of the University of California.  All rights reserved.");
@@ -53,10 +53,8 @@ __RCSID("$NetBSD: w.c,v 1.93 2022/05/26 06:48:36 wiz Exp $");
 #include <sys/types.h>
 #include <sys/time.h>
 #include <sys/stat.h>
-#include <sys/sysctl.h>
-#include <sys/proc.h>
-#include <sys/ioctl.h>
 #include <sys/socket.h>
+#include <sys/ioctl.h>
 
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -65,7 +63,6 @@ __RCSID("$NetBSD: w.c,v 1.93 2022/05/26 06:48:36 wiz Exp $");
 #include <err.h>
 #include <errno.h>
 #include <fcntl.h>
-#include <kvm.h>
 #include <limits.h>
 #include <netdb.h>
 #include <nlist.h>
@@ -85,6 +82,15 @@ __RCSID("$NetBSD: w.c,v 1.93 2022/05/26 06:48:36 wiz Exp $");
 #include <vis.h>
 
 #include "extern.h"
+
+#ifdef _EXT_FEATURES
+#include <sys/sysctl.h>
+#include <sys/proc.h>
+#include <kvm.h>
+#endif
+
+
+#include "nb_stdlib.h"
 
 struct timespec	boottime;
 struct winsize	ws;
