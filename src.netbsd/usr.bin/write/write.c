@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1989, 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -64,6 +64,7 @@ __RCSID("$NetBSD: write.c,v 1.27 2011/09/06 18:46:35 joerg Exp $");
 
 #include "utmpentry.h"
 #include "term_chk.h"
+#include "nb_pwd.h"
 
 __dead static void done(int);
 static void do_write(int, const char *, const uid_t);

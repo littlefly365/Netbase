@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __RCSID("$NetBSD: term_chk.c,v 1.8 2009/04/14 07:59:17 lukem Exp $");
 #endif
