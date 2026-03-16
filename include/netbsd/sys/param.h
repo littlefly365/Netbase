@@ -39,12 +39,18 @@
 #ifndef _SYS_NB_PARAM_H
 #define _SYS_NB_PARAM_H
 
+#include "sys/nb_syslimits.h"
+
 #ifndef MAXPHYS
 #define     MAXPHYS         (64 * 1024)
 #endif
 
 #ifndef MAXBISIZE
 #define     MAXBSIZE        MAXPHYS
+#endif
+
+#ifndef MAXPATHLEN
+#define     MAXPATHLEN      PATH_MAX
 #endif
 
 #endif

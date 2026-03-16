@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __RCSID("$NetBSD: utmpentry.c,v 1.22 2021/02/26 02:45:43 christos Exp $");
 #endif
@@ -49,6 +49,8 @@ __RCSID("$NetBSD: utmpentry.c,v 1.22 2021/02/26 02:45:43 christos Exp $");
 #endif
 
 #include "utmpentry.h"
+#include "sys/nb_time.h"
+#include "compat.h"
 
 
 /* Fail the compile if x is not true, by constructing an illegal type. */
@@ -313,10 +315,11 @@ getentryx(struct utmpentry *e, struct utmpx *up)
 	memcpy(e->line, up->ut_line, sizeof(up->ut_line));
 	memcpy(e->host, up->ut_host, sizeof(up->ut_host));
 
-	e->tv = up->ut_tv;
+	e->tv.tv_sec = up->ut_tv.tv_sec;
+	e->tv.tv_usec = up->ut_tv.tv_usec;
 	e->pid = up->ut_pid;
-	e->term = up->ut_exit.e_termination;
-	e->exit = up->ut_exit.e_exit;
+	e->term = up->ut_exit.__e_termination;
+	e->exit = up->ut_exit.__e_exit;
 	e->sess = up->ut_session;
 	e->type = up->ut_type;
 	adjust_size(e);
