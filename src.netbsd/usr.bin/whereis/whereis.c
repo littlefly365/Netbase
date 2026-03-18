@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -44,7 +44,6 @@ __RCSID("$NetBSD: whereis.c,v 1.21 2008/10/17 10:53:26 apb Exp $");
 
 #include <sys/param.h>
 #include <sys/stat.h>
-#include <sys/sysctl.h>
 
 #include <err.h>
 #include <errno.h>
@@ -52,6 +51,9 @@ __RCSID("$NetBSD: whereis.c,v 1.21 2008/10/17 10:53:26 apb Exp $");
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#include "nb_stdlib.h"
+#include "sys/nb_sysctl.h"
 
 static void usage(void) __dead;
 
@@ -93,22 +95,14 @@ main(int argc, char *argv[])
 	if (argc == 0)
 		usage();
 
- 	if (useenvpath) {
- 		if ((std = getenv("PATH")) == NULL)
- 			errx(1, "PATH environment variable is not set");
-	} else {
-		/* Retrieve the standard path. */
-		mib[0] = CTL_USER;
-		mib[1] = USER_CS_PATH;
-		if (sysctl(mib, 2, NULL, &len, NULL, 0) == -1)
-			err(1, "sysctl: user.cs_path");
-		if (len == 0)
-			errx(1, "sysctl: user.cs_path (zero length)");
-		if ((std = malloc(len)) == NULL)
-			err(1, NULL);
-		if (sysctl(mib, 2, std, &len, NULL, 0) == -1)
-			err(1, "sysctl: user.cs_path");
-	}
+ 	if ((std = getenv("PATH")) == NULL)
+ 		errx(1, "PATH environment variable is not set");
+
+	len = strlen(std) + 1;
+	strncpy(path, malloc(len), sizeof(path) - 1); 
+	path[sizeof(path) - 1] = '\\0';
+	
+//	path = malloc(len);
 
 	/* For each path, for each program... */
 	for (; *argv; ++argv) {

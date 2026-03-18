@@ -33,7 +33,7 @@
 #include "nbtool_config.h"
 #endif
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #if !defined(lint)
 __COPYRIGHT("@(#) Copyright (c) 1989, 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -53,6 +53,7 @@ __RCSID("$NetBSD: hexdump.c,v 1.19 2016/03/04 02:54:38 dholland Exp $");
 #include <string.h>
 
 #include "hexdump.h"
+#include "nb_stdlib.h"
 
 FS *fshead;				/* head of format strings */
 int blocksize;				/* data block size */

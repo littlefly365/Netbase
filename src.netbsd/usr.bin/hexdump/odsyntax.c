@@ -33,7 +33,7 @@
 #include "nbtool_config.h"
 #endif
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #if !defined(lint)
 #if 0
 static char sccsid[] = "@(#)odsyntax.c	8.2 (Berkeley) 5/4/95";
