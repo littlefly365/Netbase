@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1989, 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -46,7 +46,9 @@ __RCSID("$NetBSD: unvis.c,v 1.13 2010/11/27 19:46:25 christos Exp $");
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <vis.h>
+
+#include "vis.h"
+#include "nb_stdlib.h"
 
 static void process(FILE *, const char *, int);
 

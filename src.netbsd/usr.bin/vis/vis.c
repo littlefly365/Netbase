@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1989, 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -51,9 +51,10 @@ __RCSID("$NetBSD: vis.c,v 1.25 2015/05/24 19:42:39 christos Exp $");
 #include <limits.h>
 #include <unistd.h>
 #include <err.h>
-#include <vis.h>
 
+#include "vis.h"
 #include "extern.h"
+#include "nb_stdlib.h"
 
 static int eflags, fold, foldwidth = 80, none, markeol;
 #ifdef DEBUG

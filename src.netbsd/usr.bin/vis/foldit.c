@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)foldit.c	8.1 (Berkeley) 6/6/93";
@@ -38,7 +38,7 @@ __RCSID("$NetBSD: foldit.c,v 1.7 2009/02/10 23:06:31 christos Exp $");
 #endif /* not lint */
 
 #include <stdio.h>
-#include <vis.h>
+#include "vis.h"
 #include "extern.h"
 
 int
