@@ -14,7 +14,7 @@ Netbase is a port of the NetBSD's utilities to another unix like operating syste
 # Info
 - The compat libraries use only code from the netbsd source tree(or libbsd).
 - The goal of this project is port netbsd userland to another systems with tiny modifications to the original source.
-- now are avaible ~90 commands ported from netbsd
+- now are avaible ~100 commands ported from netbsd
 
 # important
 - if you see build or runtime errors tell me (Note: The utils are tested on Arch/Alpine and only with a basic use of them).
