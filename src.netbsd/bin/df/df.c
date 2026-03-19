@@ -74,7 +74,7 @@ __RCSID("$NetBSD: df.c,v 1.101.2.1 2023/12/18 14:17:42 martin Exp $");
 
 struct mntinfo {
     unsigned long int f_frsize;
-    __fsfilcnt_t f_favail;
+    fsfilcnt_t f_favail;
     unsigned long int f_namemax;
     unsigned int f_type;    
     unsigned long int f_fsid;

@@ -17,6 +17,12 @@
 #include <sys/types.h>
 #include <sys/acl.h>
 
+#ifndef __Glibc__
+typedef unsigned char u_char;
+typedef unsigned int   u_int;
+#endif
+
+
 #define fcpxattr
 #define setproctitle             
 #define  O_EXLOCK  	0

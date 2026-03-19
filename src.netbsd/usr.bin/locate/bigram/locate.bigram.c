@@ -56,8 +56,10 @@ __RCSID("$NetBSD: locate.bigram.c,v 1.13 2016/09/05 00:40:29 sevan Exp $");
 #include <stdlib.h>
 #include <string.h>
 #include <sys/param.h>			/* for MAXPATHLEN */
-
 #include "nb_stdlib.h"
+#ifndef __Glibc__
+#include "compat.h"
+#endif
 
 static int compare_bigrams(const void *, const void *);
 static void add_bigram(u_char, u_char);
