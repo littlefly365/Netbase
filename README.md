@@ -24,8 +24,9 @@ Netbase is a port of the NetBSD's utilities to another unix like operating syste
 
 | Platform        | Status           |
 |-----------------|------------------|
-| Linux glibc     | ☑️ Works         |
-| Linux musl      | ☑️ Works         |
+| Linux glibc     | ☑️ Works          |
+| Linux musl      | ☑️ Works          |
+| another libc    | 🧪 untested      |
 
 # Building
 
@@ -39,10 +40,13 @@ Netbase is a port of the NetBSD's utilities to another unix like operating syste
 
 # TODO
 
-|    Plataform/Goal	|     Status	          	|
-|-----------------------|-------------------------------|
-| glibc		  	| ☑️ yes	                |
-| musl		  	| 🧪 WIP	            	|
-| another libc		| 🧪 untested               	|
-| Full Userland (! GNU) | 🧪 partial (coreutils)	|
+|    GNU Alternative	|     BSD Alternative	  |
+|-----------------------|-------------------------|
+| 	coreutils	|	🧪 Partial	  |	
+| 	findutils	|	☑️  Complete	  |
+| 	diffutils	|	☑️  Complete	  |
+| 	grep		|	☑️  Complete	  |
+| 	sed		|	☑️  Complete	  |
+| 	gawk		|	☑️  Complete	  |
+|	bash		|	☑️  Complete (ksh) |
 
