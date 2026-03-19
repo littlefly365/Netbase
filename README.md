@@ -38,7 +38,7 @@ Netbase is a port of the NetBSD's utilities to another unix like operating syste
 
 `bmake`
 
-# TODO
+# Status
 
 |    GNU Alternative	|     BSD Alternative	  |
 |-----------------------|-------------------------|
