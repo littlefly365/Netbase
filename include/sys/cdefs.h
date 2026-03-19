@@ -1,1 +1,0 @@
-../netbsd/sys/cdefs.h
