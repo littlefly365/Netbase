@@ -1,5 +1,5 @@
 # NetBase
-Netbase is a port of the NetBSD utilities to another unix like operating systems.
+Netbase is a port of the NetBSD utilities to other Unix-like operating systems.
 
 # Deps
 - bsd make
