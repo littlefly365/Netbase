@@ -119,6 +119,8 @@ void sh_exit(int) __dead;
  */
 
 #if defined(BSD) && !defined(__SVR4)
+#ifndef setjmp
 #define setjmp(jmploc)	_setjmp(jmploc)
+#endif
 #define longjmp(jmploc, val)	_longjmp(jmploc, val)
 #endif

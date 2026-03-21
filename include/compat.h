@@ -17,7 +17,7 @@
 #include <sys/types.h>
 #include <sys/acl.h>
 
-#ifndef __Glibc__
+#ifndef __GLIBC__
 typedef unsigned char u_char;
 typedef unsigned int   u_int;
 #endif
@@ -181,5 +181,7 @@ extern struct sigtab signals[];
 
 int signalnumber(const char *name);
 int signalnext(int sig);
+
+#define	F_MAXFD		11
 
 #endif

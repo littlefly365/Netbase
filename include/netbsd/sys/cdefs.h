@@ -44,8 +44,16 @@
 #define __RCSID(_s)
 #endif
 
+#ifndef __predict_true
+#define __predict_true(exp)     __builtin_expect((exp) ? 1 : 0, 1)
+#endif
+
 #ifndef __predict_false
 #define	__predict_false(exp)	__builtin_expect((exp) != 0, 0)
+#endif
+
+#ifndef __UNVOLATILE
+#define __UNVOLATILE(a)	((void *)(unsigned long)(volatile void *)(a))
 #endif
 
 #ifndef __packed
@@ -99,7 +107,7 @@
 #endif
 
 #ifndef __used
-#define __used __unused
+#define __used __nbunused
 #endif
 
 #ifdef __cplusplus

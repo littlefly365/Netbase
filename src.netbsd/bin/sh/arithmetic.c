@@ -36,7 +36,7 @@
  * From FreeBSD, who obtained it from dash, modified both times...
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 
 #ifndef lint
 __RCSID("$NetBSD: arithmetic.c,v 1.5.12.1 2025/12/26 12:52:33 martin Exp $");

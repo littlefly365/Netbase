@@ -42,11 +42,19 @@
 #include <unistd.h>
 #include <time.h>
 
+typedef struct state *timezone_t;
+
 static inline time_t mktime_z(void *tz, struct tm *tm) {
     (void)tz;  
     return mktime(tm);
 }
 
+size_t strftime_z(void *zone, char *s, size_t max,
+                  const char *format, const struct tm *tm)
+{
+    (void)zone; 
+    return strftime(s, max, format, tm);
+}
 #define CLK_TCK             (sysconf(39))
 
 #endif

@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)input.c	8.3 (Berkeley) 6/9/95";
@@ -48,6 +48,7 @@ __RCSID("$NetBSD: input.c,v 1.72 2021/02/16 15:30:26 kre Exp $");
 #include <limits.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 #include <sys/stat.h>
 
 /*
@@ -569,10 +570,12 @@ setinputfd(int fd, int push)
 void
 setinputstring(char *string, int push, int line1)
 {
+	if (!string)
+	        string = "";
 
 	INTOFF;
 	if (push)		/* XXX: always, as it happens */
-		pushfile();
+	pushfile();
 	parsenextc = string;
 	parselleft = parsenleft = strlen(string);
 	plinno = line1;

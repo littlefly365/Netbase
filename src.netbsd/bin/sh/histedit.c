@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)histedit.c	8.2 (Berkeley) 5/4/95";
@@ -62,6 +62,7 @@ __RCSID("$NetBSD: histedit.c,v 1.65.2.2 2024/08/07 10:41:11 martin Exp $");
 #include "myhistedit.h"
 #include "error.h"
 #include "alias.h"
+#include "nb_stdlib.h"
 #ifndef SMALL
 #include "eval.h"
 #include "memalloc.h"
@@ -97,7 +98,6 @@ histedit(void)
 	FILE *el_err;
 
 #define editing (Eflag || Vflag)
-
 	CTRACE(DBG_HISTORY, ("histedit: %cE%cV %sinteractive\n",
 	    Eflag ? '-' : '+',  Vflag ? '-' : '+', iflag ? "" : "not "));
 
@@ -673,7 +673,7 @@ out:
  * bind a key (tab by default) to execute the function.
  */
 unsigned char
-sh_complete(EditLine *sel, int ch __unused)
+sh_complete(EditLine *sel, int ch __nbunused)
 {
 	return (unsigned char)fn_complete2(sel, NULL, sh_matches,
 		L" \t\n\"\\'`@$><=;|&{(", NULL, NULL, (size_t)100,

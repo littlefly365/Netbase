@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)parser.c	8.7 (Berkeley) 5/16/95";
@@ -2584,7 +2584,7 @@ setprompt(int which)
 #ifndef SMALL
 	if (!el)
 #endif
-		out2str(getprompt(NULL));
+	out2str("$ ");
 }
 
 /*

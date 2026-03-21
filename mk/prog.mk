@@ -9,8 +9,8 @@ ${PROG}: ${OBJS}
 	@echo "---${PROG}---"
 	@echo "${CC} ${OBJS} -o ${PROG}"
 	@$(CC) ${LDFLAGS} ${OBJS} ${LDLIBS} -o ${PROG}
-.c.o: 
-	${CC} ${CPPFLAGS} ${CFLAGS} -c $< -o $@
+.c.o:
+	${CC} ${CPPFLAGS} ${CFLAGS} -c $< -o ./$@
 clean:
 	rm -rf ${PROG} ${OBJS}
 install:
@@ -20,4 +20,5 @@ install:
 	ln -sf ${DESTDIR}/${BINT}/${PROG} ${DESTDIR}/${BINT}/${s}
 .endfor
 .endif
-.PHONY: all $(PROG) clean install
+
+.PHONY: all ${PROG} clean install

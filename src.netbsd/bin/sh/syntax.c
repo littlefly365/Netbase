@@ -1,6 +1,6 @@
 /*	$NetBSD: syntax.c,v 1.8 2019/02/04 09:56:48 kre Exp $	*/
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 __RCSID("$NetBSD: syntax.c,v 1.8 2019/02/04 09:56:48 kre Exp $");
 
 #include <limits.h>

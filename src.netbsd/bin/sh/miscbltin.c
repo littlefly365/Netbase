@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)miscbltin.c	8.4 (Berkeley) 5/4/95";
@@ -64,9 +64,10 @@ __RCSID("$NetBSD: miscbltin.c,v 1.53.2.1 2023/11/03 10:07:09 martin Exp $");
 #include "builtins.h"
 #include "mystring.h"
 #include "redir.h"		/* for user_fd_limit */
+#include "nb_unistd.h"
 
 #undef rflag
-
+typedef int ptrdiff_t;
 
 
 /*

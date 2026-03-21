@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)var.c	8.3 (Berkeley) 5/4/95";
@@ -73,6 +73,8 @@ __RCSID("$NetBSD: var.c,v 1.82.2.1 2024/12/31 01:40:26 snj Exp $");
 #include "parser.h"
 #include "show.h"
 #include "machdep.h"
+#include "private.h"
+#include "nb_time.h"
 #ifndef SMALL
 #include "myhistedit.h"
 #endif
@@ -1485,21 +1487,17 @@ get_tod(struct var *vp)
 	tz = lookupvar("TZ");
 	(void)time(&now);
 
-	if (tz != NULL) {
-		if (tzs.b == NULL || strcmp(tzs.b, tz) != 0) {
-			INTOFF;
-			if (make_space(&tzs, strlen(tz) + 1)) {
-				strcpy(tzs.b, tz);
-				if (last_zone)
-					tzfree(last_zone);
-				last_zone = zone = tzalloc(tz);
-				INTON;
-			} else
-				zone = tzalloc(tz);
-		} else
-			zone = last_zone;
 
-		tmp = localtime_rz(zone, &now, &tm_now);
+	if (tz != NULL) {
+		if (tzs.b == NULL || strcmp(tzs.b, tz) != 0){	
+				if (make_space(&tzs, strlen(tz) + 1)) {
+					strcpy(tzs.b, tz);
+					setenv("TZ", tz, 1);
+					tzset();
+				} 
+		}
+
+		tmp = localtime_r(&now, &tm_now);
 	} else
 		tmp = localtime_r(&now, &tm_now);
 

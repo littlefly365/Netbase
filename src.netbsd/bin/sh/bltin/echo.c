@@ -51,7 +51,7 @@
  * expanded.  printf is now a builtin of netbsd's sh and csh.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 __RCSID("$NetBSD: echo.c,v 1.15 2021/05/18 21:39:06 kre Exp $");
 
 #define main echocmd

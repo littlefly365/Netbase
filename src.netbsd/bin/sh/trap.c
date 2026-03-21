@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)trap.c	8.5 (Berkeley) 6/5/95";
@@ -69,6 +69,7 @@ __RCSID("$NetBSD: trap.c,v 1.56 2021/11/10 15:26:34 kre Exp $");
 #include "trap.h"
 #include "mystring.h"
 #include "var.h"
+#include "compat.h"
 
 
 /*
@@ -133,7 +134,7 @@ trap_signame(int signo)
 
 	if (signo == 0)
 		return "EXIT";
-	p = signalname(signo);
+	p = strsignal(signo);
 	if (p != NULL)
 		return p;
 	(void)snprintf(nbuf, sizeof nbuf, "%d", signo);
@@ -188,7 +189,7 @@ printsignals(struct output *out, int len)
 		pad = (len | 7) + 1 - len;
 
 	for (sig = 0; (sig = signalnext(sig)) != 0; ) {
-		name = signalname(sig);
+		name = strsignal(sig);
 		if (name == NULL)
 			continue;
 

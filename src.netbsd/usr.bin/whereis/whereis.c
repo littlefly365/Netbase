@@ -102,8 +102,6 @@ main(int argc, char *argv[])
 	strncpy(path, malloc(len), sizeof(path) - 1); 
 	path[sizeof(path) - 1] = '\\0';
 	
-//	path = malloc(len);
-
 	/* For each path, for each program... */
 	for (; *argv; ++argv) {
 		if (**argv == '/') {

@@ -1,5 +1,5 @@
 # NetBase
-Netbase is a port of the NetBSD's utilities to another unix like operating systems.
+Netbase is a port of the NetBSD utilities to another unix like operating systems.
 
 # Deps
 - bsd make
@@ -14,7 +14,7 @@ Netbase is a port of the NetBSD's utilities to another unix like operating syste
 # Info
 - The compat libraries use only code from the netbsd source tree(or libbsd).
 - The goal of this project is port netbsd userland to another systems with tiny modifications to the original source.
-- now are avaible ~100 commands ported from netbsd
+- now are available ~100 commands ported from netbsd
 
 # important
 - if you see build or runtime errors tell me (Note: The utils are tested on Arch/Alpine and only with a basic use of them).
@@ -49,4 +49,4 @@ Netbase is a port of the NetBSD's utilities to another unix like operating syste
 | 	sed		|	☑️  Complete	  |
 | 	gawk		|	☑️  Complete	  |
 |	bash		|	☑️  Complete (ksh) |
-
+(NOTE: sh is available with nsh name, dont recommend their use (have serious problem) please use ksh instead)

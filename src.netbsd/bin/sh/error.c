@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)error.c	8.2 (Berkeley) 5/4/95";
@@ -52,6 +52,7 @@ __RCSID("$NetBSD: error.c,v 1.44 2021/11/10 15:26:34 kre Exp $");
 #include <stdio.h>
 #include <string.h>
 
+#include "nb_stdlib.h"
 #include "shell.h"
 #include "eval.h" /* for commandname */
 #include "main.h"

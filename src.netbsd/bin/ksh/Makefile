@@ -8,4 +8,6 @@ CPPFLAGS += -Wno-unused-value
 CPPFLAGS += -Wno-old-style-definition
 CPPFLAGS += -Wno-ignored-qualifiers
 
+SYMLINKS=sh
+
 .include "../../mk/prog.mk"

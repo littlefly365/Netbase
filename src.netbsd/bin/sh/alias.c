@@ -174,7 +174,7 @@ lookupalias(const char *name, int check)
 }
 
 const char *
-alias_text(void *dummy __unused, const char *name)
+alias_text(void *dummy __nbunused, const char *name)
 {
 	struct alias *ap;
 

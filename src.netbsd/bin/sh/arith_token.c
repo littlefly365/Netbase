@@ -36,7 +36,7 @@
  * From FreeBSD, from dash
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 
 #ifndef lint
 __RCSID("$NetBSD: arith_token.c,v 1.7 2017/12/17 04:06:03 kre Exp $");

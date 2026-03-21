@@ -39,6 +39,9 @@
  * Shell variables.
  */
 
+#include <stdint.h>
+#include <string.h>
+
 /* flags */
 #define VUNSET		0x0001	/* the variable is not set */
 #define VEXPORT		0x0002	/* variable is exported */
@@ -123,7 +126,11 @@ extern int funclineabs;
 #define ps4val()	(vps4.text + 4)
 #define optindval()	(voptind.text + 7)
 #ifndef SMALL
-#define histsizeval()	(vhistsize.text + 9)
+static inline const char *histsizeval(void) {
+    if (!vhistsize.text || strlen(vhistsize.text) <= 9)
+        return NULL;  
+    return vhistsize.text + 9;
+}
 #define termval()	(vterm.text + 5)
 #endif
 

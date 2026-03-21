@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)exec.c	8.4 (Berkeley) 6/8/95";
@@ -84,7 +84,7 @@ __RCSID("$NetBSD: exec.c,v 1.57 2021/11/16 11:28:29 kre Exp $");
 #define CMDTABLESIZE 31		/* should be prime */
 #define ARB 1			/* actual size determined at run time */
 
-
+struct builtincmd;
 
 struct tblentry {
 	struct tblentry *next;	/* next entry in hash chain */

@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)jobs.c	8.5 (Berkeley) 5/4/95";
@@ -50,8 +50,8 @@ __RCSID("$NetBSD: jobs.c,v 1.117.2.1 2024/02/03 14:31:38 martin Exp $");
 #include <paths.h>
 #include <sys/types.h>
 #include <sys/param.h>
-#ifdef BSD
 #include <sys/wait.h>
+#ifdef BSD
 #include <sys/time.h>
 #include <sys/resource.h>
 #endif
@@ -82,7 +82,7 @@ __RCSID("$NetBSD: jobs.c,v 1.117.2.1 2024/02/03 14:31:38 martin Exp $");
 #include "memalloc.h"
 #include "error.h"
 #include "mystring.h"
-
+#include "compat.h"
 
 #ifndef	WCONTINUED
 #define	WCONTINUED 0		/* So we can compile on old systems */

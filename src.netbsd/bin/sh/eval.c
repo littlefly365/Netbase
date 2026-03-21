@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)eval.c	8.9 (Berkeley) 6/8/95";
@@ -49,13 +49,13 @@ __RCSID("$NetBSD: eval.c,v 1.188.2.2 2024/11/25 10:24:57 martin Exp $");
 #include <errno.h>
 #include <limits.h>
 #include <unistd.h>
-#include <sys/fcntl.h>
+#include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/times.h>
 #include <sys/param.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <sys/sysctl.h>
+#include "sys/nb_sysctl.h"
 
 /*
  * Evaluate a command.
@@ -121,7 +121,14 @@ STATIC void evalpipe(union node *);
 STATIC void evalcommand(union node *, int, struct backcmd *);
 STATIC void prehash(union node *);
 
+STATIC int bltincmd(int argc, char **argv);
+STATIC int execcmd(int argc, char **argv);
+STATIC int typecmd(int argc, char **argv);
+STATIC int hashcmd(int argc, char **argv);
+STATIC int trapcmd(int argc, char **argv);
+
 STATIC char *find_dot_file(char *);
+
 
 /*
  * Called to reset things after an exception.
@@ -813,23 +820,8 @@ evalbackcmd(union node *n, struct backcmd *result)
 const char *
 syspath(void)
 {
-	static char *sys_path = NULL;
-	static int mib[] = {CTL_USER, USER_CS_PATH};
 	static char def_path[] = "PATH=/usr/bin:/bin:/usr/sbin:/sbin";
-	size_t len;
-
-	if (sys_path == NULL) {
-		if (sysctl(mib, 2, 0, &len, 0, 0) != -1 &&
-		    (sys_path = ckmalloc(len + 5)) != NULL &&
-		    sysctl(mib, 2, sys_path + 5, &len, 0, 0) != -1) {
-			memcpy(sys_path, "PATH=", 5);
-		} else {
-			ckfree(sys_path);
-			/* something to keep things happy */
-			sys_path = def_path;
-		}
-	}
-	return sys_path;
+	return def_path;
 }
 
 static int
@@ -1017,7 +1009,6 @@ evalcommand(union node *cmd, int flgs, struct backcmd *backcmd)
 
 		do {
 			int argsused, use_syspath;
-
 			find_command(argv[0], &cmdentry, cmd_flags, path);
 			VTRACE(DBG_CMDS, ("Command %s type %d\n", argv[0],
 			    cmdentry.cmdtype));

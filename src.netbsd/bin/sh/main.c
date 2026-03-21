@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1991, 1993\
  The Regents of the University of California.  All rights reserved.");
@@ -79,6 +79,7 @@ __RCSID("$NetBSD: main.c,v 1.89 2022/09/18 06:03:19 kre Exp $");
 #include "exec.h"
 #include "cd.h"
 #include "redir.h"
+#include "compat.h"
 
 #define PROFILE 0
 
@@ -289,6 +290,8 @@ main(int argc, char **argv)
 
 	if (sflag || minusc == NULL) {
  state4:	/* XXX ??? - why isn't this before the "if" statement */
+		setinputfd(0, 1);
+		initvar();
 		cmdloop(1);
 		if (iflag) {
 			out2str("\n");
@@ -364,6 +367,7 @@ cmdloop(int top)
 				stop_skipping();
 			break;
 		}
+
 	}
 	popstackmark(&smark);
 }

@@ -37,6 +37,7 @@
 #ifndef OUTPUT_INCL
 
 #include <stdarg.h>
+#include "sys/nb_cdefs.h"
 
 struct output {
 	char *nextc;
