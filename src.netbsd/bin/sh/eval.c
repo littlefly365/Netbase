@@ -55,6 +55,7 @@ __RCSID("$NetBSD: eval.c,v 1.188.2.2 2024/11/25 10:24:57 martin Exp $");
 #include <sys/param.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include "nb_unistd.h"
 #include "sys/nb_sysctl.h"
 
 /*

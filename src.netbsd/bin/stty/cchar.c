@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 #if 0
 static char sccsid[] = "@(#)cchar.c	8.5 (Berkeley) 4/2/94";

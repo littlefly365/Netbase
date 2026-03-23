@@ -63,6 +63,7 @@ __RCSID("$NetBSD: histedit.c,v 1.65.2.2 2024/08/07 10:41:11 martin Exp $");
 #include "error.h"
 #include "alias.h"
 #include "nb_stdlib.h"
+#include "nb_unistd.h"
 #ifndef SMALL
 #include "eval.h"
 #include "memalloc.h"

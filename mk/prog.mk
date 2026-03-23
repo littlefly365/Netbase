@@ -15,9 +15,10 @@ clean:
 	rm -rf ${PROG} ${OBJS}
 install:
 	install -D -m 755 ${PROG} ${DESTDIR}/${BINT}/${PROG}
+
 .if defined(SYMLINKS)
 .for s in ${SYMLINKS}
-	ln -sf ${DESTDIR}/${BINT}/${PROG} ${DESTDIR}/${BINT}/${s}
+	ln -sf ${PROG} ${DESTDIR}/${BINT}/${s}
 .endfor
 .endif
 

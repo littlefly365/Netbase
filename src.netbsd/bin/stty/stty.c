@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "sys/nb_cdefs.h"
 #ifndef lint
 __COPYRIGHT("@(#) Copyright (c) 1989, 1991, 1993, 1994\
  The Regents of the University of California.  All rights reserved.");
@@ -57,6 +57,7 @@ __RCSID("$NetBSD: stty.c,v 1.24 2019/09/06 16:28:53 christos Exp $");
 
 #include "stty.h"
 #include "extern.h"
+#include "nb_stdlib.h"
 
 int
 main(int argc, char *argv[])

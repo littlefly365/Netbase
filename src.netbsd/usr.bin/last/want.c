@@ -28,6 +28,8 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
+#include "nb_utmpx.h"
+
 static struct utmp *buf;
 static time_t seentime;
 

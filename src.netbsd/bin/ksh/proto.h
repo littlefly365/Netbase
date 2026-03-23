@@ -55,7 +55,7 @@ int 	c_test		ARGS((char **));
 /* edit.c: most prototypes in edit.h */
 void 	x_init		ARGS((void));
 int 	x_read		ARGS((char *, size_t));
-void	set_editmode	ARGS((const char *));
+void	set_editmode	ARGS((char *));
 /* emacs.c: most prototypes in edit.h */
 int 	x_bind		ARGS((const char *, const char *, int, int));
 /* eval.c */

@@ -5,7 +5,8 @@ SUBDIR = env dirname basename id tee yes head printf wc \
 	realpath split fold du mkfifo csplit stat mktemp nohup pr \
 	xinstall tr xargs pathchk find uname asa apply banner \
 	biff patch cal cmp touch mkstr sdiff renice deroff \
-	col cksum locate users who write hexdump whereis vis unvis
+	col cksum locate users who write hexdump whereis vis unvis \
+	unexpand
 
 .export BINT
 .include <bsd.subdir.mk>

@@ -1,13 +1,4 @@
-PROG= stty
+PROG=stty
+SRCS=cchar.c gfmt.c key.c modes.c print.c stty.c
 
-all: obj $(PROG)
-
-obj:
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $(PROG).c 
-$(PROG): obj
-	$(CC) $(PROG).o $(LDFLAGS) -o $(PROG)
-clean:
-	rm -rf $(PROG).o 
-build: all
-	mv $(PROG) ../../build/bin
-.PHONY: all obj $(PROG) clean build
+.include "../../mk/prog.mk"

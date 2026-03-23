@@ -365,7 +365,7 @@ promptlen(cp, spp)
 
 void
 set_editmode(ed)
-	const char *ed;
+	char *ed;
 {
 	static const enum sh_flag edit_flags[] = {
 #ifdef EMACS

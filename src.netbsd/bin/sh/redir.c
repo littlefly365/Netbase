@@ -50,6 +50,7 @@ __RCSID("$NetBSD: redir.c,v 1.72 2021/11/22 05:17:43 kre Exp $");
 #include <errno.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include "nb_unistd.h"
 
 /*
  * Code for dealing with input/output redirection.
@@ -564,12 +565,8 @@ copyfd(int from, int to, int cloexec)
 	int newfd;
 
 	if (cloexec && to > 2) {
-#ifdef O_CLOEXEC
-		newfd = dup3(from, to, O_CLOEXEC);
-#else
 		newfd = dup2(from, to);
 		fcntl(newfd, F_SETFD, fcntl(newfd,F_GETFD) | FD_CLOEXEC);
-#endif
 	} else
 		newfd = dup2(from, to);
 
