@@ -1,7 +1,7 @@
 TOP=../..
 
 
-CC ?= clang
+CC ?= gcc
 
 LIBPATH =-L$(TOP)/lib/netbsd -L$(TOP)/lib/util
 LCFLAGS ?=
@@ -13,7 +13,7 @@ LDFLAGS += $(LIBPATH)
 LDADD ?=
 LDLIBS += $(LDADD) -lnetbsd
 
-DESTDIR ?= 
+#DESTDIR ?= 
 PREFIX ?= usr/local
 LIBDIR ?= $(PREFIX)/lib
 INCDIR ?= $(PREFIX)/include/netbsd/

@@ -1,6 +1,11 @@
 # NetBase
 Netbase is a port of the NetBSD utilities to other Unix-like operating systems.
 
+# important
+- This project is no longer maintained as a monolithic repository. It has been split into smaller components.
+- if you see build or runtime errors tell me (Note: The utils are tested on Arch/Alpine and only with a basic use of them).
+- This project try to make posible a GNUless system, so with some utilities like diff and diff3 (netbsd does not have it) we will use code from openbsd or freebsd
+
 # Deps
 - bsd make
 - gcc or clang
@@ -16,9 +21,6 @@ Netbase is a port of the NetBSD utilities to other Unix-like operating systems.
 - The goal of this project is port netbsd userland to another systems with tiny modifications to the original source.
 - now are available ~100 commands ported from netbsd
 
-# important
-- if you see build or runtime errors tell me (Note: The utils are tested on Arch/Alpine and only with a basic use of them).
-- This project try to make posible a GNUless system, so with some utilities like diff and diff3 (netbsd does not have it) we will use code from openbsd or freebsd
 
 # Compatibility Matrix
 
