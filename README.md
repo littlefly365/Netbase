@@ -2,7 +2,7 @@
 Netbase is a port of the NetBSD utilities to other Unix-like operating systems.
 
 # important
-- This project is no longer maintained as a monolithic repository. It has been split into smaller components.
+- This project is no longer maintained as a monolithic repository. It has been split into smaller components, please use these instead [Coreutils](https://github.com/littlefly365/BSD-Coreutils)
 - if you see build or runtime errors tell me (Note: The utils are tested on Arch/Alpine and only with a basic use of them).
 - This project try to make posible a GNUless system, so with some utilities like diff and diff3 (netbsd does not have it) we will use code from openbsd or freebsd
 
